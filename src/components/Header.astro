@@ -1,13 +1,13 @@
 ---
 /**
  * Header Component
- * WCAG 2.2 AA compliant, sticky navigation with mobile menu
+ * WCAG 2.2 AA compliant, sticky navigation with glassmorphism
  */
 import Logo from './Logo.astro';
 import Navigation from './Navigation.astro';
 ---
 
-<header class="site-header" role="banner">
+<header class="site-header" role="banner" data-header>
   <div class="container">
     <div class="header-content">
       <Logo />
@@ -22,10 +22,46 @@ import Navigation from './Navigation.astro';
     top: 0;
     width: 100%;
     height: var(--header-height);
-    background-color: var(--header-bg);
-    border-bottom: 1px solid var(--header-border-color);
     z-index: var(--header-z-index);
-    box-shadow: var(--shadow-sm);
+
+    /* Glassmorphism Effect */
+    background: var(--glass-white-medium);
+    backdrop-filter: var(--glass-backdrop-light);
+    -webkit-backdrop-filter: var(--glass-backdrop-light); /* Safari support */
+
+    /* Subtle Border & Shadow */
+    border-bottom: 1px solid var(--glass-border-light);
+    box-shadow: var(--shadow-glass-sm);
+
+    /* Performance Optimization */
+    will-change: backdrop-filter, background;
+
+    /* Smooth Transitions */
+    transition:
+      background var(--duration-base) var(--ease-smooth),
+      backdrop-filter var(--duration-base) var(--ease-smooth),
+      box-shadow var(--duration-base) var(--ease-smooth);
+  }
+
+  /* Scrolled State - Intensiverer Blur */
+  .site-header[data-scrolled="true"] {
+    background: var(--glass-white-strong);
+    backdrop-filter: var(--glass-backdrop-medium);
+    -webkit-backdrop-filter: var(--glass-backdrop-medium);
+    box-shadow: var(--shadow-glass-md);
+  }
+
+  /* Fallback für Browser ohne backdrop-filter Support */
+  @supports not (backdrop-filter: blur(12px)) {
+    .site-header {
+      background: var(--color-bg-primary);
+      box-shadow: var(--shadow-base);
+    }
+
+    .site-header[data-scrolled="true"] {
+      background: var(--color-bg-primary);
+      box-shadow: var(--shadow-md);
+    }
   }
 
   .header-content {
@@ -35,3 +71,54 @@ import Navigation from './Navigation.astro';
     height: 100%;
   }
 </style>
+
+<script>
+  /**
+   * Scroll-basierte Header-Intensivierung
+   * Verstärkt den Blur-Effekt beim Scrollen
+   */
+  function initHeaderScroll() {
+    const header = document.querySelector('[data-header]');
+    if (!header) return;
+
+    let lastScroll = 0;
+    let ticking = false;
+
+    function updateHeader() {
+      const currentScroll = window.pageYOffset;
+
+      // Ab 50px Scroll: intensiverer Blur
+      if (currentScroll > 50) {
+        header.setAttribute('data-scrolled', 'true');
+      } else {
+        header.removeAttribute('data-scrolled');
+      }
+
+      lastScroll = currentScroll;
+    }
+
+    // Throttle mit requestAnimationFrame für Performance
+    window.addEventListener('scroll', () => {
+      if (!ticking) {
+        window.requestAnimationFrame(() => {
+          updateHeader();
+          ticking = false;
+        });
+        ticking = true;
+      }
+    });
+
+    // Initial check
+    updateHeader();
+  }
+
+  // Initialize on page load
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initHeaderScroll);
+  } else {
+    initHeaderScroll();
+  }
+
+  // Re-initialize after Astro page transitions (if using view transitions)
+  document.addEventListener('astro:page-load', initHeaderScroll);
+</script>

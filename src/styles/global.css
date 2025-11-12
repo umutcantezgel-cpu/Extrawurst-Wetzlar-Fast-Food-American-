@@ -4,6 +4,7 @@
  */
 
 @import './tokens.css';
+@import './tokens-glass.css';
 @import './fonts.css';
 @tailwind base;
 @tailwind components;

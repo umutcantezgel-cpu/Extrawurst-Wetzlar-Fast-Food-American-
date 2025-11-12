@@ -1,0 +1,277 @@
+/**
+ * Glassmorphism & Modern Design Tokens
+ * Erweiterung zu tokens.css für moderne UI-Effekte
+ * Performance-optimiert mit Browser-Fallbacks
+ */
+
+/* ============================================================================
+   GLASSMORPHISM TOKENS
+   ============================================================================ */
+
+:root {
+  /* Glass Background Colors - für transparente Elemente */
+  --glass-white: rgba(255, 255, 255, 0.1);
+  --glass-white-light: rgba(255, 255, 255, 0.4);
+  --glass-white-medium: rgba(255, 255, 255, 0.7);
+  --glass-white-strong: rgba(255, 255, 255, 0.95);
+
+  --glass-dark: rgba(0, 0, 0, 0.1);
+  --glass-dark-medium: rgba(0, 0, 0, 0.5);
+  --glass-dark-strong: rgba(0, 0, 0, 0.8);
+
+  /* Glass Brand Colors - transparente Brand-Farben */
+  --glass-primary: rgba(255, 107, 107, 0.1);
+  --glass-primary-medium: rgba(255, 107, 107, 0.3);
+  --glass-secondary: rgba(252, 196, 25, 0.1);
+  --glass-secondary-medium: rgba(252, 196, 25, 0.3);
+
+  /* Glass Borders - subtile Ränder */
+  --glass-border-light: rgba(255, 255, 255, 0.18);
+  --glass-border-medium: rgba(255, 255, 255, 0.3);
+  --glass-border-dark: rgba(0, 0, 0, 0.1);
+  --glass-border-brand: rgba(255, 107, 107, 0.2);
+
+  /* Backdrop Filters - Blur-Effekte */
+  --blur-xs: blur(4px);
+  --blur-sm: blur(8px);
+  --blur-md: blur(12px);
+  --blur-lg: blur(20px);
+  --blur-xl: blur(30px);
+
+  /* Combined Backdrop Filters - Blur + Saturation */
+  --glass-backdrop-light: blur(12px) saturate(180%);
+  --glass-backdrop-medium: blur(20px) saturate(200%);
+  --glass-backdrop-strong: blur(30px) saturate(220%);
+
+  /* Glass Shadows - Multi-layer shadows für Tiefe */
+  --shadow-glass-sm:
+    0 4px 16px rgba(0, 0, 0, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+
+  --shadow-glass-md:
+    0 8px 32px rgba(0, 0, 0, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.5);
+
+  --shadow-glass-lg:
+    0 12px 48px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.6);
+
+  --shadow-glass-xl:
+    0 20px 64px rgba(0, 0, 0, 0.15),
+    inset 0 2px 0 rgba(255, 255, 255, 0.7);
+
+  /* Elevated Shadows - für hover states */
+  --shadow-elevated:
+    0 10px 40px rgba(0, 0, 0, 0.15),
+    0 2px 8px rgba(0, 0, 0, 0.1);
+
+  --shadow-elevated-lg:
+    0 20px 60px rgba(0, 0, 0, 0.2),
+    0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* ============================================================================
+   GRADIENT TOKENS
+   ============================================================================ */
+
+:root {
+  /* Brand Gradients - für CTA und Akzente */
+  --gradient-sunset: linear-gradient(135deg, #FF6B6B 0%, #FCC419 100%);
+  --gradient-sunset-vertical: linear-gradient(180deg, #FF6B6B 0%, #FCC419 100%);
+  --gradient-sunset-radial: radial-gradient(circle, #FF6B6B 0%, #FCC419 100%);
+
+  /* Glass Gradients - für glassmorphism backgrounds */
+  --gradient-glass-white: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    rgba(255, 255, 255, 0.05) 100%
+  );
+
+  --gradient-glass-brand: linear-gradient(
+    135deg,
+    rgba(255, 107, 107, 0.1) 0%,
+    rgba(252, 196, 25, 0.1) 100%
+  );
+
+  /* Overlay Gradients - für Hero-Bereiche */
+  --gradient-overlay-dark: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.2) 0%,
+    rgba(0, 0, 0, 0.6) 100%
+  );
+
+  --gradient-overlay-brand: linear-gradient(
+    135deg,
+    rgba(255, 107, 107, 0.8) 0%,
+    rgba(252, 196, 25, 0.8) 100%
+  );
+
+  /* Mesh Gradients - moderne, komplexe Hintergründe */
+  --gradient-mesh-bg:
+    radial-gradient(at 0% 0%, rgba(255, 107, 107, 0.1) 0px, transparent 50%),
+    radial-gradient(at 100% 0%, rgba(252, 196, 25, 0.1) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(255, 107, 107, 0.05) 0px, transparent 50%),
+    radial-gradient(at 0% 100%, rgba(252, 196, 25, 0.05) 0px, transparent 50%);
+
+  --gradient-mesh-hero:
+    radial-gradient(at 20% 30%, rgba(255, 107, 107, 0.15) 0px, transparent 50%),
+    radial-gradient(at 80% 70%, rgba(252, 196, 25, 0.15) 0px, transparent 50%);
+}
+
+/* ============================================================================
+   ANIMATION TOKENS
+   ============================================================================ */
+
+:root {
+  /* Easing Functions - für natürliche Bewegungen */
+  --ease-smooth: cubic-bezier(0.25, 0.1, 0.25, 1);
+  --ease-bounce: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out-back: cubic-bezier(0.68, -0.6, 0.32, 1.6);
+
+  /* Duration - verschiedene Geschwindigkeiten */
+  --duration-instant: 100ms;
+  --duration-fast: 200ms;
+  --duration-base: 300ms;
+  --duration-slow: 500ms;
+  --duration-slower: 700ms;
+  --duration-slowest: 1000ms;
+
+  /* Transform Values - wiederverwendbare Transformationen */
+  --transform-scale-sm: scale(1.02);
+  --transform-scale-md: scale(1.05);
+  --transform-scale-lg: scale(1.1);
+
+  --transform-lift-sm: translateY(-2px);
+  --transform-lift-md: translateY(-4px);
+  --transform-lift-lg: translateY(-8px);
+
+  --transform-rotate-sm: rotate(-2deg);
+  --transform-rotate-md: rotate(-5deg);
+  --transform-rotate-lg: rotate(-10deg);
+}
+
+/* ============================================================================
+   VERFEINERTE FARB-TOKENS
+   ============================================================================ */
+
+:root {
+  /* Sanftere Brand-Farben */
+  --color-brand-primary-soft: #FF8787;
+  --color-brand-primary-lighter: #FFA5A5;
+  --color-brand-primary-alpha-10: rgba(255, 107, 107, 0.1);
+  --color-brand-primary-alpha-20: rgba(255, 107, 107, 0.2);
+
+  --color-brand-secondary-soft: #FFD666;
+  --color-brand-secondary-lighter: #FFE499;
+  --color-brand-secondary-alpha-10: rgba(252, 196, 25, 0.1);
+  --color-brand-secondary-alpha-20: rgba(252, 196, 25, 0.2);
+
+  /* Moderne Neutrals - wärmer */
+  --color-neutral-25: #FCFCFC;
+  --color-neutral-75: #F5F5F5;
+  --color-neutral-150: #EEEEEE;
+  --color-neutral-850: #1A1A1A;
+
+  /* Akzent-Farben mit Alpha */
+  --color-success-alpha-10: rgba(81, 207, 102, 0.1);
+  --color-error-alpha-10: rgba(255, 107, 107, 0.1);
+  --color-warning-alpha-10: rgba(255, 212, 59, 0.1);
+  --color-info-alpha-10: rgba(51, 154, 240, 0.1);
+}
+
+/* ============================================================================
+   RADIUS ENHANCEMENTS
+   ============================================================================ */
+
+:root {
+  /* Zusätzliche Border Radius Optionen */
+  --radius-xs: 0.25rem;  /* 4px */
+  --radius-xl: 1.5rem;   /* 24px */
+  --radius-2xl: 2rem;    /* 32px */
+  --radius-3xl: 3rem;    /* 48px */
+}
+
+/* ============================================================================
+   Z-INDEX SYSTEM
+   ============================================================================ */
+
+:root {
+  /* Z-Index Hierarchy für predictable layering */
+  --z-base: 0;
+  --z-dropdown: 100;
+  --z-sticky: 200;
+  --z-fixed: 300;
+  --z-modal-backdrop: 400;
+  --z-modal: 500;
+  --z-popover: 600;
+  --z-tooltip: 700;
+}
+
+/* ============================================================================
+   FILTER EFFECTS
+   ============================================================================ */
+
+:root {
+  /* Drop Shadows (als filter, nicht box-shadow) */
+  --filter-shadow-sm: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1));
+  --filter-shadow-md: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.12));
+  --filter-shadow-lg: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15));
+
+  /* Brightness/Contrast für Hover */
+  --filter-brighten: brightness(1.1);
+  --filter-darken: brightness(0.9);
+  --filter-saturate: saturate(1.2);
+  --filter-desaturate: saturate(0.8);
+}
+
+/* ============================================================================
+   RESPONSIVE SPACING (zusätzlich)
+   ============================================================================ */
+
+:root {
+  /* Fluid Spacing mit clamp */
+  --space-fluid-sm: clamp(1rem, 2vw, 1.5rem);
+  --space-fluid-md: clamp(2rem, 4vw, 3rem);
+  --space-fluid-lg: clamp(3rem, 6vw, 6rem);
+  --space-fluid-xl: clamp(4rem, 8vw, 8rem);
+}
+
+/* ============================================================================
+   REDUCED MOTION OVERRIDES
+   ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    /* Animationen deaktivieren */
+    --duration-instant: 0ms;
+    --duration-fast: 0ms;
+    --duration-base: 0ms;
+    --duration-slow: 0ms;
+    --duration-slower: 0ms;
+    --duration-slowest: 0ms;
+
+    /* Aber backdrop-filter beibehalten (keine Bewegung) */
+    /* --glass-backdrop-* bleibt aktiv */
+  }
+}
+
+/* ============================================================================
+   DARK MODE PREPARATION
+   ============================================================================ */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Invertierte Glass-Farben für Dark Mode */
+    --glass-white: rgba(0, 0, 0, 0.3);
+    --glass-white-medium: rgba(0, 0, 0, 0.7);
+    --glass-white-strong: rgba(0, 0, 0, 0.95);
+
+    --glass-dark: rgba(255, 255, 255, 0.1);
+    --glass-dark-medium: rgba(255, 255, 255, 0.3);
+
+    --glass-border-light: rgba(255, 255, 255, 0.1);
+    --glass-border-medium: rgba(255, 255, 255, 0.2);
+  }
+}
