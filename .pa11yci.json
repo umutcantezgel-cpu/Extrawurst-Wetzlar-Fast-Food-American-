@@ -1,0 +1,21 @@
+{
+  "defaults": {
+    "standard": "WCAG2AA",
+    "runners": ["axe", "htmlcs"],
+    "level": "error",
+    "timeout": 30000,
+    "wait": 1000,
+    "chromeLaunchConfig": {
+      "args": ["--no-sandbox", "--disable-setuid-sandbox"]
+    },
+    "ignore": []
+  },
+  "urls": [
+    "dist/index.html",
+    "dist/speisekarte/index.html",
+    "dist/ueber-uns/index.html",
+    "dist/kontakt/index.html",
+    "dist/impressum/index.html",
+    "dist/datenschutz/index.html"
+  ]
+}

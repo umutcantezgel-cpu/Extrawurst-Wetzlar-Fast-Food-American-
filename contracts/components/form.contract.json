@@ -1,0 +1,75 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://extrawurst-wetzlar.de/contracts/components/form.contract.json",
+  "title": "Form Component Contract",
+  "version": "1.0.0",
+  "component": "Form",
+  "description": "Accessible form with validation and error handling",
+  "props": {
+    "action": {
+      "type": "string",
+      "required": true,
+      "description": "Form submission endpoint"
+    },
+    "method": {
+      "type": "string",
+      "enum": ["GET", "POST"],
+      "default": "POST"
+    },
+    "id": {
+      "type": "string",
+      "required": true,
+      "description": "Unique form identifier"
+    },
+    "honeypot": {
+      "type": "boolean",
+      "default": true,
+      "description": "Include honeypot field for spam protection"
+    }
+  },
+  "accessibility": {
+    "wcag": "AA",
+    "requirements": [
+      "All inputs have associated labels",
+      "Error messages linked via aria-describedby",
+      "Required fields marked with aria-required",
+      "Invalid fields marked with aria-invalid",
+      "Form errors announced with aria-live",
+      "Logical tab order",
+      "Fieldset/legend for grouped inputs"
+    ],
+    "ariaAttributes": [
+      "aria-labelledby",
+      "aria-describedby",
+      "aria-required",
+      "aria-invalid",
+      "aria-live"
+    ],
+    "validation": {
+      "clientSide": true,
+      "serverSide": true,
+      "realTime": false,
+      "onSubmit": true
+    }
+  },
+  "performance": {
+    "maxSizeKB": 5,
+    "criticalCSS": true,
+    "deferJS": true
+  },
+  "security": {
+    "csrfProtection": true,
+    "honeypot": true,
+    "rateLimit": {
+      "enabled": true,
+      "requests": 3,
+      "window": 3600
+    },
+    "sanitization": "server-side"
+  },
+  "consent": {
+    "required": false,
+    "profile": null,
+    "privacyNotice": true
+  }
+}

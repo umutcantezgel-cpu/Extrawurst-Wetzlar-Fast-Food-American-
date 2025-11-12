@@ -1,0 +1,365 @@
+---
+/**
+ * Homepage - Extrawurst Wetzlar
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+import Button from '../components/Button.astro';
+import ConsentBanner from '../components/ConsentBanner.astro';
+
+const structuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'Restaurant',
+  'name': 'Extrawurst Wetzlar',
+  'description': 'Authentisches American Fast Food Restaurant in Wetzlar',
+  'image': 'https://extrawurst-wetzlar.de/assets/img/restaurant-exterior.jpg',
+  'servesCuisine': 'American',
+  'priceRange': '€€',
+  'address': {
+    '@type': 'PostalAddress',
+    'streetAddress': 'Bahnhofstraße 1',
+    'addressLocality': 'Wetzlar',
+    'postalCode': '35576',
+    'addressCountry': 'DE',
+  },
+  'geo': {
+    '@type': 'GeoCoordinates',
+    'latitude': 50.5533,
+    'longitude': 8.5028,
+  },
+  'telephone': '+49 6441 123456',
+  'email': 'info@extrawurst-wetzlar.de',
+  'openingHoursSpecification': [
+    {
+      '@type': 'OpeningHoursSpecification',
+      'dayOfWeek': ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday'],
+      'opens': '11:00',
+      'closes': '22:00',
+    },
+    {
+      '@type': 'OpeningHoursSpecification',
+      'dayOfWeek': ['Saturday', 'Sunday'],
+      'opens': '12:00',
+      'closes': '23:00',
+    },
+  ],
+};
+---
+
+<BaseLayout
+  title="Extrawurst Wetzlar - Authentisches American Fast Food"
+  description="Genießen Sie authentisches amerikanisches Fast Food in Wetzlar. Frische Burger, knusprige Pommes und köstliche Milkshakes. Täglich geöffnet."
+  structuredData={structuredData}
+  preloadImages={['/assets/img/hero-burger.jpg']}
+>
+  <Header />
+
+  <main id="main-content">
+    <Hero
+      title="Authentisches American Fast Food"
+      subtitle="Frisch zubereitet mit Leidenschaft in Wetzlar"
+      ctaText="Zur Speisekarte"
+      ctaHref="/speisekarte/"
+      backgroundImage="/assets/img/hero-burger.jpg"
+    />
+
+    <!-- Features Section -->
+    <section class="section" aria-labelledby="features-title">
+      <div class="container">
+        <h2 id="features-title" class="section-title text-center">
+          Warum Extrawurst?
+        </h2>
+
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon" aria-hidden="true">🍔</div>
+            <h3 class="feature-title">Frische Zutaten</h3>
+            <p class="feature-description">
+              100% Rindfleisch und regionales Gemüse täglich frisch zubereitet
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon" aria-hidden="true">⚡</div>
+            <h3 class="feature-title">Schnell & Lecker</h3>
+            <p class="feature-description">
+              Frisch zubereitet in unter 10 Minuten - ohne Kompromisse beim Geschmack
+            </p>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon" aria-hidden="true">❤️</div>
+            <h3 class="feature-title">Mit Liebe gemacht</h3>
+            <p class="feature-description">
+              Jeder Burger ist ein Unikat - handgemacht mit Leidenschaft
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Menu Preview -->
+    <section class="section bg-secondary" aria-labelledby="menu-title">
+      <div class="container">
+        <h2 id="menu-title" class="section-title text-center">
+          Unsere Highlights
+        </h2>
+
+        <div class="menu-grid">
+          <article class="menu-card">
+            <h3 class="menu-card-title">Classic Burger</h3>
+            <p class="menu-card-description">
+              Saftiges Rindfleisch-Patty, frischer Salat, Tomate, Zwiebeln, hausgemachte Sauce
+            </p>
+            <p class="menu-card-price">8,90 €</p>
+          </article>
+
+          <article class="menu-card">
+            <h3 class="menu-card-title">Cheese Deluxe</h3>
+            <p class="menu-card-description">
+              Doppeltes Rindfleisch, doppelter Käse, Bacon, BBQ-Sauce
+            </p>
+            <p class="menu-card-price">11,90 €</p>
+          </article>
+
+          <article class="menu-card">
+            <h3 class="menu-card-title">Crispy Chicken</h3>
+            <p class="menu-card-description">
+              Knuspriges Hähnchenbrustfilet, Cole Slaw, Mayo
+            </p>
+            <p class="menu-card-price">9,90 €</p>
+          </article>
+        </div>
+
+        <div class="text-center mt-8">
+          <Button href="/speisekarte/" variant="primary" size="lg">
+            Zur kompletten Speisekarte
+          </Button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="section" aria-labelledby="testimonials-title">
+      <div class="container">
+        <h2 id="testimonials-title" class="section-title text-center">
+          Das sagen unsere Gäste
+        </h2>
+
+        <div class="testimonials-grid">
+          <blockquote class="testimonial">
+            <p class="testimonial-text">
+              "Die besten Burger in Wetzlar! Frische Zutaten und der Geschmack ist einfach perfekt."
+            </p>
+            <footer class="testimonial-author">
+              <cite>— Sarah M.</cite>
+            </footer>
+          </blockquote>
+
+          <blockquote class="testimonial">
+            <p class="testimonial-text">
+              "Authentisches amerikanisches Fast Food wie in den USA. Absolute Empfehlung!"
+            </p>
+            <footer class="testimonial-author">
+              <cite>— Michael K.</cite>
+            </footer>
+          </blockquote>
+
+          <blockquote class="testimonial">
+            <p class="testimonial-text">
+              "Schneller Service, leckeres Essen und super freundliches Personal. Immer wieder gerne!"
+            </p>
+            <footer class="testimonial-author">
+              <cite>— Julia R.</cite>
+            </footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="section cta-section" aria-labelledby="cta-title">
+      <div class="container text-center">
+        <h2 id="cta-title" class="section-title">
+          Besuchen Sie uns!
+        </h2>
+        <p class="cta-text">
+          Erleben Sie authentisches American Fast Food in Wetzlar.<br />
+          Wir freuen uns auf Ihren Besuch.
+        </p>
+        <div class="cta-actions">
+          <Button href="/kontakt/" variant="primary" size="lg">
+            Kontakt aufnehmen
+          </Button>
+          <Button href="/speisekarte/" variant="outline" size="lg">
+            Speisekarte ansehen
+          </Button>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+  <ConsentBanner />
+</BaseLayout>
+
+<style>
+  .section-title {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-12);
+  }
+
+  @media (min-width: 768px) {
+    .section-title {
+      font-size: var(--font-size-4xl);
+    }
+  }
+
+  .text-center {
+    text-align: center;
+  }
+
+  .bg-secondary {
+    background-color: var(--color-bg-secondary);
+  }
+
+  .mt-8 {
+    margin-top: var(--space-8);
+  }
+
+  /* Features Grid */
+  .features-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--gap-lg);
+  }
+
+  @media (min-width: 768px) {
+    .features-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .feature-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: var(--card-padding);
+    background-color: var(--card-bg);
+    border: var(--card-border-width) solid var(--card-border-color);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--card-shadow);
+  }
+
+  .feature-icon {
+    font-size: 4rem;
+    margin-bottom: var(--space-4);
+  }
+
+  .feature-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-3);
+  }
+
+  .feature-description {
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  /* Menu Grid */
+  .menu-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--gap-md);
+  }
+
+  @media (min-width: 768px) {
+    .menu-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .menu-card {
+    padding: var(--card-padding);
+    background-color: var(--card-bg);
+    border: var(--card-border-width) solid var(--card-border-color);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--card-shadow);
+  }
+
+  .menu-card-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-3);
+  }
+
+  .menu-card-description {
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-4);
+  }
+
+  .menu-card-price {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-brand-primary);
+  }
+
+  /* Testimonials */
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--gap-lg);
+  }
+
+  @media (min-width: 768px) {
+    .testimonials-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .testimonial {
+    padding: var(--card-padding);
+    background-color: var(--card-bg);
+    border-left: 4px solid var(--color-brand-primary);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--card-shadow);
+  }
+
+  .testimonial-text {
+    font-size: var(--font-size-lg);
+    font-style: italic;
+    margin-bottom: var(--space-4);
+  }
+
+  .testimonial-author {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-secondary);
+  }
+
+  /* CTA Section */
+  .cta-section {
+    background: linear-gradient(135deg, var(--color-brand-primary), var(--color-brand-secondary));
+    color: var(--color-text-inverse);
+  }
+
+  .cta-text {
+    font-size: var(--font-size-lg);
+    margin-bottom: var(--space-8);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .cta-actions {
+    display: flex;
+    gap: var(--gap-md);
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+</style>

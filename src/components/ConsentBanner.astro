@@ -1,0 +1,335 @@
+---
+/**
+ * Consent Banner Component
+ * DSGVO/TTDSG compliant, with reject option
+ */
+---
+
+<aside
+  class="consent-banner"
+  role="dialog"
+  aria-labelledby="consent-title"
+  aria-describedby="consent-description"
+  aria-modal="false"
+  data-consent-banner
+  hidden
+>
+  <div class="consent-content">
+    <div class="consent-text">
+      <h2 id="consent-title" class="consent-title">
+        Cookie-Einstellungen
+      </h2>
+      <p id="consent-description" class="consent-description">
+        Wir verwenden Cookies, um Ihnen ein optimales Website-Erlebnis zu bieten.
+        Dazu gehören notwendige Cookies sowie optionale Cookies für erweiterte Funktionen.
+        Sie können Ihre Einstellungen jederzeit anpassen.
+      </p>
+    </div>
+
+    <div class="consent-actions">
+      <button
+        type="button"
+        class="btn btn-outline btn-md"
+        data-consent-action="reject"
+      >
+        Ablehnen
+      </button>
+      <button
+        type="button"
+        class="btn btn-ghost btn-md"
+        data-consent-action="customize"
+      >
+        Anpassen
+      </button>
+      <button
+        type="button"
+        class="btn btn-primary btn-md"
+        data-consent-action="accept"
+      >
+        Alle akzeptieren
+      </button>
+    </div>
+  </div>
+
+  <!-- Detailed Settings Modal -->
+  <div class="consent-modal" data-consent-modal hidden>
+    <div class="consent-modal-content">
+      <h3 class="consent-modal-title">Cookie-Einstellungen anpassen</h3>
+
+      <div class="consent-options">
+        <div class="consent-option">
+          <label class="consent-option-label">
+            <input
+              type="checkbox"
+              name="consent-necessary"
+              checked
+              disabled
+              aria-describedby="consent-necessary-desc"
+            />
+            <div class="consent-option-info">
+              <strong>Notwendige Cookies</strong>
+              <p id="consent-necessary-desc" class="consent-option-desc">
+                Erforderlich für die Grundfunktionen der Website. Können nicht deaktiviert werden.
+              </p>
+            </div>
+          </label>
+        </div>
+
+        <div class="consent-option">
+          <label class="consent-option-label">
+            <input
+              type="checkbox"
+              name="consent-functional"
+              data-consent-checkbox="functional"
+              aria-describedby="consent-functional-desc"
+            />
+            <div class="consent-option-info">
+              <strong>Funktionale Cookies</strong>
+              <p id="consent-functional-desc" class="consent-option-desc">
+                Ermöglichen erweiterte Funktionen wie Karten und Videos.
+              </p>
+            </div>
+          </label>
+        </div>
+      </div>
+
+      <div class="consent-modal-actions">
+        <button
+          type="button"
+          class="btn btn-ghost btn-md"
+          data-consent-action="modal-close"
+        >
+          Abbrechen
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary btn-md"
+          data-consent-action="save"
+        >
+          Speichern
+        </button>
+      </div>
+    </div>
+  </div>
+</aside>
+
+<style>
+  .consent-banner {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999;
+    background-color: var(--color-bg-primary);
+    border-top: 1px solid var(--color-border-primary);
+    box-shadow: var(--shadow-lg);
+    animation: slideUp var(--transition-base) var(--ease-in-out);
+  }
+
+  @keyframes slideUp {
+    from {
+      transform: translateY(100%);
+    }
+    to {
+      transform: translateY(0);
+    }
+  }
+
+  .consent-content {
+    max-width: var(--container-max-width);
+    margin: 0 auto;
+    padding: var(--space-6);
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-md);
+  }
+
+  @media (min-width: 768px) {
+    .consent-content {
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+  }
+
+  .consent-text {
+    flex: 1;
+  }
+
+  .consent-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-2);
+  }
+
+  .consent-description {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+
+  .consent-actions {
+    display: flex;
+    gap: var(--gap-sm);
+    flex-wrap: wrap;
+  }
+
+  /* Consent Modal */
+  .consent-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: var(--color-bg-overlay);
+    animation: fadeIn var(--transition-base) var(--ease-in-out);
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  .consent-modal-content {
+    background-color: var(--color-bg-primary);
+    border-radius: var(--radius-lg);
+    padding: var(--space-8);
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: var(--shadow-xl);
+  }
+
+  .consent-modal-title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-6);
+  }
+
+  .consent-options {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-md);
+    margin-bottom: var(--space-8);
+  }
+
+  .consent-option {
+    padding: var(--space-4);
+    border: 1px solid var(--color-border-primary);
+    border-radius: var(--radius-base);
+  }
+
+  .consent-option-label {
+    display: flex;
+    gap: var(--space-3);
+    cursor: pointer;
+  }
+
+  .consent-option-label input[type='checkbox'] {
+    width: 24px;
+    height: 24px;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+
+  .consent-option-info {
+    flex: 1;
+  }
+
+  .consent-option-desc {
+    margin-top: var(--space-1);
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+  }
+
+  .consent-modal-actions {
+    display: flex;
+    gap: var(--gap-md);
+    justify-content: flex-end;
+  }
+</style>
+
+<script>
+  // Consent management will be handled by consent-manager.js module
+  // This script only handles UI interactions
+
+  function initConsentBanner() {
+    const banner = document.querySelector('[data-consent-banner]') as HTMLElement;
+    const modal = document.querySelector('[data-consent-modal]') as HTMLElement;
+
+    if (!banner) return;
+
+    // Check if consent has been given
+    const consent = localStorage.getItem('ew_consent_preferences');
+    if (consent) {
+      banner.hidden = true;
+      return;
+    }
+
+    // Show banner
+    banner.hidden = false;
+
+    // Handle button clicks
+    document.addEventListener('click', (e) => {
+      const target = e.target as HTMLElement;
+      const action = target.getAttribute('data-consent-action');
+
+      if (!action) return;
+
+      switch (action) {
+        case 'accept':
+          // Accept all
+          saveConsent({ necessary: true, functional: true });
+          banner.hidden = true;
+          break;
+
+        case 'reject':
+          // Reject all except necessary
+          saveConsent({ necessary: true, functional: false });
+          banner.hidden = true;
+          break;
+
+        case 'customize':
+          // Show modal
+          modal.hidden = false;
+          break;
+
+        case 'modal-close':
+          // Close modal
+          modal.hidden = true;
+          break;
+
+        case 'save':
+          // Save custom preferences
+          const functional = (document.querySelector('[data-consent-checkbox="functional"]') as HTMLInputElement)?.checked || false;
+          saveConsent({ necessary: true, functional });
+          modal.hidden = true;
+          banner.hidden = true;
+          break;
+      }
+    });
+  }
+
+  function saveConsent(preferences: Record<string, boolean>) {
+    localStorage.setItem('ew_consent_preferences', JSON.stringify(preferences));
+
+    // Dispatch event for consent manager
+    window.dispatchEvent(
+      new CustomEvent('consent-changed', {
+        detail: preferences,
+      })
+    );
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initConsentBanner);
+  } else {
+    initConsentBanner();
+  }
+</script>

@@ -1,0 +1,224 @@
+---
+/**
+ * Two-Click Embed Component
+ * DSGVO-compliant embeds for YouTube, Google Maps, etc.
+ */
+
+interface Props {
+  type: 'youtube' | 'googleMaps';
+  videoId?: string;
+  mapQuery?: string;
+  title: string;
+}
+
+const { type, videoId, mapQuery, title } = Astro.props;
+
+const embedUrls = {
+  youtube: videoId ? `https://www.youtube-nocookie.com/embed/${videoId}` : '',
+  googleMaps: mapQuery ? `https://www.google.com/maps/embed/v1/place?key=YOUR_API_KEY&q=${encodeURIComponent(mapQuery)}` : '',
+};
+
+const embedUrl = embedUrls[type];
+const embedId = `embed-${type}-${Math.random().toString(36).substr(2, 9)}`;
+---
+
+<div
+  class="two-click-embed"
+  data-embed-type={type}
+  data-embed-url={embedUrl}
+  data-embed-id={embedId}
+>
+  <!-- Placeholder (shown before consent) -->
+  <div class="embed-placeholder" data-embed-placeholder>
+    <div class="embed-placeholder-content">
+      <svg
+        class="embed-icon"
+        width="64"
+        height="64"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        {type === 'youtube' && (
+          <>
+            <polygon points="5 3 19 12 5 21 5 3"></polygon>
+          </>
+        )}
+        {type === 'googleMaps' && (
+          <>
+            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+            <circle cx="12" cy="10" r="3"></circle>
+          </>
+        )}
+      </svg>
+
+      <h3 class="embed-title">{title}</h3>
+
+      <p class="embed-notice">
+        Dieser Inhalt wird von einem Drittanbieter bereitgestellt. Durch das Aktivieren
+        des Inhalts akzeptieren Sie die Datenschutzbestimmungen des Anbieters.
+      </p>
+
+      <button
+        type="button"
+        class="btn btn-primary btn-md"
+        data-embed-activate
+        aria-label={`${title} laden und anzeigen`}
+      >
+        Inhalt laden
+      </button>
+
+      <a
+        href={type === 'youtube' ? `https://www.youtube.com/watch?v=${videoId}` : `https://www.google.com/maps/search/${mapQuery}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="embed-link"
+      >
+        In neuem Fenster öffnen
+      </a>
+    </div>
+  </div>
+
+  <!-- Embed container (shown after consent) -->
+  <div class="embed-container" data-embed-container hidden>
+    <!-- Iframe will be inserted here via JS -->
+  </div>
+</div>
+
+<style>
+  .two-click-embed {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background-color: var(--color-bg-secondary);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+  }
+
+  .embed-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    padding: var(--space-8);
+  }
+
+  .embed-placeholder-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--gap-md);
+    text-align: center;
+    max-width: 400px;
+  }
+
+  .embed-icon {
+    color: var(--color-brand-primary);
+  }
+
+  .embed-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-primary);
+  }
+
+  .embed-notice {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .embed-link {
+    font-size: var(--font-size-sm);
+    color: var(--color-brand-primary);
+    text-decoration: underline;
+  }
+
+  .embed-container {
+    width: 100%;
+    height: 100%;
+  }
+
+  .embed-container iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+</style>
+
+<script>
+  function initTwoClickEmbeds() {
+    const embeds = document.querySelectorAll('.two-click-embed');
+
+    embeds.forEach((embed) => {
+      const activateBtn = embed.querySelector('[data-embed-activate]') as HTMLButtonElement;
+      const placeholder = embed.querySelector('[data-embed-placeholder]') as HTMLElement;
+      const container = embed.querySelector('[data-embed-container]') as HTMLElement;
+      const embedUrl = embed.getAttribute('data-embed-url');
+      const embedType = embed.getAttribute('data-embed-type');
+
+      if (!activateBtn || !embedUrl) return;
+
+      activateBtn.addEventListener('click', () => {
+        // Create iframe
+        const iframe = document.createElement('iframe');
+        iframe.src = embedUrl;
+        iframe.title = embed.querySelector('.embed-title')?.textContent || 'Embedded content';
+        iframe.setAttribute('allowfullscreen', '');
+        iframe.setAttribute('loading', 'lazy');
+
+        // Security attributes
+        if (embedType === 'youtube') {
+          iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-presentation');
+          iframe.setAttribute('referrerpolicy', 'no-referrer');
+        } else if (embedType === 'googleMaps') {
+          iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin');
+          iframe.setAttribute('referrerpolicy', 'no-referrer');
+        }
+
+        // Insert iframe
+        container.innerHTML = '';
+        container.appendChild(iframe);
+
+        // Toggle visibility
+        placeholder.hidden = true;
+        container.hidden = false;
+
+        // Save consent preference
+        const consent = JSON.parse(localStorage.getItem('ew_consent_preferences') || '{}');
+        consent.functional = true;
+        localStorage.setItem('ew_consent_preferences', JSON.stringify(consent));
+
+        // Dispatch event
+        window.dispatchEvent(
+          new CustomEvent('embed-loaded', {
+            detail: {
+              type: embedType,
+              url: embedUrl,
+            },
+          })
+        );
+      });
+    });
+
+    // Auto-activate if consent already given
+    const consent = JSON.parse(localStorage.getItem('ew_consent_preferences') || '{}');
+    if (consent.functional) {
+      embeds.forEach((embed) => {
+        const activateBtn = embed.querySelector('[data-embed-activate]') as HTMLButtonElement;
+        // Don't auto-click, but could show a different state
+      });
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initTwoClickEmbeds);
+  } else {
+    initTwoClickEmbeds();
+  }
+</script>

@@ -1,0 +1,16 @@
+{
+  "name": "Extrawurst Wetzlar",
+  "short_name": "Extrawurst",
+  "description": "Authentisches American Fast Food in Wetzlar",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#FF6B6B",
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml"
+    }
+  ]
+}

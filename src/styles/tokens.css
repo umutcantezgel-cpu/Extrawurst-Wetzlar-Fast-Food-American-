@@ -1,0 +1,209 @@
+/**
+ * Design Tokens - Tier 1/2/3
+ * Token-only approach: Never use magic values in components
+ */
+
+/* ============================================================================
+   TIER 1: PRIMITIVE TOKENS (Brand Constants)
+   ============================================================================ */
+
+:root {
+  /* Colors - Primitive */
+  --color-red-50: #FFF5F5;
+  --color-red-500: #FF6B6B;
+  --color-red-700: #F03E3E;
+  --color-red-900: #C92A2A;
+
+  --color-yellow-50: #FFF9DB;
+  --color-yellow-500: #FCC419;
+  --color-yellow-700: #F59F00;
+
+  --color-neutral-50: #F8F9FA;
+  --color-neutral-100: #F1F3F5;
+  --color-neutral-200: #E9ECEF;
+  --color-neutral-500: #ADB5BD;
+  --color-neutral-700: #495057;
+  --color-neutral-900: #212529;
+
+  /* Spacing - Primitive (8px grid) */
+  --space-1: 0.25rem;  /* 4px */
+  --space-2: 0.5rem;   /* 8px */
+  --space-3: 0.75rem;  /* 12px */
+  --space-4: 1rem;     /* 16px */
+  --space-6: 1.5rem;   /* 24px */
+  --space-8: 2rem;     /* 32px */
+  --space-12: 3rem;    /* 48px */
+  --space-16: 4rem;    /* 64px */
+  --space-24: 6rem;    /* 96px */
+
+  /* Font Sizes - Primitive */
+  --font-size-xs: 0.75rem;    /* 12px */
+  --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-base: 1rem;     /* 16px */
+  --font-size-lg: 1.125rem;   /* 18px */
+  --font-size-xl: 1.25rem;    /* 20px */
+  --font-size-2xl: 1.5rem;    /* 24px */
+  --font-size-3xl: 1.875rem;  /* 30px */
+  --font-size-4xl: 2.25rem;   /* 36px */
+  --font-size-5xl: 3rem;      /* 48px */
+
+  /* Font Weights - Primitive */
+  --font-weight-normal: 400;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+
+  /* Line Heights - Primitive */
+  --line-height-tight: 1.25;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.75;
+
+  /* Border Radius - Primitive */
+  --radius-sm: 0.25rem;
+  --radius-base: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-full: 9999px;
+
+  /* Shadows - Primitive */
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-base: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+
+  /* Transitions - Primitive */
+  --transition-fast: 150ms;
+  --transition-base: 250ms;
+  --transition-slow: 350ms;
+  --ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ============================================================================
+   TIER 2: SEMANTIC TOKENS (Purpose-driven)
+   ============================================================================ */
+
+:root {
+  /* Brand Colors - Semantic */
+  --color-brand-primary: var(--color-red-500);
+  --color-brand-primary-hover: var(--color-red-700);
+  --color-brand-primary-light: var(--color-red-50);
+  --color-brand-secondary: var(--color-yellow-500);
+  --color-brand-secondary-hover: var(--color-yellow-700);
+
+  /* Background - Semantic */
+  --color-bg-primary: #FFFFFF;
+  --color-bg-secondary: var(--color-neutral-50);
+  --color-bg-tertiary: var(--color-neutral-100);
+  --color-bg-overlay: rgb(0 0 0 / 0.5);
+
+  /* Text - Semantic */
+  --color-text-primary: var(--color-neutral-900);
+  --color-text-secondary: var(--color-neutral-700);
+  --color-text-tertiary: var(--color-neutral-500);
+  --color-text-inverse: #FFFFFF;
+
+  /* Border - Semantic */
+  --color-border-primary: var(--color-neutral-200);
+  --color-border-secondary: var(--color-neutral-100);
+  --color-border-focus: var(--color-brand-primary);
+
+  /* Feedback - Semantic */
+  --color-success: #51CF66;
+  --color-error: #FF6B6B;
+  --color-warning: #FFD43B;
+  --color-info: #339AF0;
+
+  /* Interactive - Semantic */
+  --color-link: var(--color-brand-primary);
+  --color-link-hover: var(--color-brand-primary-hover);
+  --color-link-visited: var(--color-red-900);
+
+  /* Focus Ring - Semantic (WCAG 2.2) */
+  --focus-ring-width: 3px;
+  --focus-ring-offset: 2px;
+  --focus-ring-color: var(--color-brand-primary);
+  --focus-ring: 0 0 0 var(--focus-ring-offset) var(--color-bg-primary),
+                0 0 0 calc(var(--focus-ring-offset) + var(--focus-ring-width)) var(--focus-ring-color);
+}
+
+/* ============================================================================
+   TIER 3: COMPONENT TOKENS (Specific UI patterns)
+   ============================================================================ */
+
+:root {
+  /* Button Tokens */
+  --button-height-sm: 2rem;     /* 32px */
+  --button-height-md: 2.75rem;  /* 44px - WCAG minimum */
+  --button-height-lg: 3.5rem;   /* 56px */
+  --button-padding-x-sm: var(--space-3);
+  --button-padding-x-md: var(--space-6);
+  --button-padding-x-lg: var(--space-8);
+  --button-border-radius: var(--radius-base);
+  --button-font-weight: var(--font-weight-semibold);
+
+  /* Input Tokens */
+  --input-height: 2.75rem;      /* 44px - WCAG minimum */
+  --input-padding-x: var(--space-4);
+  --input-padding-y: var(--space-3);
+  --input-border-width: 1px;
+  --input-border-radius: var(--radius-base);
+  --input-border-color: var(--color-border-primary);
+  --input-border-color-focus: var(--color-border-focus);
+  --input-bg: var(--color-bg-primary);
+  --input-text-color: var(--color-text-primary);
+
+  /* Card Tokens */
+  --card-padding: var(--space-6);
+  --card-border-radius: var(--radius-lg);
+  --card-border-width: 1px;
+  --card-border-color: var(--color-border-primary);
+  --card-shadow: var(--shadow-base);
+  --card-bg: var(--color-bg-primary);
+
+  /* Header Tokens */
+  --header-height: 4rem;        /* 64px */
+  --header-padding-x: var(--space-6);
+  --header-bg: var(--color-bg-primary);
+  --header-border-color: var(--color-border-secondary);
+  --header-z-index: 1000;
+
+  /* Container Tokens */
+  --container-max-width: 1280px;
+  --container-padding-x: var(--space-6);
+
+  /* Gap/Grid Tokens */
+  --gap-sm: var(--space-4);
+  --gap-md: var(--space-6);
+  --gap-lg: var(--space-8);
+  --gap-xl: var(--space-12);
+}
+
+/* ============================================================================
+   REDUCED MOTION (WCAG 2.2)
+   ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-fast: 0ms;
+    --transition-base: 0ms;
+    --transition-slow: 0ms;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ============================================================================
+   DARK MODE TOKENS (Future-proofing)
+   ============================================================================ */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Dark mode tokens can be added here when needed */
+  }
+}

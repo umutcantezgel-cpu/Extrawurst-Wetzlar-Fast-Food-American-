@@ -1,0 +1,67 @@
+---
+/**
+ * Logo Component
+ * Accessible site logo with proper alt text
+ */
+---
+
+<div class="logo">
+  <a href="/" aria-label="Extrawurst Wetzlar - Zur Startseite">
+    <svg
+      width="180"
+      height="48"
+      viewBox="0 0 180 48"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
+    >
+      <rect width="48" height="48" rx="8" fill="currentColor" class="text-brand-primary-500" />
+      <path
+        d="M16 20h16v8H16z"
+        fill="currentColor"
+        class="text-brand-secondary-500"
+      />
+      <text
+        x="56"
+        y="32"
+        font-family="Poppins, sans-serif"
+        font-size="24"
+        font-weight="700"
+        fill="currentColor"
+        class="text-neutral-900"
+      >
+        Extrawurst
+      </text>
+    </svg>
+  </a>
+</div>
+
+<style>
+  .logo {
+    display: flex;
+    align-items: center;
+    flex-shrink: 0;
+  }
+
+  .logo a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    transition: opacity var(--transition-base) var(--ease-in-out);
+  }
+
+  .logo a:hover {
+    opacity: 0.8;
+  }
+
+  .logo a:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+    border-radius: var(--radius-base);
+  }
+
+  svg {
+    height: 48px;
+    width: auto;
+  }
+</style>

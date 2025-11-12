@@ -1,0 +1,69 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://extrawurst-wetzlar.de/contracts/components/button.contract.json",
+  "title": "Button Component Contract",
+  "version": "1.0.0",
+  "component": "Button",
+  "description": "Accessible button component with multiple variants",
+  "props": {
+    "variant": {
+      "type": "string",
+      "enum": ["primary", "secondary", "outline", "ghost"],
+      "default": "primary",
+      "description": "Visual style variant"
+    },
+    "size": {
+      "type": "string",
+      "enum": ["sm", "md", "lg"],
+      "default": "md",
+      "description": "Size variant"
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Disabled state"
+    },
+    "loading": {
+      "type": "boolean",
+      "default": false,
+      "description": "Loading state with spinner"
+    },
+    "href": {
+      "type": "string",
+      "description": "If provided, renders as link instead of button"
+    },
+    "ariaLabel": {
+      "type": "string",
+      "description": "Accessible label (overrides visual text)"
+    }
+  },
+  "accessibility": {
+    "wcag": "AA",
+    "requirements": [
+      "Minimum 44×44px touch target",
+      "Visible focus indicator",
+      "Keyboard accessible",
+      "Color contrast ≥ 4.5:1",
+      "Disabled state communicated to screen readers",
+      "Loading state announced with aria-live"
+    ],
+    "ariaAttributes": [
+      "aria-label",
+      "aria-disabled",
+      "aria-busy"
+    ],
+    "keyboardSupport": [
+      "Enter: Activate",
+      "Space: Activate"
+    ]
+  },
+  "performance": {
+    "maxSizeKB": 2,
+    "criticalCSS": true,
+    "lazyLoad": false
+  },
+  "consent": {
+    "required": false,
+    "profile": null
+  }
+}

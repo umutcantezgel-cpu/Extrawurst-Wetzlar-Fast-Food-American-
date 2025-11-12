@@ -1,0 +1,184 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://extrawurst-wetzlar.de/contracts/orchestrator.json",
+  "title": "Layout Orchestrator",
+  "version": "1.0.0",
+  "description": "Defines page composition, layout trees, and component bindings",
+  "layouts": {
+    "default": {
+      "structure": [
+        {
+          "component": "Header",
+          "slot": "header",
+          "props": {
+            "sticky": true,
+            "transparent": false
+          },
+          "children": [
+            {
+              "component": "Logo",
+              "props": {
+                "src": "/assets/img/logo.svg",
+                "alt": "Extrawurst Wetzlar Logo"
+              }
+            },
+            {
+              "component": "Navigation",
+              "props": {
+                "items": [
+                  { "label": "Start", "href": "/" },
+                  { "label": "Speisekarte", "href": "/speisekarte/" },
+                  { "label": "Über uns", "href": "/ueber-uns/" },
+                  { "label": "Kontakt", "href": "/kontakt/" }
+                ]
+              }
+            }
+          ]
+        },
+        {
+          "component": "Main",
+          "slot": "main",
+          "props": {
+            "skipLinkTarget": true
+          }
+        },
+        {
+          "component": "Footer",
+          "slot": "footer",
+          "children": [
+            {
+              "component": "FooterNav",
+              "props": {
+                "columns": [
+                  {
+                    "title": "Restaurant",
+                    "links": [
+                      { "label": "Speisekarte", "href": "/speisekarte/" },
+                      { "label": "Über uns", "href": "/ueber-uns/" },
+                      { "label": "Kontakt", "href": "/kontakt/" }
+                    ]
+                  },
+                  {
+                    "title": "Service",
+                    "links": [
+                      { "label": "Reservierung", "href": "/kontakt/" },
+                      { "label": "Catering", "href": "/kontakt/" }
+                    ]
+                  },
+                  {
+                    "title": "Rechtliches",
+                    "links": [
+                      { "label": "Impressum", "href": "/impressum/" },
+                      { "label": "Datenschutz", "href": "/datenschutz/" }
+                    ]
+                  }
+                ]
+              }
+            },
+            {
+              "component": "SocialLinks",
+              "props": {
+                "platforms": []
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "homepage": {
+      "extends": "default",
+      "slots": {
+        "main": [
+          {
+            "component": "Hero",
+            "props": {
+              "title": "Authentisches American Fast Food",
+              "subtitle": "Frisch zubereitet mit Leidenschaft",
+              "ctaText": "Zur Speisekarte",
+              "ctaHref": "/speisekarte/",
+              "backgroundImage": "/assets/img/hero-burger.jpg"
+            }
+          },
+          {
+            "component": "Features",
+            "props": {
+              "items": [
+                {
+                  "icon": "burger",
+                  "title": "Frische Zutaten",
+                  "description": "100% Rindfleisch und regionales Gemüse"
+                },
+                {
+                  "icon": "clock",
+                  "title": "Schnell & Lecker",
+                  "description": "Frisch zubereitet in unter 10 Minuten"
+                },
+                {
+                  "icon": "heart",
+                  "title": "Mit Liebe gemacht",
+                  "description": "Jeder Burger ist ein Unikat"
+                }
+              ]
+            }
+          },
+          {
+            "component": "MenuPreview",
+            "props": {
+              "title": "Unsere Highlights",
+              "items": []
+            }
+          },
+          {
+            "component": "Testimonials",
+            "props": {
+              "title": "Das sagen unsere Gäste"
+            }
+          },
+          {
+            "component": "CTA",
+            "props": {
+              "title": "Besuchen Sie uns!",
+              "text": "Erleben Sie authentisches American Fast Food in Wetzlar",
+              "buttonText": "Kontakt aufnehmen",
+              "buttonHref": "/kontakt/"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "bindings": {
+    "consent": {
+      "target": "ConsentManager",
+      "events": ["com.extrawurst.consent.changed"],
+      "storage": "localStorage",
+      "key": "ew_consent_preferences"
+    },
+    "navigation": {
+      "target": "Navigation",
+      "events": ["com.extrawurst.navigation.changed"],
+      "a11y": {
+        "trapFocus": true,
+        "escapeClose": true,
+        "announceState": true
+      }
+    }
+  },
+  "conditions": {
+    "showNewsletter": {
+      "type": "consent",
+      "profile": "functional",
+      "granted": true
+    },
+    "showMap": {
+      "type": "consent",
+      "profile": "functional",
+      "granted": true
+    },
+    "showVideo": {
+      "type": "consent",
+      "profile": "functional",
+      "granted": true
+    }
+  }
+}

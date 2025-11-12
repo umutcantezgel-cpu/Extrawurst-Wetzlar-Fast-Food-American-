@@ -1,0 +1,118 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://extrawurst-wetzlar.de/contracts/events.catalog.json",
+  "title": "Events Catalog",
+  "version": "1.0.0",
+  "description": "Catalog of async events following CloudEvents specification",
+  "events": [
+    {
+      "type": "com.extrawurst.consent.changed",
+      "specversion": "1.0",
+      "source": "/components/consent-manager",
+      "description": "Fired when user changes consent preferences",
+      "dataschema": {
+        "type": "object",
+        "properties": {
+          "profile": {
+            "type": "string",
+            "enum": ["necessary", "functional", "analytics", "marketing"]
+          },
+          "granted": {
+            "type": "boolean"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": ["profile", "granted", "timestamp"]
+      }
+    },
+    {
+      "type": "com.extrawurst.form.submitted",
+      "specversion": "1.0",
+      "source": "/components/contact-form",
+      "description": "Fired when contact form is successfully submitted",
+      "dataschema": {
+        "type": "object",
+        "properties": {
+          "formId": {
+            "type": "string"
+          },
+          "success": {
+            "type": "boolean"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": ["formId", "success", "timestamp"]
+      }
+    },
+    {
+      "type": "com.extrawurst.embed.loaded",
+      "specversion": "1.0",
+      "source": "/components/two-click-embed",
+      "description": "Fired when two-click embed is activated and loaded",
+      "dataschema": {
+        "type": "object",
+        "properties": {
+          "embedType": {
+            "type": "string",
+            "enum": ["youtube", "googleMaps"]
+          },
+          "embedId": {
+            "type": "string"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": ["embedType", "embedId", "timestamp"]
+      }
+    },
+    {
+      "type": "com.extrawurst.navigation.changed",
+      "specversion": "1.0",
+      "source": "/components/navigation",
+      "description": "Fired when navigation state changes (mobile menu toggle)",
+      "dataschema": {
+        "type": "object",
+        "properties": {
+          "isOpen": {
+            "type": "boolean"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": ["isOpen", "timestamp"]
+      }
+    },
+    {
+      "type": "com.extrawurst.lightbox.opened",
+      "specversion": "1.0",
+      "source": "/components/lightbox",
+      "description": "Fired when lightbox gallery is opened",
+      "dataschema": {
+        "type": "object",
+        "properties": {
+          "imageId": {
+            "type": "string"
+          },
+          "imageIndex": {
+            "type": "number"
+          },
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "required": ["imageId", "imageIndex", "timestamp"]
+      }
+    }
+  ]
+}

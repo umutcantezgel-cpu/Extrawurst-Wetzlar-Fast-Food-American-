@@ -1,0 +1,46 @@
+{
+  "name": "extrawurst-wetzlar-premium-website",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "description": "Premium Static Enterprise Website for Extrawurst Wetzlar - American Fast Food",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro",
+    "lhci": "lhci autorun",
+    "a11y": "npm run a11y:axe && npm run a11y:pa11y",
+    "a11y:axe": "node scripts/a11y-axe.js",
+    "a11y:pa11y": "pa11y-ci --config .pa11yci.json",
+    "links": "node scripts/link-checker.js",
+    "sri:gen": "node scripts/gen-sri.js",
+    "sri:verify": "node scripts/verify-sri.js",
+    "security": "npm run security:headers && npm run security:no-inline",
+    "security:headers": "node scripts/check-security-headers.js",
+    "security:no-inline": "node scripts/no-inline-scanner.js",
+    "reports": "node scripts/collect-reports.js",
+    "validate:contracts": "node scripts/validate-contracts.js",
+    "test": "npm run validate:contracts && npm run sri:verify",
+    "prebuild": "npm run sri:gen",
+    "postbuild": "npm run sri:verify"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.9.4",
+    "astro": "^4.16.0",
+    "typescript": "^5.6.3"
+  },
+  "devDependencies": {
+    "@axe-core/cli": "^4.10.2",
+    "@lhci/cli": "^0.14.0",
+    "ajv": "^8.17.1",
+    "broken-link-checker": "^0.7.8",
+    "pa11y-ci": "^3.1.0",
+    "postcss": "^8.4.49",
+    "tailwindcss": "^3.4.15"
+  },
+  "engines": {
+    "node": ">=20.0.0",
+    "npm": ">=10.0.0"
+  }
+}

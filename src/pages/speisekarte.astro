@@ -1,0 +1,156 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ConsentBanner from '../components/ConsentBanner.astro';
+---
+
+<BaseLayout
+  title="Speisekarte - Burger, Pommes & mehr"
+  description="Entdecken Sie unsere Speisekarte mit saftigen Burgern, knusprigen Pommes, Chicken Wings und erfrischenden Getränken. Alle Gerichte auch zum Mitnehmen."
+>
+  <Header />
+  <main id="main-content">
+    <section class="section">
+      <div class="container">
+        <h1 class="page-title">Unsere Speisekarte</h1>
+
+        <div class="menu-category">
+          <h2 class="category-title">Burger</h2>
+          <div class="menu-items">
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Classic Burger</h3>
+                <span class="menu-item-price">8,90 €</span>
+              </div>
+              <p class="menu-item-description">Rindfleisch-Patty, Salat, Tomate, Zwiebeln, hausgemachte Sauce</p>
+            </article>
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Cheese Deluxe</h3>
+                <span class="menu-item-price">11,90 €</span>
+              </div>
+              <p class="menu-item-description">Doppeltes Rindfleisch, doppelter Käse, Bacon, BBQ-Sauce</p>
+            </article>
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Crispy Chicken</h3>
+                <span class="menu-item-price">9,90 €</span>
+              </div>
+              <p class="menu-item-description">Knuspriges Hähnchenbrustfilet, Cole Slaw, Mayo</p>
+            </article>
+          </div>
+        </div>
+
+        <div class="menu-category">
+          <h2 class="category-title">Beilagen</h2>
+          <div class="menu-items">
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Pommes Frites</h3>
+                <span class="menu-item-price">3,50 €</span>
+              </div>
+              <p class="menu-item-description">Knusprig goldbraun, leicht gesalzen</p>
+            </article>
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Süßkartoffel-Pommes</h3>
+                <span class="menu-item-price">4,50 €</span>
+              </div>
+              <p class="menu-item-description">Mit Meersalz und Rosmarin</p>
+            </article>
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Onion Rings</h3>
+                <span class="menu-item-price">4,90 €</span>
+              </div>
+              <p class="menu-item-description">Knusprig panierte Zwiebelringe</p>
+            </article>
+          </div>
+        </div>
+
+        <div class="menu-category">
+          <h2 class="category-title">Getränke</h2>
+          <div class="menu-items">
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Cola / Limo</h3>
+                <span class="menu-item-price">2,90 €</span>
+              </div>
+              <p class="menu-item-description">0,4l</p>
+            </article>
+            <article class="menu-item">
+              <div class="menu-item-header">
+                <h3 class="menu-item-title">Milkshake</h3>
+                <span class="menu-item-price">4,90 €</span>
+              </div>
+              <p class="menu-item-description">Vanille, Schoko oder Erdbeere</p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <ConsentBanner />
+</BaseLayout>
+
+<style>
+  .page-title {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-extrabold);
+    margin-bottom: var(--space-16);
+    text-align: center;
+  }
+
+  .menu-category {
+    margin-bottom: var(--space-16);
+  }
+
+  .category-title {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-8);
+    padding-bottom: var(--space-4);
+    border-bottom: 2px solid var(--color-brand-primary);
+  }
+
+  .menu-items {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-md);
+  }
+
+  .menu-item {
+    padding: var(--card-padding);
+    background-color: var(--card-bg);
+    border: var(--card-border-width) solid var(--card-border-color);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--card-shadow);
+  }
+
+  .menu-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: var(--gap-md);
+    margin-bottom: var(--space-2);
+  }
+
+  .menu-item-title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+  }
+
+  .menu-item-price {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-brand-primary);
+    white-space: nowrap;
+  }
+
+  .menu-item-description {
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+</style>

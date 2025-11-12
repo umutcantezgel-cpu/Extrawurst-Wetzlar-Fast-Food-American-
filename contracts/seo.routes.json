@@ -1,0 +1,136 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://extrawurst-wetzlar.de/contracts/seo.routes.json",
+  "title": "SEO Routes Catalog",
+  "version": "1.0.0",
+  "routes": [
+    {
+      "path": "/",
+      "priority": 1.0,
+      "changefreq": "weekly",
+      "meta": {
+        "title": "Extrawurst Wetzlar - Authentisches American Fast Food",
+        "description": "Genießen Sie authentisches amerikanisches Fast Food in Wetzlar. Frische Burger, knusprige Pommes und köstliche Milkshakes. Täglich geöffnet.",
+        "keywords": ["burger wetzlar", "fast food wetzlar", "american restaurant", "burger restaurant"],
+        "ogType": "website",
+        "ogImage": "/assets/img/og-home.jpg",
+        "twitterCard": "summary_large_image"
+      },
+      "canonical": "https://extrawurst-wetzlar.de/",
+      "alternates": [],
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "Restaurant",
+        "name": "Extrawurst Wetzlar",
+        "description": "Authentisches American Fast Food Restaurant in Wetzlar",
+        "image": "https://extrawurst-wetzlar.de/assets/img/restaurant-exterior.jpg",
+        "servesCuisine": "American",
+        "priceRange": "€€",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Bahnhofstraße 1",
+          "addressLocality": "Wetzlar",
+          "postalCode": "35576",
+          "addressCountry": "DE"
+        },
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 50.5533,
+          "longitude": 8.5028
+        },
+        "telephone": "+49 6441 123456",
+        "email": "info@extrawurst-wetzlar.de",
+        "openingHoursSpecification": [
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+            "opens": "11:00",
+            "closes": "22:00"
+          },
+          {
+            "@type": "OpeningHoursSpecification",
+            "dayOfWeek": ["Saturday", "Sunday"],
+            "opens": "12:00",
+            "closes": "23:00"
+          }
+        ]
+      }
+    },
+    {
+      "path": "/speisekarte/",
+      "priority": 0.9,
+      "changefreq": "monthly",
+      "meta": {
+        "title": "Speisekarte - Burger, Pommes & mehr",
+        "description": "Entdecken Sie unsere Speisekarte mit saftigen Burgern, knusprigen Pommes, Chicken Wings und erfrischenden Getränken. Alle Gerichte auch zum Mitnehmen.",
+        "keywords": ["burger speisekarte", "menü wetzlar", "preise burger"],
+        "ogType": "website",
+        "ogImage": "/assets/img/og-menu.jpg"
+      },
+      "canonical": "https://extrawurst-wetzlar.de/speisekarte/",
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "Menu",
+        "name": "Extrawurst Speisekarte"
+      }
+    },
+    {
+      "path": "/ueber-uns/",
+      "priority": 0.8,
+      "changefreq": "monthly",
+      "meta": {
+        "title": "Über uns - Unsere Geschichte & Vision",
+        "description": "Erfahren Sie mehr über Extrawurst Wetzlar: Unsere Leidenschaft für authentisches amerikanisches Fast Food und frische Zutaten aus der Region.",
+        "keywords": ["über uns", "restaurant geschichte", "team wetzlar"],
+        "ogType": "website",
+        "ogImage": "/assets/img/og-about.jpg"
+      },
+      "canonical": "https://extrawurst-wetzlar.de/ueber-uns/"
+    },
+    {
+      "path": "/kontakt/",
+      "priority": 0.7,
+      "changefreq": "monthly",
+      "meta": {
+        "title": "Kontakt - Reservierung & Anfragen",
+        "description": "Kontaktieren Sie uns für Reservierungen, Catering-Anfragen oder Fragen. Wir freuen uns auf Ihren Besuch in der Bahnhofstraße 1, Wetzlar.",
+        "keywords": ["kontakt", "reservierung", "restaurant wetzlar"],
+        "ogType": "website",
+        "ogImage": "/assets/img/og-contact.jpg"
+      },
+      "canonical": "https://extrawurst-wetzlar.de/kontakt/"
+    },
+    {
+      "path": "/impressum/",
+      "priority": 0.3,
+      "changefreq": "yearly",
+      "meta": {
+        "title": "Impressum",
+        "description": "Impressum und rechtliche Angaben der Extrawurst Wetzlar GmbH.",
+        "robots": "noindex, follow"
+      },
+      "canonical": "https://extrawurst-wetzlar.de/impressum/"
+    },
+    {
+      "path": "/datenschutz/",
+      "priority": 0.3,
+      "changefreq": "yearly",
+      "meta": {
+        "title": "Datenschutzerklärung",
+        "description": "Datenschutzerklärung der Extrawurst Wetzlar GmbH gemäß DSGVO.",
+        "robots": "noindex, follow"
+      },
+      "canonical": "https://extrawurst-wetzlar.de/datenschutz/"
+    },
+    {
+      "path": "/404/",
+      "priority": 0.1,
+      "changefreq": "never",
+      "meta": {
+        "title": "Seite nicht gefunden - 404",
+        "description": "Die angeforderte Seite wurde nicht gefunden.",
+        "robots": "noindex, nofollow"
+      }
+    }
+  ]
+}

@@ -1,0 +1,198 @@
+---
+/**
+ * Kontakt Page
+ */
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ContactForm from '../components/ContactForm.astro';
+import TwoClickEmbed from '../components/TwoClickEmbed.astro';
+import ConsentBanner from '../components/ConsentBanner.astro';
+---
+
+<BaseLayout
+  title="Kontakt - Reservierung & Anfragen"
+  description="Kontaktieren Sie uns für Reservierungen, Catering-Anfragen oder Fragen. Wir freuen uns auf Ihren Besuch in der Bahnhofstraße 1, Wetzlar."
+>
+  <Header />
+
+  <main id="main-content">
+    <section class="section">
+      <div class="container">
+        <h1 class="page-title">Kontakt</h1>
+
+        <div class="contact-grid">
+          <!-- Contact Info -->
+          <div class="contact-info">
+            <h2 class="section-title">Wir freuen uns auf Sie!</h2>
+
+            <div class="info-block">
+              <h3 class="info-title">Adresse</h3>
+              <address class="info-text">
+                Extrawurst Wetzlar<br />
+                Bahnhofstraße 1<br />
+                35576 Wetzlar<br />
+                Deutschland
+              </address>
+            </div>
+
+            <div class="info-block">
+              <h3 class="info-title">Telefon</h3>
+              <p class="info-text">
+                <a href="tel:+4964441123456">+49 6441 123456</a>
+              </p>
+            </div>
+
+            <div class="info-block">
+              <h3 class="info-title">E-Mail</h3>
+              <p class="info-text">
+                <a href="mailto:info@extrawurst-wetzlar.de">info@extrawurst-wetzlar.de</a>
+              </p>
+            </div>
+
+            <div class="info-block">
+              <h3 class="info-title">Öffnungszeiten</h3>
+              <dl class="opening-hours">
+                <div class="opening-hours-row">
+                  <dt>Montag - Freitag:</dt>
+                  <dd>11:00 - 22:00 Uhr</dd>
+                </div>
+                <div class="opening-hours-row">
+                  <dt>Samstag - Sonntag:</dt>
+                  <dd>12:00 - 23:00 Uhr</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+
+          <!-- Contact Form -->
+          <div class="contact-form-wrapper">
+            <h2 class="section-title">Schreiben Sie uns</h2>
+            <ContactForm />
+          </div>
+        </div>
+
+        <!-- Map -->
+        <div class="map-section">
+          <h2 class="section-title">So finden Sie uns</h2>
+          <TwoClickEmbed
+            type="googleMaps"
+            mapQuery="Bahnhofstraße 1, 35576 Wetzlar"
+            title="Extrawurst Wetzlar auf Google Maps"
+          />
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <Footer />
+  <ConsentBanner />
+</BaseLayout>
+
+<style>
+  .page-title {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-extrabold);
+    margin-bottom: var(--space-12);
+    text-align: center;
+  }
+
+  @media (min-width: 768px) {
+    .page-title {
+      font-size: var(--font-size-5xl);
+    }
+  }
+
+  .section-title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-6);
+  }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--gap-xl);
+    margin-bottom: var(--space-16);
+  }
+
+  @media (min-width: 1024px) {
+    .contact-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+
+  .contact-info {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-lg);
+  }
+
+  .info-block {
+    padding: var(--card-padding);
+    background-color: var(--card-bg);
+    border: var(--card-border-width) solid var(--card-border-color);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--card-shadow);
+  }
+
+  .info-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--space-3);
+    color: var(--color-brand-primary);
+  }
+
+  .info-text {
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+    margin: 0;
+  }
+
+  .info-text address {
+    font-style: normal;
+  }
+
+  .info-text a {
+    color: var(--color-link);
+    text-decoration: none;
+    transition: color var(--transition-base) var(--ease-in-out);
+  }
+
+  .info-text a:hover {
+    color: var(--color-link-hover);
+    text-decoration: underline;
+  }
+
+  .opening-hours {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  .opening-hours-row {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--gap-md);
+  }
+
+  .opening-hours dt {
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .opening-hours dd {
+    margin: 0;
+  }
+
+  .contact-form-wrapper {
+    padding: var(--card-padding);
+    background-color: var(--card-bg);
+    border: var(--card-border-width) solid var(--card-border-color);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--card-shadow);
+  }
+
+  .map-section {
+    margin-top: var(--space-16);
+  }
+</style>

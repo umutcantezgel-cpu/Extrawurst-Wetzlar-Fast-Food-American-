@@ -1,0 +1,203 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://extrawurst-wetzlar.de/contracts/manifest.webspec.json",
+  "title": "Extrawurst Wetzlar - Web Specification Manifest",
+  "version": "1.0.0",
+  "metadata": {
+    "appName": "Extrawurst Wetzlar",
+    "description": "Premium American Fast Food Restaurant in Wetzlar",
+    "organization": {
+      "name": "Extrawurst Wetzlar GmbH",
+      "type": "Restaurant",
+      "address": {
+        "streetAddress": "Bahnhofstraße 1",
+        "addressLocality": "Wetzlar",
+        "postalCode": "35576",
+        "addressCountry": "DE"
+      },
+      "phone": "+49 6441 123456",
+      "email": "info@extrawurst-wetzlar.de"
+    },
+    "businessHours": [
+      {
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "11:00",
+        "closes": "22:00"
+      },
+      {
+        "dayOfWeek": ["Saturday", "Sunday"],
+        "opens": "12:00",
+        "closes": "23:00"
+      }
+    ],
+    "languages": ["de-DE"],
+    "defaultLanguage": "de-DE"
+  },
+  "branding": {
+    "primaryColor": "#FF6B6B",
+    "secondaryColor": "#FCC419",
+    "logoPath": "/assets/img/logo.svg",
+    "faviconPath": "/favicon.ico",
+    "fonts": {
+      "body": {
+        "family": "Inter",
+        "weights": [400, 600, 700],
+        "format": "woff2",
+        "display": "swap"
+      },
+      "display": {
+        "family": "Poppins",
+        "weights": [600, 700, 800],
+        "format": "woff2",
+        "display": "swap"
+      }
+    }
+  },
+  "performance": {
+    "budgets": {
+      "maxJavaScriptKB": 50,
+      "maxCSSKB": 30,
+      "maxImageKB": 200,
+      "maxFontKB": 100
+    },
+    "targets": {
+      "LCP": 2.5,
+      "INP": 200,
+      "CLS": 0.1,
+      "FCP": 1.8,
+      "TTFB": 0.8
+    },
+    "preload": {
+      "critical": [
+        "/assets/font/inter-regular.woff2",
+        "/assets/font/poppins-bold.woff2",
+        "/assets/css/main.css"
+      ]
+    }
+  },
+  "security": {
+    "csp": {
+      "mode": "strict",
+      "reportOnly": false,
+      "reportUri": "/api/csp-report",
+      "directives": {
+        "default-src": ["'self'"],
+        "script-src": ["'self'"],
+        "style-src": ["'self'"],
+        "img-src": ["'self'", "data:"],
+        "font-src": ["'self'"],
+        "connect-src": ["'self'"],
+        "frame-src": ["'none'"],
+        "object-src": ["'none'"],
+        "base-uri": ["'self'"],
+        "form-action": ["'self'"],
+        "frame-ancestors": ["'none'"],
+        "upgrade-insecure-requests": true,
+        "require-trusted-types-for": ["'script'"]
+      }
+    },
+    "hsts": {
+      "maxAge": 31536000,
+      "includeSubDomains": true,
+      "preload": true
+    },
+    "sri": {
+      "enabled": true,
+      "algorithm": "sha384",
+      "coverage": ["css", "js", "woff2"]
+    },
+    "trustedTypes": {
+      "enabled": true,
+      "policyName": "default"
+    },
+    "permissions": {
+      "geolocation": "deny",
+      "microphone": "deny",
+      "camera": "deny",
+      "payment": "deny"
+    }
+  },
+  "consent": {
+    "mode": "opt-in",
+    "profiles": {
+      "necessary": {
+        "always": true,
+        "description": "Erforderliche Cookies für Grundfunktionen"
+      },
+      "functional": {
+        "default": false,
+        "description": "Funktionale Cookies für erweiterte Features",
+        "includes": ["two-click-embeds"]
+      },
+      "analytics": {
+        "default": false,
+        "description": "Analyse-Cookies zur Verbesserung des Angebots",
+        "includes": []
+      },
+      "marketing": {
+        "default": false,
+        "description": "Marketing-Cookies für personalisierte Werbung",
+        "includes": []
+      }
+    },
+    "twoClickEmbeds": {
+      "youtube": {
+        "enabled": true,
+        "consentProfile": "functional",
+        "sandbox": "allow-scripts allow-same-origin",
+        "referrerPolicy": "no-referrer"
+      },
+      "googleMaps": {
+        "enabled": true,
+        "consentProfile": "functional",
+        "sandbox": "allow-scripts allow-same-origin",
+        "referrerPolicy": "no-referrer"
+      }
+    }
+  },
+  "features": {
+    "newsletter": {
+      "enabled": true,
+      "doubleOptIn": true,
+      "endpoint": "/api/newsletter"
+    },
+    "contactForm": {
+      "enabled": true,
+      "endpoint": "/api/contact",
+      "honeypot": true,
+      "rateLimit": {
+        "requests": 3,
+        "window": 3600
+      }
+    },
+    "lightbox": {
+      "enabled": true,
+      "lazyLoad": true
+    },
+    "search": {
+      "enabled": false
+    }
+  },
+  "seo": {
+    "titleTemplate": "%s | Extrawurst Wetzlar",
+    "defaultTitle": "Extrawurst Wetzlar - Authentisches American Fast Food",
+    "defaultDescription": "Genießen Sie authentisches amerikanisches Fast Food in Wetzlar. Frische Burger, knusprige Pommes und köstliche Milkshakes. Täglich geöffnet.",
+    "keywords": ["burger", "fast food", "wetzlar", "restaurant", "american food", "pommes", "milkshakes"],
+    "canonicalBase": "https://extrawurst-wetzlar.de",
+    "robotsPolicy": "index, follow",
+    "sitemapPath": "/sitemap.xml"
+  },
+  "monitoring": {
+    "slos": {
+      "availability": 99.9,
+      "performanceLCP": 2.5,
+      "performanceINP": 200,
+      "a11yCritical": 0,
+      "securityCritical": 0
+    },
+    "uptimeProbe": "/health",
+    "errorTracking": {
+      "enabled": false
+    }
+  }
+}

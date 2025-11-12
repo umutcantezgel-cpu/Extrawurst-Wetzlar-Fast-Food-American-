@@ -1,0 +1,103 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import ConsentBanner from '../components/ConsentBanner.astro';
+---
+
+<BaseLayout
+  title="Über uns - Unsere Geschichte & Vision"
+  description="Erfahren Sie mehr über Extrawurst Wetzlar: Unsere Leidenschaft für authentisches amerikanisches Fast Food und frische Zutaten aus der Region."
+>
+  <Header />
+  <main id="main-content">
+    <section class="section">
+      <div class="container">
+        <h1 class="page-title">Über uns</h1>
+
+        <div class="content-grid">
+          <div class="content-block">
+            <h2 class="content-title">Unsere Geschichte</h2>
+            <p class="content-text">
+              Seit 2020 bringen wir authentisches amerikanisches Fast Food nach Wetzlar.
+              Was mit einem Traum begann, ist heute eine feste Größe in der lokalen Gastronomie-Szene.
+            </p>
+            <p class="content-text">
+              Unsere Leidenschaft für perfekte Burger und die Verwendung frischer, regionaler Zutaten
+              macht jeden Besuch bei Extrawurst zu einem besonderen Erlebnis.
+            </p>
+          </div>
+
+          <div class="content-block">
+            <h2 class="content-title">Unsere Philosophie</h2>
+            <p class="content-text">
+              Wir glauben, dass Fast Food nicht Fast Food sein muss. Deshalb verwenden wir
+              ausschließlich 100% Rindfleisch von regionalen Lieferanten und bereiten jeden
+              Burger frisch zu.
+            </p>
+            <p class="content-text">
+              Qualität, Frische und Geschmack stehen bei uns an erster Stelle. Jeder Burger
+              wird mit Liebe und Sorgfalt zubereitet - denn Sie verdienen das Beste.
+            </p>
+          </div>
+
+          <div class="content-block">
+            <h2 class="content-title">Unser Team</h2>
+            <p class="content-text">
+              Unser engagiertes Team aus erfahrenen Köchen und freundlichem Service-Personal
+              sorgt dafür, dass Sie sich bei uns wohlfühlen und ein unvergessliches
+              kulinarisches Erlebnis genießen.
+            </p>
+            <p class="content-text">
+              Wir freuen uns darauf, Sie in unserem Restaurant in der Bahnhofstraße begrüßen
+              zu dürfen!
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+  <ConsentBanner />
+</BaseLayout>
+
+<style>
+  .page-title {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-extrabold);
+    margin-bottom: var(--space-16);
+    text-align: center;
+  }
+
+  .content-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--gap-xl);
+  }
+
+  .content-block {
+    padding: var(--card-padding);
+    background-color: var(--card-bg);
+    border: var(--card-border-width) solid var(--card-border-color);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--card-shadow);
+  }
+
+  .content-title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--space-4);
+    color: var(--color-brand-primary);
+  }
+
+  .content-text {
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-text-secondary);
+    margin-bottom: var(--space-4);
+  }
+
+  .content-text:last-child {
+    margin-bottom: 0;
+  }
+</style>
