@@ -21,9 +21,13 @@
     "security:no-inline": "node scripts/no-inline-scanner.js",
     "reports": "node scripts/collect-reports.js",
     "validate:contracts": "node scripts/validate-contracts.js",
+    "audit": "node scripts/audit/run-audits.js",
+    "audit:assets": "node scripts/audit/asset-profiler.js",
+    "audit:perf": "node scripts/audit/performance-baseline.js",
+    "audit:full": "npm run audit && npm run audit:assets",
     "test": "npm run validate:contracts && npm run sri:verify",
     "prebuild": "npm run sri:gen",
-    "postbuild": "npm run sri:verify"
+    "postbuild": "npm run sri:verify && npm run audit:assets"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
@@ -37,7 +41,9 @@
     "broken-link-checker": "^0.7.8",
     "pa11y-ci": "^3.1.0",
     "postcss": "^8.4.49",
-    "tailwindcss": "^3.4.15"
+    "puppeteer": "^22.0.0",
+    "tailwindcss": "^3.4.15",
+    "workbox-build": "^7.0.0"
   },
   "engines": {
     "node": ">=20.0.0",

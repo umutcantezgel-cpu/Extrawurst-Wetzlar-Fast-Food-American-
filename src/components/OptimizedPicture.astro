@@ -1,0 +1,134 @@
+---
+/**
+ * Optimized Picture Component
+ * Supports AVIF, WebP with fallbacks
+ * Implements responsive srcset/sizes
+ * Lazy loading with LQIP placeholders
+ */
+
+interface Props {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  sizes?: string;
+  loading?: 'lazy' | 'eager';
+  fetchpriority?: 'high' | 'low' | 'auto';
+  class?: string;
+  lqip?: string; // Low Quality Image Placeholder (base64)
+}
+
+const {
+  src,
+  alt,
+  width,
+  height,
+  sizes = '100vw',
+  loading = 'lazy',
+  fetchpriority = 'auto',
+  class: className = '',
+  lqip,
+} = Astro.props;
+
+// Generate srcset for different formats and sizes
+const basePath = src.replace(/\.[^.]+$/, ''); // Remove extension
+const ext = src.match(/\.[^.]+$/)?.[0] || '.jpg';
+
+const widths = [400, 800, 1200, 1600, 2000];
+const srcsetWebP = widths.map((w) => `${basePath}-${w}.webp ${w}w`).join(', ');
+const srcsetAVIF = widths.map((w) => `${basePath}-${w}.avif ${w}w`).join(', ');
+const srcsetFallback = widths.map((w) => `${basePath}-${w}${ext} ${w}w`).join(', ');
+
+// Aspect ratio for responsive sizing
+const aspectRatio = (height / width) * 100;
+---
+
+<picture class={`optimized-picture ${className}`}>
+  <!-- AVIF (best compression) -->
+  <source type="image/avif" srcset={srcsetAVIF} sizes={sizes} />
+
+  <!-- WebP (wide support, good compression) -->
+  <source type="image/webp" srcset={srcsetWebP} sizes={sizes} />
+
+  <!-- Fallback (JPEG/PNG) -->
+  <source type={`image/${ext.slice(1)}`} srcset={srcsetFallback} sizes={sizes} />
+
+  <!-- Main img tag -->
+  <img
+    src={`${basePath}-800${ext}`}
+    alt={alt}
+    width={width}
+    height={height}
+    loading={loading}
+    fetchpriority={fetchpriority}
+    decoding="async"
+    style={lqip
+      ? `background-image: url(${lqip}); background-size: cover; background-position: center;`
+      : undefined}
+  />
+</picture>
+
+<style>
+  .optimized-picture {
+    display: block;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .optimized-picture img {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    transition: opacity 0.3s ease-in-out;
+  }
+
+  /* Blur-up effect for LQIP */
+  .optimized-picture img[loading='lazy'] {
+    opacity: 0;
+  }
+
+  .optimized-picture img[loading='lazy'].loaded {
+    opacity: 1;
+  }
+
+  /* Reduce motion */
+  @media (prefers-reduced-motion: reduce) {
+    .optimized-picture img {
+      transition: none;
+    }
+  }
+</style>
+
+<script>
+  // Progressive image loading
+  document.addEventListener('DOMContentLoaded', () => {
+    const images = document.querySelectorAll('.optimized-picture img[loading="lazy"]');
+
+    const imageObserver = new IntersectionObserver(
+      (entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const img = entry.target as HTMLImageElement;
+
+            img.addEventListener('load', () => {
+              img.classList.add('loaded');
+            });
+
+            // Already loaded
+            if (img.complete) {
+              img.classList.add('loaded');
+            }
+
+            observer.unobserve(img);
+          }
+        });
+      },
+      {
+        rootMargin: '50px', // Start loading 50px before entering viewport
+      }
+    );
+
+    images.forEach((img) => imageObserver.observe(img));
+  });
+</script>
