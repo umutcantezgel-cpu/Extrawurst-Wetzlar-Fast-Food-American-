@@ -1,0 +1,13 @@
+# Netlify Configuration - Root Level
+# Points to memobaut subdirectory
+
+[build]
+  base = "memobaut"
+  command = "npm run build"
+  publish = "memobaut/dist"
+
+# Redirect rules
+[[redirects]]
+  from = "/*"
+  to = "/index.html"
+  status = 200
