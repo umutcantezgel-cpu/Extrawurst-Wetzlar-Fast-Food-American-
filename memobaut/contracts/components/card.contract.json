@@ -1,0 +1,138 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "Card Component Contract - memobaut.com",
+  "version": "1.0.0",
+  "component": "Card",
+  "description": "Reusable card container with variants for services, projects, and content",
+  "props": {
+    "variant": {
+      "type": "string",
+      "enum": ["default", "glass", "elevated", "interactive"],
+      "default": "default",
+      "description": "Visual style variant"
+    },
+    "as": {
+      "type": "string",
+      "enum": ["div", "article", "section"],
+      "default": "div",
+      "description": "HTML element to render"
+    },
+    "href": {
+      "type": "string",
+      "optional": true,
+      "description": "If provided, makes entire card clickable"
+    },
+    "padding": {
+      "type": "string",
+      "enum": ["none", "sm", "md", "lg", "xl"],
+      "default": "xl",
+      "description": "Internal padding"
+    },
+    "hoverable": {
+      "type": "boolean",
+      "default": false,
+      "description": "Enable hover effects"
+    }
+  },
+  "variants": {
+    "default": {
+      "bg": "{card-default-bg}",
+      "border": "{card-default-border}",
+      "borderWidth": "1px",
+      "radius": "{card-default-radius}",
+      "shadow": "{card-default-shadow}",
+      "shadow-hover": "{card-default-shadow-hover}"
+    },
+    "glass": {
+      "bg": "{card-glass-bg}",
+      "backdrop-filter": "{card-glass-backdrop-filter}",
+      "border": "{card-glass-border}",
+      "borderWidth": "1px",
+      "radius": "{card-glass-radius}",
+      "shadow": "{card-glass-shadow}",
+      "shadow-hover": "{card-glass-shadow-hover}"
+    },
+    "elevated": {
+      "bg": "{card-elevated-bg}",
+      "border": "{card-elevated-border}",
+      "borderWidth": "0",
+      "radius": "{card-elevated-radius}",
+      "shadow": "{card-elevated-shadow}",
+      "shadow-hover": "{card-elevated-shadow-hover}"
+    },
+    "interactive": {
+      "bg": "{card-default-bg}",
+      "border": "{card-default-border}",
+      "borderWidth": "1px",
+      "radius": "{card-default-radius}",
+      "shadow": "{card-default-shadow}",
+      "shadow-hover": "{elevation-5}",
+      "cursor": "pointer",
+      "hoverTransform": "translateY(-4px) scale(1.02)"
+    }
+  },
+  "padding": {
+    "none": "0",
+    "sm": "{spacing-4}",
+    "md": "{spacing-6}",
+    "lg": "{spacing-8}",
+    "xl": "{component-padding-xl}"
+  },
+  "slots": {
+    "header": {
+      "description": "Card header section (optional)",
+      "recommended": "Use for title, subtitle, or meta info"
+    },
+    "body": {
+      "description": "Main card content (required)",
+      "recommended": "Primary content area"
+    },
+    "footer": {
+      "description": "Card footer section (optional)",
+      "recommended": "Use for actions, timestamps, or metadata"
+    },
+    "media": {
+      "description": "Image or video section (optional)",
+      "recommended": "Use aspect-ratio for consistent sizing"
+    }
+  },
+  "accessibility": {
+    "wcag": "2.2 AA",
+    "requirements": [
+      "If clickable, ensure entire card is keyboard accessible",
+      "Focus indicator must encompass entire card",
+      "Use semantic HTML (article for blog posts, section for features)",
+      "Provide heading within card for screen reader navigation",
+      "If image is decorative, use alt=\"\"",
+      "If card links somewhere, provide context in link text"
+    ],
+    "focusIndicator": {
+      "outline": "2px solid {focus-ring}",
+      "outlineOffset": "2px",
+      "borderRadius": "{radius-card}"
+    }
+  },
+  "behavior": {
+    "transition": "{transitions-macro}",
+    "transitionProperties": ["box-shadow", "transform", "border-color"],
+    "hoverElevation": "Increase shadow from elevation-2 to elevation-4",
+    "reducedMotion": "Disable transform animations, keep shadow transition"
+  },
+  "usage": {
+    "serviceCard": {
+      "variant": "glass",
+      "hoverable": true,
+      "structure": "Icon + Title + Description + Optional CTA"
+    },
+    "projectCard": {
+      "variant": "elevated",
+      "hoverable": true,
+      "structure": "Image + Title + Category + Description"
+    },
+    "testimonialCard": {
+      "variant": "default",
+      "hoverable": false,
+      "structure": "Quote + Author + Rating"
+    }
+  }
+}

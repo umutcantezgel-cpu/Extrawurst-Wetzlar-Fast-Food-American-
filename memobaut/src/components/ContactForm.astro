@@ -1,0 +1,453 @@
+---
+/**
+ * ContactForm Component - memobaut.com
+ * GDPR-compliant contact form with validation
+ * Contract: contracts/components/contact-form.contract.json
+ */
+
+import Button from './Button.astro';
+---
+
+<form class="contact-form" id="contact-form" method="POST" action="/.netlify/functions/contact" novalidate>
+  <fieldset class="contact-form__fieldset">
+    <legend class="sr-only">Kontaktformular</legend>
+
+    <!-- Name Field -->
+    <div class="contact-form__field">
+      <label for="name" class="contact-form__label">
+        Ihr Name <span class="contact-form__required" aria-label="Pflichtfeld">*</span>
+      </label>
+      <input
+        type="text"
+        id="name"
+        name="name"
+        class="contact-form__input"
+        placeholder="Max Mustermann"
+        required
+        autocomplete="name"
+        minlength="2"
+        maxlength="100"
+        aria-describedby="name-error"
+        aria-invalid="false"
+      />
+      <span id="name-error" class="contact-form__error" role="alert"></span>
+    </div>
+
+    <!-- Email Field -->
+    <div class="contact-form__field">
+      <label for="email" class="contact-form__label">
+        E-Mail-Adresse <span class="contact-form__required" aria-label="Pflichtfeld">*</span>
+      </label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        class="contact-form__input"
+        placeholder="max@beispiel.de"
+        required
+        autocomplete="email"
+        aria-describedby="email-error"
+        aria-invalid="false"
+      />
+      <span id="email-error" class="contact-form__error" role="alert"></span>
+    </div>
+
+    <!-- Phone Field (Optional) -->
+    <div class="contact-form__field">
+      <label for="phone" class="contact-form__label">
+        Telefonnummer <span class="contact-form__optional">(optional)</span>
+      </label>
+      <input
+        type="tel"
+        id="phone"
+        name="phone"
+        class="contact-form__input"
+        placeholder="+49 123 456789"
+        autocomplete="tel"
+        pattern="[+]?[0-9\s\-()]{6,20}"
+        aria-describedby="phone-error"
+        aria-invalid="false"
+      />
+      <span id="phone-error" class="contact-form__error" role="alert"></span>
+    </div>
+
+    <!-- Subject Field -->
+    <div class="contact-form__field">
+      <label for="subject" class="contact-form__label">
+        Betreff <span class="contact-form__required" aria-label="Pflichtfeld">*</span>
+      </label>
+      <select
+        id="subject"
+        name="subject"
+        class="contact-form__input contact-form__select"
+        required
+        aria-describedby="subject-error"
+        aria-invalid="false"
+      >
+        <option value="">Bitte wählen...</option>
+        <option value="neubau">Neubau</option>
+        <option value="sanierung">Sanierung</option>
+        <option value="umbau">Umbau</option>
+        <option value="beratung">Beratung</option>
+        <option value="sonstiges">Sonstiges</option>
+      </select>
+      <span id="subject-error" class="contact-form__error" role="alert"></span>
+    </div>
+
+    <!-- Message Field -->
+    <div class="contact-form__field">
+      <label for="message" class="contact-form__label">
+        Ihre Nachricht <span class="contact-form__required" aria-label="Pflichtfeld">*</span>
+      </label>
+      <textarea
+        id="message"
+        name="message"
+        class="contact-form__input contact-form__textarea"
+        placeholder="Beschreiben Sie Ihr Anliegen..."
+        required
+        rows="6"
+        minlength="10"
+        maxlength="2000"
+        aria-describedby="message-error"
+        aria-invalid="false"
+      ></textarea>
+      <span id="message-error" class="contact-form__error" role="alert"></span>
+    </div>
+
+    <!-- Honeypot (spam protection) -->
+    <div class="contact-form__honeypot" aria-hidden="true">
+      <label for="website">Website</label>
+      <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+    </div>
+
+    <!-- Privacy Checkbox -->
+    <div class="contact-form__field contact-form__field--checkbox">
+      <label class="contact-form__checkbox-label">
+        <input
+          type="checkbox"
+          id="privacy"
+          name="privacy"
+          class="contact-form__checkbox"
+          required
+          aria-describedby="privacy-error"
+          aria-invalid="false"
+        />
+        <span>
+          Ich habe die <a href="/datenschutz/" target="_blank" rel="noopener">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zu. <span class="contact-form__required" aria-label="Pflichtfeld">*</span>
+        </span>
+      </label>
+      <span id="privacy-error" class="contact-form__error" role="alert"></span>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="contact-form__submit">
+      <Button type="submit" variant="primary" size="lg" fullWidth>
+        Nachricht senden
+      </Button>
+    </div>
+  </fieldset>
+
+  <!-- Status Messages -->
+  <div id="form-status" class="contact-form__status" role="status" aria-live="polite" aria-atomic="true"></div>
+</form>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const statusDiv = document.getElementById('form-status') as HTMLDivElement;
+
+  if (form) {
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Clear previous errors
+      clearErrors();
+
+      // Validate form
+      if (!validateForm()) {
+        return;
+      }
+
+      // Get form data
+      const formData = new FormData(form);
+      const data = Object.fromEntries(formData.entries());
+
+      // Check honeypot
+      if (data.website) {
+        showStatus('error', 'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.');
+        return;
+      }
+
+      // Disable submit button
+      const submitBtn = form.querySelector('button[type="submit"]') as HTMLButtonElement;
+      if (submitBtn) {
+        submitBtn.disabled = true;
+        submitBtn.setAttribute('aria-busy', 'true');
+        submitBtn.textContent = 'Wird gesendet...';
+      }
+
+      try {
+        // In static build, we'll use Netlify Forms or Functions
+        // For now, show success message (placeholder)
+        await new Promise(resolve => setTimeout(resolve, 1000));
+
+        showStatus('success', 'Vielen Dank für Ihre Nachricht! Wir melden uns in Kürze bei Ihnen.');
+        form.reset();
+      } catch (error) {
+        showStatus('error', 'Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder kontaktieren Sie uns telefonisch.');
+      } finally {
+        if (submitBtn) {
+          submitBtn.disabled = false;
+          submitBtn.setAttribute('aria-busy', 'false');
+          submitBtn.textContent = 'Nachricht senden';
+        }
+      }
+    });
+
+    // Real-time validation on blur
+    const inputs = form.querySelectorAll('input, select, textarea');
+    inputs.forEach(input => {
+      input.addEventListener('blur', () => {
+        validateField(input as HTMLInputElement);
+      });
+    });
+  }
+
+  function validateForm(): boolean {
+    const inputs = form.querySelectorAll('input:not([type="hidden"]), select, textarea');
+    let isValid = true;
+
+    inputs.forEach(input => {
+      if (!validateField(input as HTMLInputElement)) {
+        isValid = false;
+      }
+    });
+
+    // Focus first error
+    if (!isValid) {
+      const firstError = form.querySelector('[aria-invalid="true"]') as HTMLElement;
+      firstError?.focus();
+    }
+
+    return isValid;
+  }
+
+  function validateField(field: HTMLInputElement): boolean {
+    const errorSpan = document.getElementById(`${field.id}-error`) as HTMLSpanElement;
+    let errorMessage = '';
+
+    // Skip honeypot and optional fields
+    if (field.name === 'website' || (field.name === 'phone' && !field.value)) {
+      return true;
+    }
+
+    // Required check
+    if (field.hasAttribute('required') && !field.value.trim()) {
+      errorMessage = 'Dieses Feld ist erforderlich.';
+    }
+
+    // Email validation
+    if (field.type === 'email' && field.value) {
+      const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+      if (!emailRegex.test(field.value)) {
+        errorMessage = 'Bitte geben Sie eine gültige E-Mail-Adresse ein.';
+      }
+    }
+
+    // Phone validation
+    if (field.type === 'tel' && field.value) {
+      const phoneRegex = /^[+]?[0-9\s\-()]{6,20}$/;
+      if (!phoneRegex.test(field.value)) {
+        errorMessage = 'Bitte geben Sie eine gültige Telefonnummer ein.';
+      }
+    }
+
+    // Min/max length
+    if (field.minLength && field.value.length < field.minLength) {
+      errorMessage = `Mindestens ${field.minLength} Zeichen erforderlich.`;
+    }
+
+    // Checkbox validation
+    if (field.type === 'checkbox' && field.hasAttribute('required') && !field.checked) {
+      errorMessage = 'Sie müssen der Datenschutzerklärung zustimmen.';
+    }
+
+    // Update UI
+    if (errorMessage) {
+      field.setAttribute('aria-invalid', 'true');
+      field.classList.add('contact-form__input--error');
+      if (errorSpan) {
+        errorSpan.textContent = errorMessage;
+      }
+      return false;
+    } else {
+      field.setAttribute('aria-invalid', 'false');
+      field.classList.remove('contact-form__input--error');
+      if (errorSpan) {
+        errorSpan.textContent = '';
+      }
+      return true;
+    }
+  }
+
+  function clearErrors() {
+    const inputs = form.querySelectorAll('input, select, textarea');
+    inputs.forEach(input => {
+      input.setAttribute('aria-invalid', 'false');
+      input.classList.remove('contact-form__input--error');
+    });
+
+    const errors = form.querySelectorAll('.contact-form__error');
+    errors.forEach(error => {
+      error.textContent = '';
+    });
+
+    statusDiv.textContent = '';
+    statusDiv.className = 'contact-form__status';
+  }
+
+  function showStatus(type: 'success' | 'error', message: string) {
+    statusDiv.textContent = message;
+    statusDiv.className = `contact-form__status contact-form__status--${type}`;
+    statusDiv.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+  }
+</script>
+
+<style>
+  .contact-form {
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .contact-form__fieldset {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-6);
+    border: none;
+    padding: 0;
+  }
+
+  .contact-form__field {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-2);
+  }
+
+  .contact-form__label {
+    color: var(--text-primary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .contact-form__required {
+    color: var(--state-error);
+  }
+
+  .contact-form__optional {
+    color: var(--text-tertiary);
+    font-weight: var(--font-weight-normal);
+  }
+
+  .contact-form__input,
+  .contact-form__select,
+  .contact-form__textarea {
+    background-color: var(--surface-raised);
+    border: 1px solid var(--border-default);
+    border-radius: var(--radius-interactive);
+    padding: var(--spacing-3) var(--spacing-4);
+    font-size: var(--font-size-base);
+    color: var(--text-primary);
+    transition:
+      border-color var(--transition-micro) var(--easing-out),
+      box-shadow var(--transition-micro) var(--easing-out);
+  }
+
+  .contact-form__input::placeholder,
+  .contact-form__textarea::placeholder {
+    color: var(--text-tertiary);
+  }
+
+  .contact-form__input:focus,
+  .contact-form__select:focus,
+  .contact-form__textarea:focus {
+    outline: none;
+    border-color: var(--border-brand);
+    box-shadow: 0 0 0 3px rgba(30, 64, 175, 0.1);
+  }
+
+  .contact-form__input--error {
+    border-color: var(--state-error) !important;
+  }
+
+  .contact-form__textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+
+  .contact-form__error {
+    color: var(--state-error);
+    font-size: var(--font-size-xs);
+    min-height: 1em;
+  }
+
+  /* Checkbox Field */
+  .contact-form__field--checkbox {
+    margin-top: var(--spacing-2);
+  }
+
+  .contact-form__checkbox-label {
+    display: flex;
+    gap: var(--spacing-3);
+    align-items: flex-start;
+    cursor: pointer;
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .contact-form__checkbox {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    cursor: pointer;
+  }
+
+  .contact-form__checkbox-label a {
+    color: var(--text-link);
+    text-decoration: underline;
+  }
+
+  /* Honeypot */
+  .contact-form__honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+  }
+
+  /* Submit */
+  .contact-form__submit {
+    margin-top: var(--spacing-2);
+  }
+
+  /* Status Messages */
+  .contact-form__status {
+    margin-top: var(--spacing-6);
+    padding: var(--spacing-4);
+    border-radius: var(--radius-interactive);
+    font-size: var(--font-size-base);
+    text-align: center;
+  }
+
+  .contact-form__status--success {
+    background-color: rgba(5, 150, 105, 0.1);
+    border: 1px solid var(--state-success);
+    color: var(--state-success);
+  }
+
+  .contact-form__status--error {
+    background-color: rgba(220, 38, 38, 0.1);
+    border: 1px solid var(--state-error);
+    color: var(--state-error);
+  }
+</style>

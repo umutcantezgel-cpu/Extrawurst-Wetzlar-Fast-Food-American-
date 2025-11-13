@@ -1,0 +1,232 @@
+---
+/**
+ * Über uns Page - memobaut.com
+ * SEO data from: contracts/routes/seo.routes.json
+ */
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Navigation.astro';
+import Footer from '../../components/Footer.astro';
+import Hero from '../../components/Hero.astro';
+import Card from '../../components/Card.astro';
+import Button from '../../components/Button.astro';
+
+const seo = {
+  title: 'Über uns - Das Team hinter memobaut | memobaut',
+  description: 'Lernen Sie unser erfahrenes Team kennen. Mit Leidenschaft und Expertise realisieren wir Ihr Bauvorhaben.',
+  ogTitle: 'Das memobaut Team',
+  ogDescription: 'Erfahrung, Kompetenz und Qualität - seit Jahren Ihr Partner im Bauwesen.',
+  ogImage: '/assets/images/og-team.jpg',
+  structuredData: {
+    '@context': 'https://schema.org',
+    '@type': 'AboutPage',
+    name: 'Über memobaut',
+  },
+};
+
+const values = [
+  {
+    title: 'Qualität',
+    description: 'Höchste Ansprüche an Material, Verarbeitung und Ausführung sind unser Standard.',
+  },
+  {
+    title: 'Zuverlässigkeit',
+    description: 'Termintreue und verlässliche Kommunikation können Sie von uns erwarten.',
+  },
+  {
+    title: 'Erfahrung',
+    description: 'Jahrzehntelange Expertise im Bauwesen garantiert professionelle Lösungen.',
+  },
+  {
+    title: 'Transparenz',
+    description: 'Faire Preise, klare Kalkulation und ehrliche Beratung ohne versteckte Kosten.',
+  },
+];
+---
+
+<BaseLayout {...seo}>
+  <Navigation slot="header" />
+
+  <Hero
+    variant="minimal"
+    title="Über uns"
+    subtitle="Ihr Partner für Qualität im Bauwesen"
+  />
+
+  <!-- About Section -->
+  <section class="about">
+    <div class="container">
+      <div class="about__content">
+        <Card variant="glass" padding="xl">
+          <div class="intro">
+            <h2 class="intro__title">Willkommen bei memobaut</h2>
+            <div class="intro__text">
+              <p>
+                Seit [Jahren] sind wir Ihr verlässlicher Partner für alle Bauvorhaben in [Region]. Mit Leidenschaft, Erfahrung und höchsten Qualitätsansprüchen setzen wir Ihre Bauprojekte um - vom ersten Spatenstich bis zur Schlüsselübergabe.
+              </p>
+              <p>
+                Unser Team aus erfahrenen Fachkräften, Architekten und Handwerkern garantiert professionelle Planung, termingerechte Ausführung und exzellente Ergebnisse. Dabei legen wir besonderen Wert auf persönliche Beratung und individuelle Lösungen für Ihre Anforderungen.
+              </p>
+              <p>
+                Ob Neubau, Sanierung oder Umbau - wir begleiten Sie von der ersten Idee bis zur erfolgreichen Fertigstellung Ihres Projekts. Vertrauen Sie auf unsere Expertise und lassen Sie uns gemeinsam Ihre Vision verwirklichen.
+              </p>
+            </div>
+          </div>
+        </Card>
+      </div>
+    </div>
+  </section>
+
+  <!-- Values Section -->
+  <section class="values">
+    <div class="container">
+      <h2 class="values__title">Unsere Werte</h2>
+      <div class="values__grid">
+        {values.map((value) => (
+          <Card variant="elevated" hoverable>
+            <div class="value">
+              <h3 class="value__title">{value.title}</h3>
+              <p class="value__description">{value.description}</p>
+            </div>
+          </Card>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="container">
+      <Card variant="glass" padding="xl">
+        <div class="cta__content">
+          <h2 class="cta__title">Lernen Sie uns kennen</h2>
+          <p class="cta__description">
+            Überzeugen Sie sich selbst von unserer Arbeitsweise. Wir freuen uns auf ein persönliches Gespräch!
+          </p>
+          <div class="cta__buttons">
+            <Button variant="primary" size="lg" href="/kontakt/">
+              Kontakt aufnehmen
+            </Button>
+            <Button variant="secondary" size="lg" href="/referenzen/">
+              Unsere Referenzen
+            </Button>
+          </div>
+        </div>
+      </Card>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .about {
+    padding-top: var(--section-padding-md);
+    padding-bottom: var(--section-padding-lg);
+  }
+
+  .about__content {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .intro {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-6);
+  }
+
+  .intro__title {
+    font-size: var(--font-size-3xl);
+    text-align: center;
+  }
+
+  .intro__text {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
+    color: var(--text-secondary);
+  }
+
+  /* Values Section */
+  .values {
+    padding-top: var(--section-padding-md);
+    padding-bottom: var(--section-padding-lg);
+    background-color: var(--bg-secondary);
+  }
+
+  .values__title {
+    font-size: var(--font-size-4xl);
+    text-align: center;
+    margin-bottom: var(--section-padding-md);
+  }
+
+  .values__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--gap-loose);
+  }
+
+  @media (min-width: 768px) {
+    .values__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .value {
+    text-align: center;
+  }
+
+  .value__title {
+    font-size: var(--font-size-2xl);
+    margin-bottom: var(--spacing-3);
+    color: var(--text-link);
+  }
+
+  .value__description {
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+    color: var(--text-secondary);
+  }
+
+  /* CTA Section */
+  .cta {
+    padding-top: var(--section-padding-lg);
+    padding-bottom: var(--section-padding-lg);
+  }
+
+  .cta__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-6);
+    align-items: center;
+    text-align: center;
+  }
+
+  .cta__title {
+    font-size: var(--font-size-4xl);
+  }
+
+  .cta__description {
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
+    color: var(--text-secondary);
+    max-width: 600px;
+  }
+
+  .cta__buttons {
+    display: flex;
+    gap: var(--spacing-4);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  @media (max-width: 640px) {
+    .cta__buttons {
+      flex-direction: column;
+      width: 100%;
+    }
+  }
+</style>

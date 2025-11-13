@@ -1,0 +1,12 @@
+# robots.txt - memobaut.com
+# Allow all robots to crawl the site
+
+User-agent: *
+Allow: /
+
+# Disallow private/legal pages from search engines
+Disallow: /impressum/
+Disallow: /datenschutz/
+
+# Sitemap location
+Sitemap: https://memobaut.com/sitemap-index.xml

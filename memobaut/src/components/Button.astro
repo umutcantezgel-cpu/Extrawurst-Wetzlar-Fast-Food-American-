@@ -1,0 +1,187 @@
+---
+/**
+ * Button Component - memobaut.com
+ * Accessible, reusable button with variants and sizes
+ * Contract: contracts/components/button.contract.json
+ */
+
+export interface Props {
+  variant?: 'primary' | 'secondary' | 'accent';
+  size?: 'sm' | 'md' | 'lg';
+  href?: string;
+  type?: 'button' | 'submit' | 'reset';
+  disabled?: boolean;
+  fullWidth?: boolean;
+  ariaLabel?: string;
+  class?: string;
+}
+
+const {
+  variant = 'primary',
+  size = 'md',
+  href,
+  type = 'button',
+  disabled = false,
+  fullWidth = false,
+  ariaLabel,
+  class: className = '',
+} = Astro.props;
+
+const Tag = href ? 'a' : 'button';
+const baseClass = 'btn';
+const variantClass = `btn--${variant}`;
+const sizeClass = `btn--${size}`;
+const fullWidthClass = fullWidth ? 'btn--full' : '';
+const disabledClass = disabled ? 'btn--disabled' : '';
+
+const classes = [
+  baseClass,
+  variantClass,
+  sizeClass,
+  fullWidthClass,
+  disabledClass,
+  className,
+].filter(Boolean).join(' ');
+---
+
+<Tag
+  class={classes}
+  href={href}
+  type={!href ? type : undefined}
+  disabled={disabled && !href ? true : undefined}
+  aria-disabled={disabled ? 'true' : undefined}
+  aria-label={ariaLabel}
+  tabindex={disabled ? -1 : undefined}
+>
+  <slot />
+</Tag>
+
+<style>
+  .btn {
+    /* Base styles */
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-2);
+    font-weight: var(--font-weight-medium);
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+    cursor: pointer;
+    user-select: none;
+    transition:
+      background-color var(--transition-macro) var(--easing-out),
+      box-shadow var(--transition-macro) var(--easing-out),
+      transform var(--transition-macro) var(--easing-out),
+      border-color var(--transition-macro) var(--easing-out);
+
+    /* Reset */
+    border: none;
+    outline: none;
+  }
+
+  /* Focus styles (WCAG 2.4.7) */
+  .btn:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+
+  /* Size variants */
+  .btn--sm {
+    font-size: var(--font-size-sm);
+    padding: var(--spacing-2) var(--spacing-4);
+    min-height: 36px;
+    border-radius: var(--radius-interactive);
+  }
+
+  .btn--md {
+    font-size: var(--font-size-base);
+    padding: var(--spacing-3) var(--spacing-6);
+    min-height: 44px;
+    border-radius: var(--radius-interactive);
+  }
+
+  .btn--lg {
+    font-size: var(--font-size-lg);
+    padding: var(--spacing-4) var(--spacing-8);
+    min-height: 52px;
+    border-radius: var(--radius-interactive);
+  }
+
+  /* Primary variant */
+  .btn--primary {
+    background-color: var(--bg-brand);
+    color: var(--text-inverse);
+    border: 1px solid var(--brand-primary-500);
+    box-shadow: var(--elevation-2);
+  }
+
+  .btn--primary:hover:not(.btn--disabled) {
+    background-color: var(--brand-primary-600);
+    box-shadow: var(--elevation-3);
+    transform: translateY(-1px);
+  }
+
+  .btn--primary:active:not(.btn--disabled) {
+    background-color: var(--brand-primary-700);
+    transform: translateY(0);
+  }
+
+  /* Secondary variant */
+  .btn--secondary {
+    background-color: transparent;
+    color: var(--text-link);
+    border: 1px solid var(--border-brand);
+    box-shadow: none;
+  }
+
+  .btn--secondary:hover:not(.btn--disabled) {
+    background-color: var(--bg-brand-light);
+    box-shadow: var(--elevation-1);
+    transform: translateY(-1px);
+  }
+
+  .btn--secondary:active:not(.btn--disabled) {
+    background-color: var(--brand-primary-100);
+    transform: translateY(0);
+  }
+
+  /* Accent variant */
+  .btn--accent {
+    background-color: var(--bg-accent);
+    color: var(--text-inverse);
+    border: 1px solid var(--brand-secondary-500);
+    box-shadow: var(--elevation-2);
+  }
+
+  .btn--accent:hover:not(.btn--disabled) {
+    background-color: var(--brand-secondary-600);
+    box-shadow: var(--elevation-3);
+    transform: translateY(-1px);
+  }
+
+  .btn--accent:active:not(.btn--disabled) {
+    background-color: var(--brand-secondary-700);
+    transform: translateY(0);
+  }
+
+  /* Full width */
+  .btn--full {
+    width: 100%;
+  }
+
+  /* Disabled state */
+  .btn--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  /* Reduced motion (WCAG 2.3.3) */
+  @media (prefers-reduced-motion: reduce) {
+    .btn {
+      transition: none;
+      transform: none !important;
+    }
+  }
+</style>

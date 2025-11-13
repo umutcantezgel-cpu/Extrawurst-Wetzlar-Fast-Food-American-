@@ -1,0 +1,6 @@
+# Netlify Redirects - memobaut.com
+# Force trailing slashes for consistency
+/* /index.html 200
+
+# 404 handling
+/404 /404/index.html 404

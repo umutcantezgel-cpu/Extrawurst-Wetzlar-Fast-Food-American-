@@ -1,0 +1,126 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "Semantic Design Tokens - memobaut.com",
+  "version": "1.0.0",
+  "description": "Tier 2: Purpose-Driven Tokens - Map primitives to semantic purposes",
+  "colors": {
+    "text-primary": "{neutral-900}",
+    "text-secondary": "{neutral-700}",
+    "text-tertiary": "{neutral-500}",
+    "text-inverse": "{neutral-25}",
+    "text-link": "{brand-primary-600}",
+    "text-link-hover": "{brand-primary-700}",
+    "text-accent": "{brand-secondary-600}",
+    "bg-primary": "{neutral-25}",
+    "bg-secondary": "{neutral-50}",
+    "bg-tertiary": "{neutral-100}",
+    "bg-inverse": "{neutral-900}",
+    "bg-brand": "{brand-primary-500}",
+    "bg-brand-light": "{brand-primary-50}",
+    "bg-accent": "{brand-secondary-500}",
+    "bg-accent-light": "{brand-secondary-50}",
+    "border-default": "{neutral-200}",
+    "border-strong": "{neutral-300}",
+    "border-subtle": "{neutral-100}",
+    "border-brand": "{brand-primary-500}",
+    "border-accent": "{brand-secondary-500}",
+    "surface-raised": "{neutral-25}",
+    "surface-sunken": "{neutral-50}",
+    "surface-overlay": "rgba(0, 0, 0, 0.5)",
+    "state-success": "#059669",
+    "state-warning": "#D97706",
+    "state-error": "#DC2626",
+    "state-info": "{brand-primary-500}",
+    "focus-ring": "{brand-primary-500}",
+    "focus-ring-offset": "{neutral-25}"
+  },
+  "spacing": {
+    "component-padding-sm": "{spacing-3}",
+    "component-padding-md": "{spacing-4}",
+    "component-padding-lg": "{spacing-6}",
+    "component-padding-xl": "{spacing-8}",
+    "section-padding-sm": "{spacing-8}",
+    "section-padding-md": "{spacing-12}",
+    "section-padding-lg": "{spacing-16}",
+    "section-padding-xl": "{spacing-24}",
+    "gap-tight": "{spacing-2}",
+    "gap-normal": "{spacing-4}",
+    "gap-relaxed": "{spacing-6}",
+    "gap-loose": "{spacing-8}",
+    "container-padding": "{spacing-4}",
+    "container-max-width": "1280px"
+  },
+  "typography": {
+    "heading-1": {
+      "fontSize": "{fontSize-5xl}",
+      "fontWeight": "{fontWeight-bold}",
+      "lineHeight": "{lineHeight-tight}",
+      "letterSpacing": "-0.02em"
+    },
+    "heading-2": {
+      "fontSize": "{fontSize-4xl}",
+      "fontWeight": "{fontWeight-bold}",
+      "lineHeight": "{lineHeight-tight}",
+      "letterSpacing": "-0.01em"
+    },
+    "heading-3": {
+      "fontSize": "{fontSize-3xl}",
+      "fontWeight": "{fontWeight-semibold}",
+      "lineHeight": "{lineHeight-snug}",
+      "letterSpacing": "0"
+    },
+    "heading-4": {
+      "fontSize": "{fontSize-2xl}",
+      "fontWeight": "{fontWeight-semibold}",
+      "lineHeight": "{lineHeight-snug}",
+      "letterSpacing": "0"
+    },
+    "body-large": {
+      "fontSize": "{fontSize-lg}",
+      "fontWeight": "{fontWeight-normal}",
+      "lineHeight": "{lineHeight-relaxed}"
+    },
+    "body-base": {
+      "fontSize": "{fontSize-base}",
+      "fontWeight": "{fontWeight-normal}",
+      "lineHeight": "{lineHeight-normal}"
+    },
+    "body-small": {
+      "fontSize": "{fontSize-sm}",
+      "fontWeight": "{fontWeight-normal}",
+      "lineHeight": "{lineHeight-normal}"
+    },
+    "label": {
+      "fontSize": "{fontSize-sm}",
+      "fontWeight": "{fontWeight-medium}",
+      "lineHeight": "{lineHeight-tight}",
+      "letterSpacing": "0.01em"
+    },
+    "caption": {
+      "fontSize": "{fontSize-xs}",
+      "fontWeight": "{fontWeight-normal}",
+      "lineHeight": "{lineHeight-normal}"
+    }
+  },
+  "effects": {
+    "elevation-1": "{shadow-sm}",
+    "elevation-2": "{shadow-base}",
+    "elevation-3": "{shadow-md}",
+    "elevation-4": "{shadow-lg}",
+    "elevation-5": "{shadow-xl}",
+    "glass-light": "0 8px 32px rgba(0, 0, 0, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.5)",
+    "glass-medium": "0 8px 32px rgba(0, 0, 0, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.5)",
+    "glass-strong": "0 8px 32px rgba(0, 0, 0, 0.16), inset 0 1px 0 rgba(255, 255, 255, 0.5)"
+  },
+  "radius": {
+    "interactive": "{borderRadius-md}",
+    "card": "{borderRadius-xl}",
+    "surface": "{borderRadius-2xl}",
+    "pill": "{borderRadius-full}"
+  },
+  "transitions": {
+    "micro": "{transition-fast}",
+    "macro": "{transition-base}",
+    "emphasized": "{transition-slow}"
+  }
+}

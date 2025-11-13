@@ -1,0 +1,188 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "Navigation Component Contract - memobaut.com",
+  "version": "1.0.0",
+  "component": "Navigation",
+  "description": "Main site navigation with responsive mobile menu",
+  "props": {
+    "variant": {
+      "type": "string",
+      "enum": ["solid", "glass", "transparent"],
+      "default": "glass",
+      "description": "Background style variant"
+    },
+    "sticky": {
+      "type": "boolean",
+      "default": true,
+      "description": "Fixed position on scroll"
+    },
+    "hideOnScroll": {
+      "type": "boolean",
+      "default": false,
+      "description": "Hide navigation when scrolling down"
+    }
+  },
+  "structure": {
+    "container": {
+      "height": "{navigation-height}",
+      "position": "sticky",
+      "top": "0",
+      "zIndex": "1000",
+      "borderBottom": "1px solid {navigation-border}"
+    },
+    "inner": {
+      "maxWidth": "{section-max-width}",
+      "margin": "0 auto",
+      "padding-x": "{navigation-padding-x}",
+      "display": "flex",
+      "alignItems": "center",
+      "justifyContent": "space-between",
+      "height": "100%"
+    },
+    "logo": {
+      "height": "40px",
+      "width": "auto"
+    },
+    "menu": {
+      "display": "flex",
+      "gap": "{navigation-gap}",
+      "alignItems": "center"
+    },
+    "menuItem": {
+      "color": "{navigation-link-color}",
+      "fontSize": "{fontSize-base}",
+      "fontWeight": "{fontWeight-medium}",
+      "transition": "{navigation-transition}"
+    }
+  },
+  "variants": {
+    "solid": {
+      "bg": "{navigation-bg}",
+      "backdrop-filter": "none",
+      "shadow": "{navigation-shadow}"
+    },
+    "glass": {
+      "bg": "{navigation-bg-glass}",
+      "backdrop-filter": "{navigation-backdrop-filter}",
+      "shadow": "{navigation-shadow}"
+    },
+    "transparent": {
+      "bg": "transparent",
+      "backdrop-filter": "none",
+      "shadow": "none",
+      "scrolledBg": "{navigation-bg-glass}",
+      "scrolledShadow": "{navigation-shadow-scrolled}"
+    }
+  },
+  "menuItems": [
+    {
+      "label": "Home",
+      "href": "/",
+      "exact": true
+    },
+    {
+      "label": "Leistungen",
+      "href": "/leistungen/",
+      "exact": false
+    },
+    {
+      "label": "Referenzen",
+      "href": "/referenzen/",
+      "exact": false
+    },
+    {
+      "label": "Über uns",
+      "href": "/ueber-uns/",
+      "exact": false
+    },
+    {
+      "label": "Kontakt",
+      "href": "/kontakt/",
+      "exact": false,
+      "highlight": true
+    }
+  ],
+  "mobileMenu": {
+    "breakpoint": "768px",
+    "trigger": {
+      "ariaLabel": "Hauptmenü öffnen/schließen",
+      "icon": "Hamburger icon (3 lines)",
+      "size": "44×44px"
+    },
+    "panel": {
+      "position": "fixed",
+      "top": "{navigation-height}",
+      "left": "0",
+      "right": "0",
+      "bottom": "0",
+      "bg": "{navigation-bg}",
+      "backdrop": "rgba(0, 0, 0, 0.5)",
+      "animation": "Slide in from right",
+      "animationDuration": "{transitions-macro}"
+    },
+    "items": {
+      "display": "flex",
+      "flexDirection": "column",
+      "gap": "{spacing-1}",
+      "padding": "{spacing-6}"
+    }
+  },
+  "accessibility": {
+    "wcag": "2.2 AA",
+    "requirements": [
+      "Navigation must be in <nav> landmark",
+      "Current page indicated with aria-current=\"page\"",
+      "Mobile menu toggle must be keyboard accessible",
+      "Mobile menu must trap focus when open",
+      "Escape key closes mobile menu",
+      "Focus returns to toggle button when menu closes",
+      "Skip to content link before navigation",
+      "Sufficient contrast for all states (≥4.5:1)"
+    ],
+    "skipLink": {
+      "text": "Zum Hauptinhalt springen",
+      "href": "#main-content",
+      "position": "absolute",
+      "top": "-100px",
+      "focusTop": "0",
+      "zIndex": "1001"
+    },
+    "focusIndicator": {
+      "outline": "2px solid {focus-ring}",
+      "outlineOffset": "2px",
+      "borderRadius": "{radius-interactive}"
+    }
+  },
+  "states": {
+    "default": "Normal navigation state",
+    "scrolled": "After scrolling, may change shadow/background",
+    "menuOpen": "Mobile menu is open, prevent body scroll",
+    "menuClosed": "Mobile menu is closed"
+  },
+  "behavior": {
+    "activeLink": {
+      "color": "{navigation-link-color-active}",
+      "borderBottom": "2px solid {border-brand}",
+      "fontWeight": "{fontWeight-semibold}"
+    },
+    "hoverLink": {
+      "color": "{navigation-link-color-hover}",
+      "transition": "{navigation-transition}"
+    },
+    "scrollBehavior": {
+      "scrollY > 50": "Add shadow, solidify background if transparent",
+      "scrollDown": "Optionally hide navigation",
+      "scrollUp": "Show navigation"
+    },
+    "mobileMenuAnimation": {
+      "open": "transform: translateX(0)",
+      "closed": "transform: translateX(100%)",
+      "backdrop": "fade in/out opacity"
+    }
+  },
+  "performance": {
+    "criticalCSS": "Include navigation styles in <head>",
+    "preloadLogo": true,
+    "lazyLoadMobileMenu": false
+  }
+}

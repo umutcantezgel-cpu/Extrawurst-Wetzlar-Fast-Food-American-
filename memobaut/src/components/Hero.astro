@@ -1,0 +1,273 @@
+---
+/**
+ * Hero Component - memobaut.com
+ * Above-the-fold hero section
+ * Contract: contracts/components/hero.contract.json
+ */
+
+import Button from './Button.astro';
+
+export interface Props {
+  variant?: 'default' | 'centered' | 'split' | 'minimal';
+  title: string;
+  subtitle?: string;
+  imageSrc?: string;
+  imageAlt?: string;
+  ctaPrimary?: {
+    text: string;
+    href: string;
+    ariaLabel?: string;
+  };
+  ctaSecondary?: {
+    text: string;
+    href: string;
+    ariaLabel?: string;
+  };
+}
+
+const {
+  variant = 'default',
+  title,
+  subtitle,
+  imageSrc,
+  imageAlt = '',
+  ctaPrimary,
+  ctaSecondary,
+} = Astro.props;
+---
+
+<section class:list={['hero', `hero--${variant}`]}>
+  {imageSrc && (
+    <div class="hero__image-wrapper">
+      <img
+        src={imageSrc}
+        alt={imageAlt}
+        class="hero__image"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <div class="hero__overlay" aria-hidden="true"></div>
+    </div>
+  )}
+
+  <div class="hero__container container">
+    <div class="hero__content">
+      <h1 class="hero__title">{title}</h1>
+
+      {subtitle && <p class="hero__subtitle">{subtitle}</p>}
+
+      {(ctaPrimary || ctaSecondary) && (
+        <div class="hero__cta-group">
+          {ctaPrimary && (
+            <Button
+              variant="primary"
+              size="lg"
+              href={ctaPrimary.href}
+              ariaLabel={ctaPrimary.ariaLabel}
+            >
+              {ctaPrimary.text}
+            </Button>
+          )}
+          {ctaSecondary && (
+            <Button
+              variant="secondary"
+              size="lg"
+              href={ctaSecondary.href}
+              ariaLabel={ctaSecondary.ariaLabel}
+            >
+              {ctaSecondary.text}
+            </Button>
+          )}
+        </div>
+      )}
+    </div>
+
+    <slot />
+  </div>
+
+  <!-- Optional scroll indicator -->
+  <div class="hero__scroll-indicator" aria-hidden="true">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M12 5V19M12 19L5 12M12 19L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: calc(100vh - 80px);
+    padding-top: var(--section-padding-xl);
+    padding-bottom: var(--section-padding-xl);
+    overflow: hidden;
+  }
+
+  /* Background Image */
+  .hero__image-wrapper {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+  }
+
+  .hero__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      135deg,
+      rgba(30, 64, 175, 0.85) 0%,
+      rgba(245, 158, 11, 0.7) 100%
+    );
+  }
+
+  /* Container */
+  .hero__container {
+    position: relative;
+    z-index: 10;
+  }
+
+  /* Content */
+  .hero__content {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-6);
+  }
+
+  .hero__title {
+    font-size: var(--font-size-5xl);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    letter-spacing: -0.02em;
+    color: var(--text-primary);
+  }
+
+  .hero--default .hero__image-wrapper + .hero__container .hero__title,
+  .hero--split .hero__image-wrapper + .hero__container .hero__title {
+    color: var(--text-inverse);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+
+  .hero__subtitle {
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
+    color: var(--text-secondary);
+    max-width: 600px;
+  }
+
+  .hero--default .hero__image-wrapper + .hero__container .hero__subtitle,
+  .hero--split .hero__image-wrapper + .hero__container .hero__subtitle {
+    color: var(--neutral-100);
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+
+  .hero__cta-group {
+    display: flex;
+    gap: var(--spacing-4);
+    flex-wrap: wrap;
+    margin-top: var(--spacing-2);
+  }
+
+  /* Scroll Indicator */
+  .hero__scroll-indicator {
+    position: absolute;
+    bottom: var(--spacing-8);
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    color: var(--text-primary);
+    animation: bounce 2s infinite;
+  }
+
+  .hero__image-wrapper ~ .hero__scroll-indicator {
+    color: var(--text-inverse);
+  }
+
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateX(-50%) translateY(0);
+    }
+    50% {
+      transform: translateX(-50%) translateY(-10px);
+    }
+  }
+
+  /* Variants */
+
+  /* Default: Text left, image right/background */
+  .hero--default .hero__content {
+    align-items: flex-start;
+    text-align: left;
+    max-width: 50%;
+  }
+
+  @media (max-width: 768px) {
+    .hero--default .hero__content {
+      max-width: 100%;
+    }
+  }
+
+  /* Centered: All centered */
+  .hero--centered .hero__content {
+    align-items: center;
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  /* Split: 50/50 */
+  .hero--split .hero__container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--gap-loose);
+    align-items: center;
+  }
+
+  @media (max-width: 768px) {
+    .hero--split .hero__container {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* Minimal: Simple centered, no image */
+  .hero--minimal {
+    min-height: 50vh;
+  }
+
+  .hero--minimal .hero__content {
+    align-items: center;
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto;
+  }
+
+  /* Responsive Typography */
+  @media (max-width: 768px) {
+    .hero__title {
+      font-size: var(--font-size-4xl);
+    }
+
+    .hero__subtitle {
+      font-size: var(--font-size-base);
+    }
+
+    .hero__cta-group {
+      flex-direction: column;
+      width: 100%;
+    }
+  }
+
+  /* Reduced Motion */
+  @media (prefers-reduced-motion: reduce) {
+    .hero__scroll-indicator {
+      animation: none;
+    }
+  }
+</style>

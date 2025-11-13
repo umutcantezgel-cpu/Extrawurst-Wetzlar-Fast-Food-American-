@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "Footer Component Contract - memobaut.com",
+  "version": "1.0.0",
+  "component": "Footer",
+  "description": "Site footer with links, contact info, and legal",
+  "structure": {
+    "container": {
+      "bg": "{footer-bg}",
+      "color": "{footer-text}",
+      "padding-y": "{footer-padding-y}",
+      "borderTop": "1px solid {footer-border}"
+    },
+    "inner": {
+      "maxWidth": "{section-max-width}",
+      "margin": "0 auto",
+      "padding-x": "{container-padding}"
+    },
+    "grid": {
+      "display": "grid",
+      "gridTemplateColumns": {
+        "mobile": "1fr",
+        "tablet": "repeat(2, 1fr)",
+        "desktop": "repeat(4, 1fr)"
+      },
+      "gap": "{footer-gap-section}"
+    },
+    "bottom": {
+      "marginTop": "{section-padding-md}",
+      "paddingTop": "{section-padding-sm}",
+      "borderTop": "1px solid {footer-border}",
+      "display": "flex",
+      "justifyContent": "space-between",
+      "alignItems": "center",
+      "flexWrap": "wrap",
+      "gap": "{gap-normal}"
+    }
+  },
+  "sections": [
+    {
+      "id": "company",
+      "title": "memobaut",
+      "content": {
+        "type": "text",
+        "description": "Ihr zuverlässiger Partner für Neubau, Sanierung und Umbau.",
+        "logo": true
+      }
+    },
+    {
+      "id": "services",
+      "title": "Leistungen",
+      "links": [
+        { "label": "Neubau", "href": "/leistungen/#neubau" },
+        { "label": "Sanierung", "href": "/leistungen/#sanierung" },
+        { "label": "Umbau", "href": "/leistungen/#umbau" },
+        { "label": "Beratung", "href": "/leistungen/#beratung" }
+      ]
+    },
+    {
+      "id": "company-info",
+      "title": "Unternehmen",
+      "links": [
+        { "label": "Über uns", "href": "/ueber-uns/" },
+        { "label": "Referenzen", "href": "/referenzen/" },
+        { "label": "Karriere", "href": "/karriere/" }
+      ]
+    },
+    {
+      "id": "contact",
+      "title": "Kontakt",
+      "content": {
+        "type": "contact",
+        "items": [
+          {
+            "type": "address",
+            "text": "[TO BE PROVIDED]",
+            "icon": "map-pin"
+          },
+          {
+            "type": "phone",
+            "text": "[TO BE PROVIDED]",
+            "href": "tel:[TO BE PROVIDED]",
+            "icon": "phone"
+          },
+          {
+            "type": "email",
+            "text": "info@memobaut.com",
+            "href": "mailto:info@memobaut.com",
+            "icon": "mail"
+          }
+        ]
+      }
+    }
+  ],
+  "bottomBar": {
+    "left": {
+      "copyright": "© {year} memobaut. Alle Rechte vorbehalten."
+    },
+    "right": {
+      "links": [
+        { "label": "Impressum", "href": "/impressum/" },
+        { "label": "Datenschutz", "href": "/datenschutz/" }
+      ]
+    }
+  },
+  "styling": {
+    "title": {
+      "fontSize": "{fontSize-lg}",
+      "fontWeight": "{fontWeight-semibold}",
+      "marginBottom": "{spacing-4}",
+      "color": "{footer-text}"
+    },
+    "link": {
+      "color": "{footer-link-color}",
+      "fontSize": "{fontSize-base}",
+      "transition": "{transitions-micro}",
+      "hover": {
+        "color": "{footer-link-color-hover}"
+      }
+    },
+    "linkList": {
+      "display": "flex",
+      "flexDirection": "column",
+      "gap": "{footer-gap-links}"
+    }
+  },
+  "accessibility": {
+    "wcag": "2.2 AA",
+    "requirements": [
+      "Footer must be in <footer> landmark",
+      "Link contrast ≥4.5:1 for both default and hover",
+      "Focus indicators visible on all interactive elements",
+      "Logical heading structure (H2 for section titles)",
+      "Phone/email links use proper protocols (tel:/mailto:)",
+      "Social media icons have accessible labels"
+    ],
+    "focusIndicator": {
+      "outline": "2px solid {focus-ring}",
+      "outlineOffset": "2px"
+    }
+  },
+  "behavior": {
+    "currentYear": "Auto-populate copyright year with JavaScript fallback",
+    "emailObfuscation": "Optionally obfuscate email to prevent spam",
+    "phoneFormat": "Format phone numbers consistently"
+  },
+  "optional": {
+    "socialMedia": {
+      "enabled": false,
+      "platforms": ["facebook", "instagram", "linkedin"],
+      "ariaLabel": "Required for each icon"
+    },
+    "newsletter": {
+      "enabled": false,
+      "gdprCompliant": true,
+      "consentRequired": true
+    }
+  }
+}

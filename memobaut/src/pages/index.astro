@@ -1,0 +1,312 @@
+---
+/**
+ * Homepage - memobaut.com
+ * SEO data from: contracts/routes/seo.routes.json
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import Hero from '../components/Hero.astro';
+import Card from '../components/Card.astro';
+import Button from '../components/Button.astro';
+
+const seo = {
+  title: 'memobaut - Ihr Bauunternehmen für Neubau, Sanierung & Umbau',
+  description: 'Professionelles Bauunternehmen mit langjähriger Erfahrung. Von der Planung bis zur Schlüsselübergabe - Ihr zuverlässiger Partner für Qualität im Bauwesen.',
+  ogTitle: 'memobaut - Qualität im Bauwesen',
+  ogDescription: 'Ihr Experte für Neubau, Sanierung und Umbau. Vertrauen Sie auf jahrelange Erfahrung und höchste Qualitätsstandards.',
+  ogImage: '/assets/images/og-home.jpg',
+  structuredData: {
+    '@context': 'https://schema.org',
+    '@type': 'GeneralContractor',
+    name: 'memobaut',
+    description: 'Bauunternehmen für Neubau, Sanierung und Umbau',
+    url: 'https://memobaut.com',
+    telephone: '[TO BE PROVIDED]',
+    email: 'info@memobaut.com',
+    address: {
+      '@type': 'PostalAddress',
+      streetAddress: '[TO BE PROVIDED]',
+      addressLocality: '[TO BE PROVIDED]',
+      postalCode: '[TO BE PROVIDED]',
+      addressCountry: 'DE',
+    },
+    areaServed: {
+      '@type': 'Place',
+      name: 'Deutschland',
+    },
+  },
+};
+
+const services = [
+  {
+    title: 'Neubau',
+    description: 'Wir realisieren Ihr Traumhaus von der ersten Skizze bis zur Schlüsselübergabe. Moderne Architektur trifft auf solide Handwerkskunst.',
+    icon: '🏗️',
+  },
+  {
+    title: 'Sanierung',
+    description: 'Fachgerechte Altbausanierung mit Respekt für die Bausubstanz. Wir erhalten den Charakter und schaffen zeitgemäßen Wohnkomfort.',
+    icon: '🔨',
+  },
+  {
+    title: 'Umbau',
+    description: 'Mehr Raum, mehr Licht, mehr Lebensqualität. Wir verwandeln Ihr bestehendes Zuhause in den perfekten Wohnraum für Ihre Bedürfnisse.',
+    icon: '🏠',
+  },
+];
+---
+
+<BaseLayout {...seo}>
+  <Navigation slot="header" />
+
+  <Hero
+    variant="centered"
+    title="Ihr Bauunternehmen für Neubau, Sanierung & Umbau"
+    subtitle="Professionelles Bauunternehmen mit langjähriger Erfahrung. Von der Planung bis zur Schlüsselübergabe - Ihr zuverlässiger Partner für Qualität im Bauwesen."
+    ctaPrimary={{
+      text: 'Jetzt Projekt anfragen',
+      href: '/kontakt/',
+    }}
+    ctaSecondary={{
+      text: 'Unsere Leistungen',
+      href: '/leistungen/',
+    }}
+  />
+
+  <!-- Services Section -->
+  <section class="services">
+    <div class="container">
+      <div class="services__header">
+        <h2 class="services__title">Unsere Leistungen</h2>
+        <p class="services__subtitle">
+          Umfassende Bauleistungen aus einer Hand
+        </p>
+      </div>
+
+      <div class="services__grid">
+        {services.map((service) => (
+          <Card variant="glass" hoverable>
+            <div class="service-card">
+              <div class="service-card__icon" aria-hidden="true">{service.icon}</div>
+              <h3 class="service-card__title">{service.title}</h3>
+              <p class="service-card__description">{service.description}</p>
+            </div>
+          </Card>
+        ))}
+      </div>
+
+      <div class="services__cta">
+        <Button variant="secondary" size="lg" href="/leistungen/">
+          Alle Leistungen ansehen
+        </Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Us Section -->
+  <section class="why-us">
+    <div class="container">
+      <div class="why-us__content">
+        <h2 class="why-us__title">Warum memobaut?</h2>
+        <ul class="why-us__list">
+          <li class="why-us__item">
+            <strong>Langjährige Erfahrung:</strong> Jahrzehntelange Expertise im Bauwesen
+          </li>
+          <li class="why-us__item">
+            <strong>Qualitätsarbeit:</strong> Höchste Ansprüche an Material und Ausführung
+          </li>
+          <li class="why-us__item">
+            <strong>Termintreue:</strong> Verlässliche Planung und pünktliche Fertigstellung
+          </li>
+          <li class="why-us__item">
+            <strong>Persönliche Beratung:</strong> Individuelle Lösungen für Ihr Projekt
+          </li>
+          <li class="why-us__item">
+            <strong>Faire Preise:</strong> Transparente Kalkulation ohne versteckte Kosten
+          </li>
+        </ul>
+        <Button variant="primary" size="lg" href="/ueber-uns/">
+          Über uns
+        </Button>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="container">
+      <Card variant="elevated" padding="xl">
+        <div class="cta__content">
+          <h2 class="cta__title">Bereit für Ihr nächstes Bauvorhaben?</h2>
+          <p class="cta__description">
+            Kontaktieren Sie uns für ein unverbindliches Beratungsgespräch. Wir freuen uns darauf, Ihr Projekt zu realisieren!
+          </p>
+          <div class="cta__buttons">
+            <Button variant="primary" size="lg" href="/kontakt/">
+              Jetzt Kontakt aufnehmen
+            </Button>
+            <Button variant="secondary" size="lg" href="/referenzen/">
+              Referenzen ansehen
+            </Button>
+          </div>
+        </div>
+      </Card>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  /* Services Section */
+  .services {
+    padding-top: var(--section-padding-lg);
+    padding-bottom: var(--section-padding-lg);
+    background-color: var(--bg-secondary);
+  }
+
+  .services__header {
+    text-align: center;
+    margin-bottom: var(--section-padding-md);
+  }
+
+  .services__title {
+    font-size: var(--font-size-4xl);
+    margin-bottom: var(--spacing-4);
+  }
+
+  .services__subtitle {
+    font-size: var(--font-size-lg);
+    color: var(--text-secondary);
+  }
+
+  .services__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--gap-loose);
+    margin-bottom: var(--section-padding-md);
+  }
+
+  @media (min-width: 768px) {
+    .services__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .service-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: var(--spacing-4);
+  }
+
+  .service-card__icon {
+    font-size: var(--font-size-6xl);
+    line-height: 1;
+  }
+
+  .service-card__title {
+    font-size: var(--font-size-2xl);
+    margin: 0;
+  }
+
+  .service-card__description {
+    color: var(--text-secondary);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .services__cta {
+    text-align: center;
+    margin-top: var(--section-padding-sm);
+  }
+
+  /* Why Us Section */
+  .why-us {
+    padding-top: var(--section-padding-lg);
+    padding-bottom: var(--section-padding-lg);
+  }
+
+  .why-us__content {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .why-us__title {
+    font-size: var(--font-size-4xl);
+    margin-bottom: var(--section-padding-sm);
+    text-align: center;
+  }
+
+  .why-us__list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-6);
+    margin-bottom: var(--section-padding-md);
+  }
+
+  .why-us__item {
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
+    padding-left: var(--spacing-8);
+    position: relative;
+  }
+
+  .why-us__item::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--bg-brand);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-2xl);
+  }
+
+  .why-us__content > :global(a) {
+    display: inline-block;
+    margin: 0 auto;
+  }
+
+  /* CTA Section */
+  .cta {
+    padding-top: var(--section-padding-lg);
+    padding-bottom: var(--section-padding-lg);
+    background-color: var(--bg-secondary);
+  }
+
+  .cta__content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-6);
+    align-items: center;
+  }
+
+  .cta__title {
+    font-size: var(--font-size-4xl);
+    margin: 0;
+  }
+
+  .cta__description {
+    font-size: var(--font-size-lg);
+    color: var(--text-secondary);
+    max-width: 600px;
+    line-height: var(--line-height-relaxed);
+  }
+
+  .cta__buttons {
+    display: flex;
+    gap: var(--spacing-4);
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  @media (max-width: 640px) {
+    .cta__buttons {
+      flex-direction: column;
+      width: 100%;
+    }
+  }
+</style>

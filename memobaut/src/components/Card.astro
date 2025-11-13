@@ -1,0 +1,159 @@
+---
+/**
+ * Card Component - memobaut.com
+ * Reusable card container with glass/elevated variants
+ * Contract: contracts/components/card.contract.json
+ */
+
+export interface Props {
+  variant?: 'default' | 'glass' | 'elevated' | 'interactive';
+  as?: 'div' | 'article' | 'section';
+  href?: string;
+  padding?: 'none' | 'sm' | 'md' | 'lg' | 'xl';
+  hoverable?: boolean;
+  class?: string;
+}
+
+const {
+  variant = 'default',
+  as: Tag = 'div',
+  href,
+  padding = 'xl',
+  hoverable = false,
+  class: className = '',
+} = Astro.props;
+
+const WrapperTag = href ? 'a' : Tag;
+
+const baseClass = 'card';
+const variantClass = `card--${variant}`;
+const paddingClass = `card--padding-${padding}`;
+const hoverableClass = hoverable || href ? 'card--hoverable' : '';
+
+const classes = [
+  baseClass,
+  variantClass,
+  paddingClass,
+  hoverableClass,
+  className,
+].filter(Boolean).join(' ');
+---
+
+<WrapperTag class={classes} href={href}>
+  <slot />
+</WrapperTag>
+
+<style>
+  .card {
+    /* Base styles */
+    display: flex;
+    flex-direction: column;
+    transition:
+      box-shadow var(--transition-macro) var(--easing-out),
+      transform var(--transition-macro) var(--easing-out),
+      border-color var(--transition-macro) var(--easing-out);
+  }
+
+  /* Link card reset */
+  a.card {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  /* Focus styles */
+  .card:focus-visible {
+    outline: 2px solid var(--focus-ring);
+    outline-offset: 2px;
+  }
+
+  /* Default variant */
+  .card--default {
+    background-color: var(--surface-raised);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-card);
+    box-shadow: var(--elevation-2);
+  }
+
+  .card--default.card--hoverable:hover {
+    box-shadow: var(--elevation-4);
+    border-color: var(--border-default);
+  }
+
+  /* Glass variant (glassmorphism) */
+  .card--glass {
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px) saturate(180%);
+    -webkit-backdrop-filter: blur(12px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: var(--radius-card);
+    box-shadow: var(--glass-medium);
+  }
+
+  .card--glass.card--hoverable:hover {
+    box-shadow: var(--glass-strong);
+    border-color: rgba(255, 255, 255, 0.5);
+  }
+
+  /* Elevated variant */
+  .card--elevated {
+    background-color: var(--surface-raised);
+    border: none;
+    border-radius: var(--radius-card);
+    box-shadow: var(--elevation-3);
+  }
+
+  .card--elevated.card--hoverable:hover {
+    box-shadow: var(--elevation-5);
+  }
+
+  /* Interactive variant */
+  .card--interactive {
+    background-color: var(--surface-raised);
+    border: 1px solid var(--border-subtle);
+    border-radius: var(--radius-card);
+    box-shadow: var(--elevation-2);
+    cursor: pointer;
+  }
+
+  .card--interactive:hover {
+    box-shadow: var(--elevation-5);
+    transform: translateY(-4px) scale(1.02);
+    border-color: var(--border-brand);
+  }
+
+  /* Padding variants */
+  .card--padding-none {
+    padding: 0;
+  }
+
+  .card--padding-sm {
+    padding: var(--spacing-4);
+  }
+
+  .card--padding-md {
+    padding: var(--spacing-6);
+  }
+
+  .card--padding-lg {
+    padding: var(--spacing-8);
+  }
+
+  .card--padding-xl {
+    padding: var(--component-padding-xl);
+  }
+
+  /* Reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    .card {
+      transition: box-shadow var(--transition-macro) var(--easing-out);
+      transform: none !important;
+    }
+  }
+
+  /* Support fallback for no backdrop-filter */
+  @supports not (backdrop-filter: blur(12px)) {
+    .card--glass {
+      background: rgba(255, 255, 255, 0.95);
+    }
+  }
+</style>

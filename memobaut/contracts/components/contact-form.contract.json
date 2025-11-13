@@ -1,0 +1,219 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "Contact Form Component Contract - memobaut.com",
+  "version": "1.0.0",
+  "component": "ContactForm",
+  "description": "GDPR-compliant contact form with validation and spam protection",
+  "fields": [
+    {
+      "id": "name",
+      "type": "text",
+      "label": "Ihr Name",
+      "placeholder": "Max Mustermann",
+      "required": true,
+      "validation": {
+        "minLength": 2,
+        "maxLength": 100,
+        "pattern": "^[a-zA-ZäöüÄÖÜß\\s\\-]+$",
+        "errorMessage": "Bitte geben Sie einen gültigen Namen ein."
+      },
+      "autocomplete": "name",
+      "ariaDescribedBy": "name-error"
+    },
+    {
+      "id": "email",
+      "type": "email",
+      "label": "E-Mail-Adresse",
+      "placeholder": "max@beispiel.de",
+      "required": true,
+      "validation": {
+        "pattern": "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$",
+        "errorMessage": "Bitte geben Sie eine gültige E-Mail-Adresse ein."
+      },
+      "autocomplete": "email",
+      "ariaDescribedBy": "email-error"
+    },
+    {
+      "id": "phone",
+      "type": "tel",
+      "label": "Telefonnummer",
+      "placeholder": "+49 123 456789",
+      "required": false,
+      "validation": {
+        "pattern": "^[+]?[0-9\\s\\-()]{6,20}$",
+        "errorMessage": "Bitte geben Sie eine gültige Telefonnummer ein."
+      },
+      "autocomplete": "tel",
+      "ariaDescribedBy": "phone-error"
+    },
+    {
+      "id": "subject",
+      "type": "select",
+      "label": "Betreff",
+      "required": true,
+      "options": [
+        { "value": "", "label": "Bitte wählen..." },
+        { "value": "neubau", "label": "Neubau" },
+        { "value": "sanierung", "label": "Sanierung" },
+        { "value": "umbau", "label": "Umbau" },
+        { "value": "beratung", "label": "Beratung" },
+        { "value": "sonstiges", "label": "Sonstiges" }
+      ],
+      "validation": {
+        "errorMessage": "Bitte wählen Sie einen Betreff aus."
+      },
+      "ariaDescribedBy": "subject-error"
+    },
+    {
+      "id": "message",
+      "type": "textarea",
+      "label": "Ihre Nachricht",
+      "placeholder": "Beschreiben Sie Ihr Anliegen...",
+      "required": true,
+      "rows": 6,
+      "validation": {
+        "minLength": 10,
+        "maxLength": 2000,
+        "errorMessage": "Ihre Nachricht muss mindestens 10 Zeichen lang sein."
+      },
+      "ariaDescribedBy": "message-error"
+    },
+    {
+      "id": "privacy",
+      "type": "checkbox",
+      "label": "Ich habe die <a href=\"/datenschutz/\">Datenschutzerklärung</a> gelesen und stimme der Verarbeitung meiner Daten zu.",
+      "required": true,
+      "validation": {
+        "errorMessage": "Sie müssen der Datenschutzerklärung zustimmen."
+      },
+      "ariaDescribedBy": "privacy-error"
+    }
+  ],
+  "submitButton": {
+    "text": "Nachricht senden",
+    "loadingText": "Wird gesendet...",
+    "variant": "primary",
+    "size": "lg",
+    "ariaLabel": "Kontaktformular absenden"
+  },
+  "styling": {
+    "container": {
+      "maxWidth": "600px",
+      "margin": "0 auto"
+    },
+    "fieldset": {
+      "display": "flex",
+      "flexDirection": "column",
+      "gap": "{spacing-6}",
+      "border": "none",
+      "padding": "0"
+    },
+    "field": {
+      "display": "flex",
+      "flexDirection": "column",
+      "gap": "{spacing-2}"
+    },
+    "label": {
+      "color": "{form-label-color}",
+      "fontSize": "{form-label-size}",
+      "fontWeight": "{form-label-weight}",
+      "marginBottom": "{form-label-margin-bottom}"
+    },
+    "input": {
+      "bg": "{form-input-bg}",
+      "border": "1px solid {form-input-border}",
+      "borderRadius": "{form-input-radius}",
+      "padding-x": "{form-input-padding-x}",
+      "padding-y": "{form-input-padding-y}",
+      "fontSize": "{fontSize-base}",
+      "color": "{form-input-text}",
+      "transition": "{form-input-transition}",
+      "focus": {
+        "borderColor": "{form-input-border-focus}",
+        "boxShadow": "{form-input-shadow-focus}",
+        "outline": "none"
+      },
+      "error": {
+        "borderColor": "{form-input-border-error}"
+      }
+    },
+    "error": {
+      "color": "{form-error-color}",
+      "fontSize": "{form-error-size}",
+      "marginTop": "{form-error-margin-top}",
+      "role": "alert"
+    }
+  },
+  "validation": {
+    "mode": "onBlur",
+    "revalidateMode": "onChange",
+    "showErrorsOn": "submit",
+    "focusFirstError": true
+  },
+  "spamProtection": {
+    "method": "honeypot",
+    "honeypotField": {
+      "name": "website",
+      "position": "absolute",
+      "left": "-9999px",
+      "tabIndex": "-1",
+      "ariaHidden": "true"
+    },
+    "rateLimit": {
+      "enabled": true,
+      "maxAttempts": 3,
+      "windowMs": 60000,
+      "message": "Zu viele Anfragen. Bitte versuchen Sie es später erneut."
+    }
+  },
+  "submission": {
+    "method": "POST",
+    "action": "/.netlify/functions/contact",
+    "encoding": "application/json",
+    "successMessage": "Vielen Dank für Ihre Nachricht! Wir melden uns in Kürze bei Ihnen.",
+    "errorMessage": "Es ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder kontaktieren Sie uns telefonisch.",
+    "redirect": null
+  },
+  "accessibility": {
+    "wcag": "2.2 AA",
+    "requirements": [
+      "All inputs must have associated <label> elements",
+      "Required fields indicated with aria-required=\"true\"",
+      "Error messages use aria-describedby and role=\"alert\"",
+      "Focus moves to first error field on failed submission",
+      "Success message announced to screen readers",
+      "Submit button disabled during submission (aria-disabled)",
+      "Contrast ratio ≥4.5:1 for all text and borders",
+      "Keyboard accessible throughout (Tab, Enter, Space)",
+      "Labels visible at all times (no placeholder-only labels)"
+    ],
+    "liveRegion": {
+      "ariaLive": "polite",
+      "ariaAtomic": "true",
+      "role": "status"
+    }
+  },
+  "gdpr": {
+    "dataProcessing": {
+      "purposes": ["Contact request handling", "Response to inquiry"],
+      "legalBasis": "Consent (Art. 6(1)(a) GDPR)",
+      "retention": "Data deleted after inquiry is resolved (max 12 months)",
+      "processors": ["Netlify Functions (hosting)"],
+      "rightToWithdraw": "Users can withdraw consent anytime via email"
+    },
+    "consentRequired": true,
+    "privacyPolicyLink": "/datenschutz/"
+  },
+  "behavior": {
+    "autoFocus": false,
+    "preserveOnError": true,
+    "clearOnSuccess": true,
+    "scrollToTop": true
+  },
+  "testing": {
+    "unit": "Validate all validation functions",
+    "integration": "Test form submission flow",
+    "a11y": "Pa11y CI with WCAG 2.2 AA rules",
+    "e2e": "Test successful and failed submissions"
+  }
+}

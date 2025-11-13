@@ -1,0 +1,205 @@
+---
+/**
+ * Referenzen Page - memobaut.com
+ * SEO data from: contracts/routes/seo.routes.json
+ */
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Navigation.astro';
+import Footer from '../../components/Footer.astro';
+import Hero from '../../components/Hero.astro';
+import Card from '../../components/Card.astro';
+import Button from '../../components/Button.astro';
+
+const seo = {
+  title: 'Referenzprojekte - Unsere realisierten Bauvorhaben | memobaut',
+  description: 'Überzeugen Sie sich von unserer Arbeit: Erfolgreich abgeschlossene Projekte in den Bereichen Neubau, Sanierung und Umbau.',
+  ogTitle: 'Referenzen - memobaut Projekte',
+  ogDescription: 'Einblicke in unsere erfolgreichen Bauvorhaben.',
+  ogImage: '/assets/images/og-referenzen.jpg',
+};
+
+// Placeholder projects - will be replaced with real data
+const projects = [
+  {
+    title: 'Einfamilienhaus Neubau',
+    category: 'Neubau',
+    location: '[Ort wird ergänzt]',
+    year: '2024',
+    description: 'Modernes Einfamilienhaus mit energieeffizienter Bauweise und großzügigen Wohnflächen.',
+  },
+  {
+    title: 'Altbau-Sanierung',
+    category: 'Sanierung',
+    location: '[Ort wird ergänzt]',
+    year: '2023',
+    description: 'Denkmalgerechte Sanierung eines historischen Gebäudes unter Erhaltung der ursprünglichen Bausubstanz.',
+  },
+  {
+    title: 'Dachgeschossausbau',
+    category: 'Umbau',
+    location: '[Ort wird ergänzt]',
+    year: '2023',
+    description: 'Ausbau des Dachgeschosses zu hochwertigen Wohnräumen mit moderner Dämmung und Lichttechnik.',
+  },
+];
+---
+
+<BaseLayout {...seo}>
+  <Navigation slot="header" />
+
+  <Hero
+    variant="minimal"
+    title="Unsere Referenzen"
+    subtitle="Einblicke in erfolgreich abgeschlossene Projekte"
+  />
+
+  <!-- Projects Section -->
+  <section class="projects">
+    <div class="container">
+      <div class="projects__intro">
+        <p class="projects__text">
+          Überzeugen Sie sich von der Qualität unserer Arbeit. Hier finden Sie eine Auswahl unserer realisierten Bauvorhaben in den Bereichen Neubau, Sanierung und Umbau.
+        </p>
+      </div>
+
+      <div class="projects__grid">
+        {projects.map((project) => (
+          <Card variant="elevated" hoverable>
+            <div class="project">
+              <div class="project__badge">{project.category}</div>
+              <h3 class="project__title">{project.title}</h3>
+              <div class="project__meta">
+                <span class="project__location">{project.location}</span>
+                <span class="project__separator">•</span>
+                <span class="project__year">{project.year}</span>
+              </div>
+              <p class="project__description">{project.description}</p>
+            </div>
+          </Card>
+        ))}
+      </div>
+
+      <div class="projects__note">
+        <Card variant="glass" padding="lg">
+          <div class="note">
+            <h3 class="note__title">Weitere Projekte auf Anfrage</h3>
+            <p class="note__text">
+              Gerne stellen wir Ihnen weitere Referenzprojekte vor und ermöglichen Besichtigungen nach Absprache mit unseren Bauherren.
+            </p>
+            <Button variant="primary" href="/kontakt/">
+              Jetzt Kontakt aufnehmen
+            </Button>
+          </div>
+        </Card>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .projects {
+    padding-top: var(--section-padding-md);
+    padding-bottom: var(--section-padding-lg);
+  }
+
+  .projects__intro {
+    max-width: 800px;
+    margin: 0 auto var(--section-padding-md);
+    text-align: center;
+  }
+
+  .projects__text {
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
+    color: var(--text-secondary);
+  }
+
+  .projects__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: var(--gap-loose);
+    margin-bottom: var(--section-padding-md);
+  }
+
+  @media (min-width: 768px) {
+    .projects__grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .projects__grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* Project Card */
+  .project {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+  }
+
+  .project__badge {
+    display: inline-block;
+    align-self: flex-start;
+    padding: var(--spacing-1) var(--spacing-3);
+    background-color: var(--bg-brand);
+    color: var(--text-inverse);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    border-radius: var(--radius-pill);
+  }
+
+  .project__title {
+    font-size: var(--font-size-2xl);
+    margin: 0;
+  }
+
+  .project__meta {
+    display: flex;
+    gap: var(--spacing-2);
+    align-items: center;
+    color: var(--text-tertiary);
+    font-size: var(--font-size-sm);
+  }
+
+  .project__separator {
+    color: var(--text-tertiary);
+  }
+
+  .project__description {
+    color: var(--text-secondary);
+    line-height: var(--line-height-relaxed);
+  }
+
+  /* Note Section */
+  .projects__note {
+    margin-top: var(--section-padding-md);
+  }
+
+  .note {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+    align-items: center;
+    text-align: center;
+  }
+
+  .note__title {
+    font-size: var(--font-size-2xl);
+    margin: 0;
+  }
+
+  .note__text {
+    font-size: var(--font-size-base);
+    line-height: var(--line-height-relaxed);
+    color: var(--text-secondary);
+    max-width: 600px;
+  }
+</style>

@@ -1,0 +1,140 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "Button Component Contract - memobaut.com",
+  "version": "1.0.0",
+  "component": "Button",
+  "description": "Reusable button component with variants, sizes, and accessibility",
+  "props": {
+    "variant": {
+      "type": "string",
+      "enum": ["primary", "secondary", "accent"],
+      "default": "primary",
+      "description": "Visual style variant"
+    },
+    "size": {
+      "type": "string",
+      "enum": ["sm", "md", "lg"],
+      "default": "md",
+      "description": "Button size"
+    },
+    "href": {
+      "type": "string",
+      "optional": true,
+      "description": "If provided, renders as <a> tag"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["button", "submit", "reset"],
+      "default": "button",
+      "description": "Button type attribute (only for <button> elements)"
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Disabled state"
+    },
+    "fullWidth": {
+      "type": "boolean",
+      "default": false,
+      "description": "Expand to full container width"
+    },
+    "ariaLabel": {
+      "type": "string",
+      "optional": true,
+      "description": "Accessible label (required if no text content)"
+    }
+  },
+  "variants": {
+    "primary": {
+      "bg": "{button-primary-bg}",
+      "bg-hover": "{button-primary-bg-hover}",
+      "text": "{button-primary-text}",
+      "border": "{button-primary-border}",
+      "shadow": "{button-primary-shadow}",
+      "shadow-hover": "{button-primary-shadow-hover}"
+    },
+    "secondary": {
+      "bg": "{button-secondary-bg}",
+      "bg-hover": "{button-secondary-bg-hover}",
+      "text": "{button-secondary-text}",
+      "border": "{button-secondary-border}",
+      "shadow": "{button-secondary-shadow}",
+      "shadow-hover": "{button-secondary-shadow-hover}"
+    },
+    "accent": {
+      "bg": "{button-accent-bg}",
+      "bg-hover": "{button-accent-bg-hover}",
+      "text": "{button-accent-text}",
+      "border": "{button-accent-border}",
+      "shadow": "{button-accent-shadow}",
+      "shadow-hover": "{button-accent-shadow-hover}"
+    }
+  },
+  "sizes": {
+    "sm": {
+      "fontSize": "{fontSize-sm}",
+      "padding-x": "{spacing-4}",
+      "padding-y": "{spacing-2}",
+      "height": "36px"
+    },
+    "md": {
+      "fontSize": "{fontSize-base}",
+      "padding-x": "{spacing-6}",
+      "padding-y": "{spacing-3}",
+      "height": "44px"
+    },
+    "lg": {
+      "fontSize": "{fontSize-lg}",
+      "padding-x": "{spacing-8}",
+      "padding-y": "{spacing-4}",
+      "height": "52px"
+    }
+  },
+  "accessibility": {
+    "wcag": "2.2 AA",
+    "requirements": [
+      "Minimum touch target: 44×44px (WCAG 2.5.5)",
+      "Focus indicator: visible, 2px outline (WCAG 2.4.7)",
+      "Contrast ratio: ≥4.5:1 for text (WCAG 1.4.3)",
+      "Keyboard accessible: Enter/Space triggers action",
+      "aria-label required if no text content",
+      "disabled buttons must have aria-disabled=\"true\"",
+      "Loading state must announce to screen readers"
+    ],
+    "focusIndicator": {
+      "outline": "2px solid {focus-ring}",
+      "outlineOffset": "2px",
+      "borderRadius": "{radius-interactive}"
+    }
+  },
+  "states": {
+    "default": "Normal interactive state",
+    "hover": "Mouse hover - elevate shadow, subtle color shift",
+    "active": "Mouse down - darker color, inset shadow",
+    "focus": "Keyboard focus - visible outline",
+    "disabled": "Non-interactive - reduced opacity, no pointer events",
+    "loading": "Processing - spinner, aria-busy=\"true\""
+  },
+  "behavior": {
+    "transition": "{transitions-macro}",
+    "transitionProperties": ["background-color", "box-shadow", "transform"],
+    "hoverTransform": "translateY(-1px)",
+    "activeTransform": "translateY(0)",
+    "reducedMotion": "Respect prefers-reduced-motion"
+  },
+  "usage": {
+    "do": [
+      "Use primary for main CTAs (max 1 per section)",
+      "Use secondary for alternative actions",
+      "Use accent sparingly for special promotions",
+      "Provide clear, action-oriented labels",
+      "Group related buttons with consistent spacing"
+    ],
+    "dont": [
+      "Don't use multiple primary buttons in same context",
+      "Don't use buttons for navigation (use links)",
+      "Don't disable without explanation",
+      "Don't use generic labels like 'Click here'"
+    ]
+  }
+}

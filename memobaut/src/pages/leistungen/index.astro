@@ -1,0 +1,243 @@
+---
+/**
+ * Leistungen Page - memobaut.com
+ * SEO data from: contracts/routes/seo.routes.json
+ */
+
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import Navigation from '../../components/Navigation.astro';
+import Footer from '../../components/Footer.astro';
+import Hero from '../../components/Hero.astro';
+import Card from '../../components/Card.astro';
+import Button from '../../components/Button.astro';
+
+const seo = {
+  title: 'Unsere Leistungen - Neubau, Sanierung, Umbau | memobaut',
+  description: 'Umfassende Bauleistungen: Neubau von Ein- und Mehrfamilienhäusern, professionelle Altbausanierung, moderne Umbau- und Erweiterungslösungen.',
+  ogTitle: 'Bauleistungen von memobaut',
+  ogDescription: 'Von der Planung bis zur Fertigstellung - alle Leistungen aus einer Hand.',
+  ogImage: '/assets/images/og-leistungen.jpg',
+  structuredData: {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    serviceType: 'Bauleistungen',
+    provider: {
+      '@type': 'Organization',
+      name: 'memobaut',
+    },
+  },
+};
+
+const services = [
+  {
+    id: 'neubau',
+    title: 'Neubau',
+    subtitle: 'Ihr Traumhaus wird Wirklichkeit',
+    description: 'Wir begleiten Sie von der ersten Idee bis zur Schlüsselübergabe. Ob Einfamilienhaus, Mehrfamilienhaus oder Gewerbeimmobilie - wir setzen Ihre Vision in die Realität um.',
+    features: [
+      'Individuelle Planung nach Ihren Wünschen',
+      'Moderne, energieeffiziente Bauweise',
+      'Hochwertige Materialien und Verarbeitung',
+      'Erfahrene Architekten und Fachkräfte',
+      'Termingerechte Fertigstellung',
+    ],
+  },
+  {
+    id: 'sanierung',
+    title: 'Sanierung',
+    subtitle: 'Neues Leben für alte Substanz',
+    description: 'Fachgerechte Altbausanierung erfordert Erfahrung und Fingerspitzengefühl. Wir bewahren den Charakter Ihres Gebäudes und bringen es auf den neuesten Stand.',
+    features: [
+      'Bestandsaufnahme und Schadenanalyse',
+      'Denkmalgerechte Sanierung',
+      'Energetische Modernisierung',
+      'Feuchtigkeitssanierung',
+      'Dach- und Fassadensanierung',
+    ],
+  },
+  {
+    id: 'umbau',
+    title: 'Umbau & Erweiterung',
+    subtitle: 'Mehr Raum für Ihre Bedürfnisse',
+    description: 'Ihr Zuhause wächst mit Ihren Anforderungen. Wir schaffen zusätzlichen Wohnraum durch Anbauten, Aufstockungen oder intelligente Umgestaltung.',
+    features: [
+      'Anbau und Aufstockung',
+      'Dachgeschossausbau',
+      'Grundrissoptimierung',
+      'Barrierefreier Umbau',
+      'Modernisierung von Bad und Küche',
+    ],
+  },
+  {
+    id: 'beratung',
+    title: 'Beratung & Planung',
+    subtitle: 'Fundierte Expertise für Ihr Projekt',
+    description: 'Gute Planung ist die halbe Miete. Wir beraten Sie umfassend zu allen Aspekten Ihres Bauvorhabens und entwickeln maßgeschneiderte Lösungen.',
+    features: [
+      'Machbarkeitsstudien',
+      'Kosten- und Zeitplanung',
+      'Baubegleitung und Bauleitung',
+      'Energieberatung',
+      'Fördermittelberatung',
+    ],
+  },
+];
+---
+
+<BaseLayout {...seo}>
+  <Navigation slot="header" />
+
+  <Hero
+    variant="minimal"
+    title="Unsere Leistungen"
+    subtitle="Von der Planung bis zur Fertigstellung - alle Bauleistungen aus einer Hand"
+  />
+
+  <!-- Services Detail Section -->
+  <section class="services-detail">
+    <div class="container">
+      {services.map((service, index) => (
+        <div id={service.id} class="service-section">
+          <Card variant={index % 2 === 0 ? 'glass' : 'elevated'} padding="xl">
+            <div class="service">
+              <div class="service__header">
+                <h2 class="service__title">{service.title}</h2>
+                <p class="service__subtitle">{service.subtitle}</p>
+              </div>
+              <p class="service__description">{service.description}</p>
+              <h3 class="service__features-title">Unsere Leistungen im Detail:</h3>
+              <ul class="service__features">
+                {service.features.map((feature) => (
+                  <li class="service__feature">{feature}</li>
+                ))}
+              </ul>
+              <div class="service__cta">
+                <Button variant="primary" href="/kontakt/">
+                  Beratung anfragen
+                </Button>
+              </div>
+            </div>
+          </Card>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta">
+    <div class="container">
+      <div class="cta__content">
+        <h2 class="cta__title">Haben Sie Fragen zu unseren Leistungen?</h2>
+        <p class="cta__description">
+          Wir beraten Sie gerne persönlich und erstellen Ihnen ein individuelles Angebot.
+        </p>
+        <Button variant="primary" size="lg" href="/kontakt/">
+          Jetzt Kontakt aufnehmen
+        </Button>
+      </div>
+    </div>
+  </section>
+
+  <Footer slot="footer" />
+</BaseLayout>
+
+<style>
+  .services-detail {
+    padding-top: var(--section-padding-md);
+    padding-bottom: var(--section-padding-lg);
+  }
+
+  .service-section {
+    margin-bottom: var(--section-padding-md);
+    scroll-margin-top: 100px; /* For anchor links */
+  }
+
+  .service-section:last-child {
+    margin-bottom: 0;
+  }
+
+  .service {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-6);
+  }
+
+  .service__header {
+    border-bottom: 2px solid var(--border-brand);
+    padding-bottom: var(--spacing-4);
+  }
+
+  .service__title {
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--spacing-2);
+  }
+
+  .service__subtitle {
+    font-size: var(--font-size-xl);
+    color: var(--text-secondary);
+    font-weight: var(--font-weight-medium);
+  }
+
+  .service__description {
+    font-size: var(--font-size-lg);
+    line-height: var(--line-height-relaxed);
+    color: var(--text-secondary);
+  }
+
+  .service__features-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    margin-bottom: var(--spacing-2);
+  }
+
+  .service__features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-3);
+  }
+
+  .service__feature {
+    padding-left: var(--spacing-8);
+    position: relative;
+    line-height: var(--line-height-relaxed);
+  }
+
+  .service__feature::before {
+    content: '✓';
+    position: absolute;
+    left: 0;
+    color: var(--bg-brand);
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-xl);
+  }
+
+  .service__cta {
+    margin-top: var(--spacing-4);
+  }
+
+  /* CTA Section */
+  .cta {
+    padding-top: var(--section-padding-md);
+    padding-bottom: var(--section-padding-lg);
+    background-color: var(--bg-secondary);
+  }
+
+  .cta__content {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .cta__title {
+    font-size: var(--font-size-3xl);
+    margin-bottom: var(--spacing-4);
+  }
+
+  .cta__description {
+    font-size: var(--font-size-lg);
+    color: var(--text-secondary);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--spacing-8);
+  }
+</style>

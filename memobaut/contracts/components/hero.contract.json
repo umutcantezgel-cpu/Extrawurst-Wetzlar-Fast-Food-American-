@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "Hero Component Contract - memobaut.com",
+  "version": "1.0.0",
+  "component": "Hero",
+  "description": "Above-the-fold hero section with title, subtitle, and CTA buttons",
+  "props": {
+    "variant": {
+      "type": "string",
+      "enum": ["default", "centered", "split", "minimal"],
+      "default": "default",
+      "description": "Layout variant"
+    },
+    "title": {
+      "type": "string",
+      "required": true,
+      "description": "Main heading (H1)"
+    },
+    "subtitle": {
+      "type": "string",
+      "optional": true,
+      "description": "Supporting text below title"
+    },
+    "imageSrc": {
+      "type": "string",
+      "optional": true,
+      "description": "Hero background or side image"
+    },
+    "imageAlt": {
+      "type": "string",
+      "optional": true,
+      "description": "Alt text for image (required if imageSrc provided)"
+    },
+    "ctaPrimary": {
+      "type": "object",
+      "optional": true,
+      "properties": {
+        "text": "string",
+        "href": "string",
+        "ariaLabel": "string (optional)"
+      }
+    },
+    "ctaSecondary": {
+      "type": "object",
+      "optional": true,
+      "properties": {
+        "text": "string",
+        "href": "string",
+        "ariaLabel": "string (optional)"
+      }
+    }
+  },
+  "variants": {
+    "default": {
+      "layout": "Text left, Image right (or background)",
+      "alignment": "left",
+      "maxWidth": "1280px",
+      "textWidth": "50%"
+    },
+    "centered": {
+      "layout": "All content centered, optional background image",
+      "alignment": "center",
+      "maxWidth": "800px",
+      "textWidth": "100%"
+    },
+    "split": {
+      "layout": "50/50 text and image split",
+      "alignment": "left",
+      "maxWidth": "1280px",
+      "textWidth": "50%"
+    },
+    "minimal": {
+      "layout": "Simple centered text, no image",
+      "alignment": "center",
+      "maxWidth": "640px",
+      "textWidth": "100%"
+    }
+  },
+  "structure": {
+    "container": {
+      "minHeight": "calc(100vh - 80px)",
+      "padding-y": "{hero-padding-y}",
+      "display": "flex",
+      "alignItems": "center",
+      "position": "relative"
+    },
+    "content": {
+      "maxWidth": "{section-max-width}",
+      "margin": "0 auto",
+      "padding-x": "{container-padding}",
+      "gap": "{hero-gap}",
+      "zIndex": "10"
+    },
+    "title": {
+      "fontSize": "{hero-title-size}",
+      "fontWeight": "{hero-title-weight}",
+      "lineHeight": "{hero-title-line-height}",
+      "color": "{text-primary}",
+      "marginBottom": "{spacing-4}"
+    },
+    "subtitle": {
+      "fontSize": "{hero-subtitle-size}",
+      "lineHeight": "{hero-subtitle-line-height}",
+      "color": "{text-secondary}",
+      "maxWidth": "600px",
+      "marginBottom": "{spacing-8}"
+    },
+    "ctaGroup": {
+      "display": "flex",
+      "gap": "{hero-cta-gap}",
+      "flexWrap": "wrap"
+    }
+  },
+  "accessibility": {
+    "wcag": "2.2 AA",
+    "requirements": [
+      "Title must be H1 (only one per page)",
+      "If background image, ensure text contrast ≥4.5:1",
+      "CTA buttons must have 44×44px minimum target size",
+      "Focus order: Title → Subtitle → Primary CTA → Secondary CTA",
+      "If video background, provide pause control (WCAG 2.2.2)",
+      "If parallax, respect prefers-reduced-motion"
+    ],
+    "contrast": {
+      "textOnImage": "Use overlay or text-shadow for contrast",
+      "overlayColor": "rgba(0, 0, 0, 0.4)",
+      "textShadow": "0 2px 4px rgba(0, 0, 0, 0.8)"
+    }
+  },
+  "performance": {
+    "imageCritical": true,
+    "imageLoading": "eager",
+    "imageFetchPriority": "high",
+    "imageSizes": "(min-width: 1280px) 1280px, 100vw",
+    "recommendedFormats": ["avif", "webp", "jpg"],
+    "maxFileSize": "150KB",
+    "criticalCSS": "Include hero styles in <head>"
+  },
+  "behavior": {
+    "scrollIndicator": "Optional chevron/arrow indicating scrollable content below",
+    "parallax": "Optional subtle parallax on background (respect prefers-reduced-motion)",
+    "fadeIn": "Optional fade-in animation on page load (respect prefers-reduced-motion)"
+  },
+  "usage": {
+    "homepage": {
+      "variant": "default",
+      "title": "memobaut - Ihr Bauunternehmen für Neubau, Sanierung & Umbau",
+      "subtitle": "Professionelles Bauunternehmen mit langjähriger Erfahrung...",
+      "ctaPrimary": "Jetzt Projekt anfragen",
+      "ctaSecondary": "Leistungen entdecken"
+    },
+    "subpage": {
+      "variant": "minimal",
+      "title": "Page Title",
+      "subtitle": "Optional description",
+      "ctaPrimary": null
+    }
+  }
+}

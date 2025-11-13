@@ -1,0 +1,20 @@
+{
+  "defaults": {
+    "standard": "WCAG2AA",
+    "runners": ["axe"],
+    "chromeLaunchConfig": {
+      "args": ["--no-sandbox", "--disable-setuid-sandbox"]
+    },
+    "timeout": 60000,
+    "wait": 1000
+  },
+  "urls": [
+    "http://localhost:4321/",
+    "http://localhost:4321/leistungen/",
+    "http://localhost:4321/referenzen/",
+    "http://localhost:4321/ueber-uns/",
+    "http://localhost:4321/kontakt/",
+    "http://localhost:4321/impressum/",
+    "http://localhost:4321/datenschutz/"
+  ]
+}

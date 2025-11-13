@@ -1,0 +1,154 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "SEO Routes Configuration - memobaut.com",
+  "version": "1.0.0",
+  "routes": [
+    {
+      "path": "/",
+      "priority": 1.0,
+      "changefreq": "weekly",
+      "meta": {
+        "title": "memobaut - Ihr Bauunternehmen für Neubau, Sanierung & Umbau",
+        "description": "Professionelles Bauunternehmen mit langjähriger Erfahrung. Von der Planung bis zur Schlüsselübergabe - Ihr zuverlässiger Partner für Qualität im Bauwesen.",
+        "ogTitle": "memobaut - Qualität im Bauwesen",
+        "ogDescription": "Ihr Experte für Neubau, Sanierung und Umbau. Vertrauen Sie auf jahrelange Erfahrung und höchste Qualitätsstandards.",
+        "ogImage": "/assets/images/og-home.jpg",
+        "ogType": "website"
+      },
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "GeneralContractor",
+        "name": "memobaut",
+        "description": "Bauunternehmen für Neubau, Sanierung und Umbau",
+        "url": "https://memobaut.com",
+        "telephone": "[TO BE PROVIDED]",
+        "email": "info@memobaut.com",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "[TO BE PROVIDED]",
+          "addressLocality": "[TO BE PROVIDED]",
+          "postalCode": "[TO BE PROVIDED]",
+          "addressCountry": "DE"
+        },
+        "areaServed": {
+          "@type": "Place",
+          "name": "Deutschland"
+        },
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Bauleistungen",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Neubau"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Sanierung"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Umbau"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "path": "/leistungen/",
+      "priority": 0.9,
+      "changefreq": "monthly",
+      "meta": {
+        "title": "Unsere Leistungen - Neubau, Sanierung, Umbau | memobaut",
+        "description": "Umfassende Bauleistungen: Neubau von Ein- und Mehrfamilienhäusern, professionelle Altbausanierung, moderne Umbau- und Erweiterungslösungen.",
+        "ogTitle": "Bauleistungen von memobaut",
+        "ogDescription": "Von der Planung bis zur Fertigstellung - alle Leistungen aus einer Hand.",
+        "ogImage": "/assets/images/og-leistungen.jpg"
+      },
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "serviceType": "Bauleistungen",
+        "provider": {
+          "@type": "Organization",
+          "name": "memobaut"
+        }
+      }
+    },
+    {
+      "path": "/referenzen/",
+      "priority": 0.8,
+      "changefreq": "monthly",
+      "meta": {
+        "title": "Referenzprojekte - Unsere realisierten Bauvorhaben | memobaut",
+        "description": "Überzeugen Sie sich von unserer Arbeit: Erfolgreich abgeschlossene Projekte in den Bereichen Neubau, Sanierung und Umbau.",
+        "ogTitle": "Referenzen - memobaut Projekte",
+        "ogDescription": "Einblicke in unsere erfolgreichen Bauvorhaben.",
+        "ogImage": "/assets/images/og-referenzen.jpg"
+      }
+    },
+    {
+      "path": "/ueber-uns/",
+      "priority": 0.7,
+      "changefreq": "monthly",
+      "meta": {
+        "title": "Über uns - Das Team hinter memobaut | memobaut",
+        "description": "Lernen Sie unser erfahrenes Team kennen. Mit Leidenschaft und Expertise realisieren wir Ihr Bauvorhaben.",
+        "ogTitle": "Das memobaut Team",
+        "ogDescription": "Erfahrung, Kompetenz und Qualität - seit Jahren Ihr Partner im Bauwesen.",
+        "ogImage": "/assets/images/og-team.jpg"
+      },
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "AboutPage",
+        "name": "Über memobaut"
+      }
+    },
+    {
+      "path": "/kontakt/",
+      "priority": 0.9,
+      "changefreq": "monthly",
+      "meta": {
+        "title": "Kontakt - Jetzt Projekt anfragen | memobaut",
+        "description": "Kontaktieren Sie uns für eine unverbindliche Beratung. Wir freuen uns auf Ihr Bauvorhaben!",
+        "ogTitle": "Kontaktieren Sie memobaut",
+        "ogDescription": "Wir sind für Sie da - persönlich, telefonisch oder per E-Mail.",
+        "ogImage": "/assets/images/og-kontakt.jpg"
+      },
+      "structuredData": {
+        "@context": "https://schema.org",
+        "@type": "ContactPage",
+        "name": "Kontakt zu memobaut"
+      }
+    },
+    {
+      "path": "/impressum/",
+      "priority": 0.3,
+      "changefreq": "yearly",
+      "meta": {
+        "title": "Impressum | memobaut",
+        "description": "Impressum und Anbieterkennzeichnung der memobaut.",
+        "robots": "noindex, follow"
+      }
+    },
+    {
+      "path": "/datenschutz/",
+      "priority": 0.3,
+      "changefreq": "yearly",
+      "meta": {
+        "title": "Datenschutzerklärung | memobaut",
+        "description": "Informationen zum Datenschutz bei memobaut.",
+        "robots": "noindex, follow"
+      }
+    }
+  ]
+}

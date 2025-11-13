@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "Component Design Tokens - memobaut.com",
+  "version": "1.0.0",
+  "description": "Tier 3: Component-Specific Tokens - Use these in components",
+  "button": {
+    "primary": {
+      "bg": "{bg-brand}",
+      "bg-hover": "{brand-primary-600}",
+      "bg-active": "{brand-primary-700}",
+      "text": "{text-inverse}",
+      "border": "{brand-primary-500}",
+      "shadow": "{elevation-2}",
+      "shadow-hover": "{elevation-3}",
+      "radius": "{radius-interactive}",
+      "padding-x": "{component-padding-lg}",
+      "padding-y": "{component-padding-md}",
+      "transition": "{transitions-macro}"
+    },
+    "secondary": {
+      "bg": "transparent",
+      "bg-hover": "{bg-brand-light}",
+      "bg-active": "{brand-primary-100}",
+      "text": "{text-link}",
+      "border": "{border-brand}",
+      "shadow": "none",
+      "shadow-hover": "{elevation-1}",
+      "radius": "{radius-interactive}",
+      "padding-x": "{component-padding-lg}",
+      "padding-y": "{component-padding-md}",
+      "transition": "{transitions-macro}"
+    },
+    "accent": {
+      "bg": "{bg-accent}",
+      "bg-hover": "{brand-secondary-600}",
+      "bg-active": "{brand-secondary-700}",
+      "text": "{text-inverse}",
+      "border": "{brand-secondary-500}",
+      "shadow": "{elevation-2}",
+      "shadow-hover": "{elevation-3}",
+      "radius": "{radius-interactive}",
+      "padding-x": "{component-padding-lg}",
+      "padding-y": "{component-padding-md}",
+      "transition": "{transitions-macro}"
+    }
+  },
+  "card": {
+    "default": {
+      "bg": "{surface-raised}",
+      "border": "{border-subtle}",
+      "radius": "{radius-card}",
+      "shadow": "{elevation-2}",
+      "shadow-hover": "{elevation-4}",
+      "padding": "{component-padding-xl}",
+      "transition": "{transitions-macro}"
+    },
+    "glass": {
+      "bg": "rgba(255, 255, 255, 0.7)",
+      "backdrop-filter": "blur(12px) saturate(180%)",
+      "border": "rgba(255, 255, 255, 0.3)",
+      "radius": "{radius-card}",
+      "shadow": "{effects-glass-medium}",
+      "shadow-hover": "{effects-glass-strong}",
+      "padding": "{component-padding-xl}",
+      "transition": "{transitions-macro}"
+    },
+    "elevated": {
+      "bg": "{surface-raised}",
+      "border": "transparent",
+      "radius": "{radius-card}",
+      "shadow": "{elevation-3}",
+      "shadow-hover": "{elevation-5}",
+      "padding": "{component-padding-xl}",
+      "transition": "{transitions-macro}"
+    }
+  },
+  "hero": {
+    "title-size": "{typography-heading-1-fontSize}",
+    "title-weight": "{typography-heading-1-fontWeight}",
+    "title-line-height": "{typography-heading-1-lineHeight}",
+    "subtitle-size": "{typography-body-large-fontSize}",
+    "subtitle-line-height": "{typography-body-large-lineHeight}",
+    "padding-y": "{section-padding-xl}",
+    "gap": "{gap-relaxed}",
+    "cta-gap": "{gap-normal}"
+  },
+  "navigation": {
+    "height": "80px",
+    "bg": "{surface-raised}",
+    "bg-glass": "rgba(255, 255, 255, 0.85)",
+    "backdrop-filter": "blur(12px) saturate(180%)",
+    "border": "{border-subtle}",
+    "shadow": "{elevation-1}",
+    "shadow-scrolled": "{elevation-2}",
+    "link-color": "{text-secondary}",
+    "link-color-hover": "{text-link}",
+    "link-color-active": "{text-link}",
+    "padding-x": "{container-padding}",
+    "gap": "{gap-relaxed}",
+    "transition": "{transitions-macro}"
+  },
+  "footer": {
+    "bg": "{bg-inverse}",
+    "text": "{text-inverse}",
+    "link-color": "{neutral-300}",
+    "link-color-hover": "{neutral-100}",
+    "border": "{neutral-800}",
+    "padding-y": "{section-padding-lg}",
+    "gap-section": "{gap-loose}",
+    "gap-links": "{gap-tight}"
+  },
+  "form": {
+    "input": {
+      "bg": "{surface-raised}",
+      "bg-focus": "{surface-raised}",
+      "border": "{border-default}",
+      "border-focus": "{border-brand}",
+      "border-error": "{state-error}",
+      "text": "{text-primary}",
+      "placeholder": "{text-tertiary}",
+      "radius": "{radius-interactive}",
+      "padding-x": "{component-padding-md}",
+      "padding-y": "{component-padding-sm}",
+      "shadow-focus": "0 0 0 3px rgba(30, 64, 175, 0.1)",
+      "transition": "{transitions-micro}"
+    },
+    "label": {
+      "color": "{text-primary}",
+      "size": "{typography-label-fontSize}",
+      "weight": "{typography-label-fontWeight}",
+      "margin-bottom": "{spacing-2}"
+    },
+    "error": {
+      "color": "{state-error}",
+      "size": "{typography-caption-fontSize}",
+      "margin-top": "{spacing-1}"
+    }
+  },
+  "section": {
+    "padding-y-sm": "{section-padding-sm}",
+    "padding-y-md": "{section-padding-md}",
+    "padding-y-lg": "{section-padding-lg}",
+    "padding-y-xl": "{section-padding-xl}",
+    "gap": "{gap-loose}",
+    "max-width": "{container-max-width}"
+  }
+}
