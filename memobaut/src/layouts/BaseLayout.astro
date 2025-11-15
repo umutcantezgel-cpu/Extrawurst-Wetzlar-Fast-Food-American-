@@ -5,6 +5,7 @@
  */
 
 import '../styles/global.css';
+import AnimatedBackground from '../components/AnimatedBackground.astro';
 
 export interface Props {
   title: string;
@@ -87,6 +88,9 @@ const currentYear = new Date().getFullYear();
   </head>
 
   <body>
+    <!-- Animated Background (Premium visual depth) -->
+    <AnimatedBackground variant="subtle" />
+
     <!-- Skip to main content link (A11y) -->
     <a href="#main-content" class="skip-to-main">
       Zum Hauptinhalt springen
@@ -116,17 +120,36 @@ const currentYear = new Date().getFullYear();
         });
       });
     </script>
+
+    <!-- Scroll-triggered animations -->
+    <script>
+      import { initScrollAnimations } from '../utils/scroll-animations';
+      initScrollAnimations();
+    </script>
   </body>
 </html>
 
 <style>
-  /* Main element spacing */
+  body {
+    position: relative;
+  }
+
+  /* Main element spacing and layering */
   main {
     min-height: 60vh;
+    position: relative;
+    z-index: var(--z-base);
   }
 
   /* Ensure focus is visible on main when skipping to content */
   main:focus {
     outline: none;
+  }
+
+  /* Ensure header/footer are above background */
+  nav,
+  footer {
+    position: relative;
+    z-index: var(--z-sticky);
   }
 </style>

@@ -1,0 +1,180 @@
+---
+/**
+ * Animated Background Component - memobaut.com
+ * Multi-layer animated gradient background for premium visual depth
+ */
+
+export interface Props {
+  variant?: 'default' | 'subtle' | 'vibrant';
+  class?: string;
+}
+
+const {
+  variant = 'default',
+  class: className = '',
+} = Astro.props;
+---
+
+<div class={`animated-bg animated-bg--${variant} ${className}`} aria-hidden="true">
+  <div class="animated-bg__layer animated-bg__layer--1"></div>
+  <div class="animated-bg__layer animated-bg__layer--2"></div>
+  <div class="animated-bg__layer animated-bg__layer--3"></div>
+</div>
+
+<style>
+  .animated-bg {
+    /* Position */
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: var(--z-background);
+    overflow: hidden;
+    pointer-events: none;
+
+    /* Ensure it's behind content */
+    background: var(--bg-primary);
+  }
+
+  .animated-bg__layer {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.4;
+    mix-blend-mode: soft-light;
+  }
+
+  /* Layer 1 - Primary Brand Gradient */
+  .animated-bg__layer--1 {
+    background: radial-gradient(
+      circle at 20% 30%,
+      var(--brand-primary-200) 0%,
+      transparent 50%
+    );
+    animation: float1 20s ease-in-out infinite;
+  }
+
+  /* Layer 2 - Secondary Brand Gradient */
+  .animated-bg__layer--2 {
+    background: radial-gradient(
+      circle at 80% 70%,
+      var(--brand-secondary-200) 0%,
+      transparent 50%
+    );
+    animation: float2 25s ease-in-out infinite;
+  }
+
+  /* Layer 3 - Accent Gradient */
+  .animated-bg__layer--3 {
+    background: radial-gradient(
+      circle at 50% 50%,
+      var(--neutral-200) 0%,
+      transparent 60%
+    );
+    animation: float3 30s ease-in-out infinite;
+  }
+
+  /* Subtle variant - Less opacity */
+  .animated-bg--subtle .animated-bg__layer {
+    opacity: 0.15;
+  }
+
+  /* Vibrant variant - More opacity and saturation */
+  .animated-bg--vibrant .animated-bg__layer {
+    opacity: 0.6;
+    filter: saturate(1.5);
+  }
+
+  /* Animations */
+  @keyframes float1 {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+    }
+    33% {
+      transform: translate(10%, 20%) scale(1.1);
+    }
+    66% {
+      transform: translate(-10%, 10%) scale(0.9);
+    }
+  }
+
+  @keyframes float2 {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+    }
+    33% {
+      transform: translate(-15%, -10%) scale(1.15);
+    }
+    66% {
+      transform: translate(15%, -20%) scale(0.85);
+    }
+  }
+
+  @keyframes float3 {
+    0%, 100% {
+      transform: translate(0, 0) scale(1) rotate(0deg);
+    }
+    50% {
+      transform: translate(5%, 5%) scale(1.2) rotate(180deg);
+    }
+  }
+
+  /* Dark mode adjustments */
+  @media (prefers-color-scheme: dark) {
+    .animated-bg {
+      background: var(--bg-primary);
+    }
+
+    .animated-bg__layer {
+      opacity: 0.2;
+    }
+
+    .animated-bg--subtle .animated-bg__layer {
+      opacity: 0.1;
+    }
+
+    .animated-bg--vibrant .animated-bg__layer {
+      opacity: 0.3;
+    }
+
+    /* Darker gradient colors for dark mode */
+    .animated-bg__layer--1 {
+      background: radial-gradient(
+        circle at 20% 30%,
+        var(--brand-primary-800) 0%,
+        transparent 50%
+      );
+    }
+
+    .animated-bg__layer--2 {
+      background: radial-gradient(
+        circle at 80% 70%,
+        var(--brand-secondary-800) 0%,
+        transparent 50%
+      );
+    }
+
+    .animated-bg__layer--3 {
+      background: radial-gradient(
+        circle at 50% 50%,
+        var(--neutral-700) 0%,
+        transparent 60%
+      );
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    .animated-bg__layer {
+      animation: none;
+    }
+  }
+
+  /* Performance optimization */
+  .animated-bg__layer {
+    will-change: transform;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+</style>

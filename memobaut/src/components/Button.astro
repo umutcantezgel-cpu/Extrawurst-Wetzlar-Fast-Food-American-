@@ -63,27 +63,31 @@ const classes = [
     align-items: center;
     justify-content: center;
     gap: var(--spacing-2);
-    font-weight: var(--font-weight-medium);
+    font-weight: var(--font-weight-semibold);
     text-align: center;
     text-decoration: none;
     white-space: nowrap;
     cursor: pointer;
     user-select: none;
+    position: relative;
+    overflow: hidden;
+
+    /* Physics-based transitions */
     transition:
-      background-color var(--transition-macro) var(--easing-out),
-      box-shadow var(--transition-macro) var(--easing-out),
-      transform var(--transition-macro) var(--easing-out),
-      border-color var(--transition-macro) var(--easing-out);
+      background-color var(--transition-base) var(--easing-spring),
+      box-shadow var(--transition-base) var(--easing-out),
+      transform var(--transition-base) var(--easing-spring),
+      border-color var(--transition-base) var(--easing-out);
 
     /* Reset */
     border: none;
     outline: none;
   }
 
-  /* Focus styles (WCAG 2.4.7) */
+  /* Focus styles (WCAG 2.4.7) - Using utility class pattern */
   .btn:focus-visible {
-    outline: 2px solid var(--focus-ring);
-    outline-offset: 2px;
+    outline: var(--focus-ring-width) solid var(--focus-ring);
+    outline-offset: var(--focus-ring-offset-width);
   }
 
   /* Size variants */
@@ -108,61 +112,74 @@ const classes = [
     border-radius: var(--radius-interactive);
   }
 
-  /* Primary variant */
+  /* Primary variant - Premium Solid */
   .btn--primary {
     background-color: var(--bg-brand);
     color: var(--text-inverse);
-    border: 1px solid var(--brand-primary-500);
-    box-shadow: var(--elevation-2);
+    border: 1px solid var(--brand-primary-600);
+    box-shadow: var(--shadow-md);
   }
 
   .btn--primary:hover:not(.btn--disabled) {
     background-color: var(--brand-primary-600);
-    box-shadow: var(--elevation-3);
-    transform: translateY(-1px);
+    box-shadow: var(--shadow-xl);
+    transform: translateY(-2px) scale(1.02);
   }
 
   .btn--primary:active:not(.btn--disabled) {
     background-color: var(--brand-primary-700);
-    transform: translateY(0);
+    box-shadow: var(--shadow-sm);
+    transform: translateY(0) scale(0.98);
   }
 
-  /* Secondary variant */
+  /* Secondary variant - Glassmorphism */
   .btn--secondary {
-    background-color: transparent;
-    color: var(--text-link);
-    border: 1px solid var(--border-brand);
-    box-shadow: none;
+    background: var(--glass-bg-medium);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    color: var(--text-primary);
+    border: 1px solid var(--glass-border-medium);
+    box-shadow: var(--glass-shadow-md);
   }
 
   .btn--secondary:hover:not(.btn--disabled) {
-    background-color: var(--bg-brand-light);
-    box-shadow: var(--elevation-1);
-    transform: translateY(-1px);
+    background: var(--glass-bg-strong);
+    border-color: var(--glass-border-strong);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px) scale(1.02);
   }
 
   .btn--secondary:active:not(.btn--disabled) {
-    background-color: var(--brand-primary-100);
-    transform: translateY(0);
+    background: var(--glass-bg-ultra-strong);
+    transform: translateY(0) scale(0.98);
   }
 
-  /* Accent variant */
+  /* Accent variant - Premium Gradient */
   .btn--accent {
-    background-color: var(--bg-accent);
+    background: linear-gradient(
+      135deg,
+      var(--brand-secondary-500) 0%,
+      var(--brand-secondary-600) 100%
+    );
     color: var(--text-inverse);
-    border: 1px solid var(--brand-secondary-500);
-    box-shadow: var(--elevation-2);
+    border: 1px solid var(--brand-secondary-600);
+    box-shadow: var(--shadow-md);
   }
 
   .btn--accent:hover:not(.btn--disabled) {
-    background-color: var(--brand-secondary-600);
-    box-shadow: var(--elevation-3);
-    transform: translateY(-1px);
+    background: linear-gradient(
+      135deg,
+      var(--brand-secondary-600) 0%,
+      var(--brand-secondary-700) 100%
+    );
+    box-shadow: var(--shadow-xl);
+    transform: translateY(-2px) scale(1.02);
   }
 
   .btn--accent:active:not(.btn--disabled) {
-    background-color: var(--brand-secondary-700);
-    transform: translateY(0);
+    background: var(--brand-secondary-700);
+    box-shadow: var(--shadow-sm);
+    transform: translateY(0) scale(0.98);
   }
 
   /* Full width */
@@ -177,11 +194,11 @@ const classes = [
     pointer-events: none;
   }
 
-  /* Reduced motion (WCAG 2.3.3) */
-  @media (prefers-reduced-motion: reduce) {
-    .btn {
-      transition: none;
-      transform: none !important;
+  /* Fallback für Browser ohne backdrop-filter */
+  @supports not (backdrop-filter: blur(16px)) {
+    .btn--secondary {
+      background: var(--bg-secondary);
+      box-shadow: var(--shadow-lg);
     }
   }
 </style>

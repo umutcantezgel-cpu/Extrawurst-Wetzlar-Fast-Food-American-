@@ -48,10 +48,14 @@ const classes = [
     /* Base styles */
     display: flex;
     flex-direction: column;
+    position: relative;
+    overflow: hidden;
+
+    /* Physics-based transitions */
     transition:
-      box-shadow var(--transition-macro) var(--easing-out),
-      transform var(--transition-macro) var(--easing-out),
-      border-color var(--transition-macro) var(--easing-out);
+      box-shadow var(--transition-base) var(--easing-out),
+      transform var(--transition-base) var(--easing-spring),
+      border-color var(--transition-base) var(--easing-out);
   }
 
   /* Link card reset */
@@ -60,10 +64,10 @@ const classes = [
     color: inherit;
   }
 
-  /* Focus styles */
+  /* Focus styles - Using utility pattern */
   .card:focus-visible {
-    outline: 2px solid var(--focus-ring);
-    outline-offset: 2px;
+    outline: var(--focus-ring-width) solid var(--focus-ring);
+    outline-offset: var(--focus-ring-offset-width);
   }
 
   /* Default variant */
@@ -71,27 +75,30 @@ const classes = [
     background-color: var(--surface-raised);
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-card);
-    box-shadow: var(--elevation-2);
+    box-shadow: var(--shadow-md);
   }
 
   .card--default.card--hoverable:hover {
-    box-shadow: var(--elevation-4);
+    box-shadow: var(--shadow-xl);
     border-color: var(--border-default);
+    transform: translateY(-2px);
   }
 
-  /* Glass variant (glassmorphism) */
+  /* Glass variant - Using new glassmorphism system */
   .card--glass {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(12px) saturate(180%);
-    -webkit-backdrop-filter: blur(12px) saturate(180%);
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: var(--glass-bg-medium);
+    backdrop-filter: blur(16px) saturate(180%);
+    -webkit-backdrop-filter: blur(16px) saturate(180%);
+    border: 1px solid var(--glass-border-medium);
     border-radius: var(--radius-card);
-    box-shadow: var(--glass-medium);
+    box-shadow: var(--glass-shadow-md);
   }
 
   .card--glass.card--hoverable:hover {
-    box-shadow: var(--glass-strong);
-    border-color: rgba(255, 255, 255, 0.5);
+    background: var(--glass-bg-strong);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--glass-border-strong);
+    transform: translateY(-2px);
   }
 
   /* Elevated variant */
@@ -99,25 +106,27 @@ const classes = [
     background-color: var(--surface-raised);
     border: none;
     border-radius: var(--radius-card);
-    box-shadow: var(--elevation-3);
+    box-shadow: var(--shadow-lg);
   }
 
   .card--elevated.card--hoverable:hover {
-    box-shadow: var(--elevation-5);
+    box-shadow: var(--shadow-2xl);
+    transform: translateY(-4px);
   }
 
-  /* Interactive variant */
+  /* Interactive variant - Premium 3D effect */
   .card--interactive {
     background-color: var(--surface-raised);
     border: 1px solid var(--border-subtle);
     border-radius: var(--radius-card);
-    box-shadow: var(--elevation-2);
+    box-shadow: var(--shadow-md);
     cursor: pointer;
+    transform-style: preserve-3d;
   }
 
   .card--interactive:hover {
-    box-shadow: var(--elevation-5);
-    transform: translateY(-4px) scale(1.02);
+    box-shadow: var(--shadow-2xl);
+    transform: translateY(-6px) scale(1.02);
     border-color: var(--border-brand);
   }
 
@@ -142,18 +151,11 @@ const classes = [
     padding: var(--component-padding-xl);
   }
 
-  /* Reduced motion */
-  @media (prefers-reduced-motion: reduce) {
-    .card {
-      transition: box-shadow var(--transition-macro) var(--easing-out);
-      transform: none !important;
-    }
-  }
-
-  /* Support fallback for no backdrop-filter */
-  @supports not (backdrop-filter: blur(12px)) {
+  /* Fallback für Browser ohne backdrop-filter */
+  @supports not (backdrop-filter: blur(16px)) {
     .card--glass {
-      background: rgba(255, 255, 255, 0.95);
+      background: var(--bg-primary);
+      box-shadow: var(--shadow-lg);
     }
   }
 </style>
