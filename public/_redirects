@@ -1,0 +1,17 @@
+# Custom 404 Not Found
+/*    /404.html   404
+
+# Clean URLs - serve .html files without extension
+/speisekarte    /speisekarte.html    200
+/aktionen       /aktionen.html       200
+/ueber-uns      /ueber-uns.html      200
+/faq            /faq.html            200
+/kontakt        /kontakt.html        200
+/impressum      /impressum.html      200
+
+# Legacy URL redirects
+/menu           /speisekarte.html    301
+/deals          /aktionen.html       301
+/about          /ueber-uns.html      301
+/contact        /kontakt.html        301
+/legal          /impressum.html      301

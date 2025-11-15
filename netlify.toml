@@ -1,0 +1,91 @@
+[build]
+  publish = "public"
+  command = "echo 'Static site - no build needed'"
+
+[build.environment]
+  NODE_VERSION = "18"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    # Security Headers
+    X-Frame-Options = "DENY"
+    X-Content-Type-Options = "nosniff"
+    X-XSS-Protection = "1; mode=block"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+
+    # Strict CSP - no unsafe-inline, no unsafe-eval
+    Content-Security-Policy = """
+      default-src 'none';
+      script-src 'self' https://maps.googleapis.com;
+      style-src 'self' https://fonts.googleapis.com;
+      img-src 'self' https://images.unsplash.com https://maps.gstatic.com https://maps.googleapis.com data:;
+      font-src 'self' https://fonts.gstatic.com;
+      connect-src 'self';
+      frame-src https://www.google.com;
+      base-uri 'self';
+      form-action 'self';
+      frame-ancestors 'none';
+    """
+
+[[headers]]
+  for = "/*.css"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.js"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.woff2"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.jpg"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.webp"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[redirects]]
+  from = "/menu"
+  to = "/speisekarte.html"
+  status = 301
+
+[[redirects]]
+  from = "/deals"
+  to = "/aktionen.html"
+  status = 301
+
+[[redirects]]
+  from = "/about"
+  to = "/ueber-uns.html"
+  status = 301
+
+[[redirects]]
+  from = "/contact"
+  to = "/kontakt.html"
+  status = 301
+
+[[redirects]]
+  from = "/legal"
+  to = "/impressum.html"
+  status = 301
+
+# SPA fallback disabled - pure static site
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404

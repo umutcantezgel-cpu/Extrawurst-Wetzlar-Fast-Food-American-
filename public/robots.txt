@@ -1,0 +1,13 @@
+# robots.txt für Extrawurst Wetzlar
+
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /api/
+Disallow: /*.json$
+
+# Sitemap
+Sitemap: https://extrawurst-wetzlar.de/sitemap.xml
+
+# Crawl-delay für respectvolle Bots
+Crawl-delay: 1
