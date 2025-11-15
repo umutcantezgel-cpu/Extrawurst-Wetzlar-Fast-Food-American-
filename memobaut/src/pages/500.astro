@@ -1,0 +1,170 @@
+---
+/**
+ * 500 Server Error Page - memobaut.com
+ * Statische Fehlerseite ohne externe Abhängigkeiten
+ * WCAG 2.2 AA konform
+ */
+
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Button from '../components/Button.astro';
+
+const pageTitle = '500 - Serverfehler | memobaut';
+const pageDescription = 'Ein unerwarteter Serverfehler ist aufgetreten. Bitte versuchen Sie es später erneut.';
+---
+
+<BaseLayout
+  title={pageTitle}
+  description={pageDescription}
+  robots="noindex, nofollow"
+>
+  <div class="error-page">
+    <div class="container">
+      <div class="error-page__content">
+        <!-- Error Code -->
+        <div class="error-page__code" aria-hidden="true">500</div>
+
+        <!-- Heading -->
+        <h1 class="error-page__title">
+          Serverfehler
+        </h1>
+
+        <!-- Description -->
+        <p class="error-page__description">
+          Ein unerwarteter Fehler ist aufgetreten. Unser Team wurde automatisch benachrichtigt und arbeitet an einer Lösung.
+          Bitte versuchen Sie es in wenigen Minuten erneut.
+        </p>
+
+        <!-- Actions -->
+        <div class="error-page__actions">
+          <Button
+            href="/"
+            variant="primary"
+            size="lg"
+            ariaLabel="Zurück zur Startseite"
+          >
+            Zur Startseite
+          </Button>
+
+          <Button
+            href="javascript:location.reload()"
+            variant="secondary"
+            size="lg"
+            ariaLabel="Seite neu laden"
+          >
+            Seite neu laden
+          </Button>
+        </div>
+
+        <!-- Support Info -->
+        <div class="error-page__support">
+          <h2 class="error-page__support-title">Problem besteht weiterhin?</h2>
+          <p>
+            Kontaktieren Sie uns direkt unter:
+            <br>
+            <a href="tel:+496441123456" class="error-page__support-link">
+              +49 (0) 6441 123 456
+            </a>
+            <br>
+            <a href="mailto:kontakt@memobaut.de" class="error-page__support-link">
+              kontakt@memobaut.de
+            </a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</BaseLayout>
+
+<style>
+  .error-page {
+    min-height: calc(100vh - 80px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--spacing-12) 0;
+    position: relative;
+    z-index: var(--z-base);
+  }
+
+  .error-page__content {
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto;
+  }
+
+  .error-page__code {
+    font-size: clamp(6rem, 10vw, 10rem);
+    font-weight: var(--font-weight-black);
+    line-height: 1;
+    color: var(--error-500);
+    opacity: 0.3;
+    margin-bottom: var(--spacing-6);
+    font-family: var(--font-family-serif);
+    user-select: none;
+  }
+
+  .error-page__title {
+    font-size: var(--font-size-4xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--text-primary);
+    margin-bottom: var(--spacing-4);
+  }
+
+  .error-page__description {
+    font-size: var(--font-size-lg);
+    color: var(--text-secondary);
+    line-height: var(--line-height-relaxed);
+    margin-bottom: var(--spacing-8);
+  }
+
+  .error-page__actions {
+    display: flex;
+    gap: var(--spacing-4);
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-bottom: var(--spacing-10);
+  }
+
+  .error-page__support {
+    margin-top: var(--spacing-10);
+    padding-top: var(--spacing-8);
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .error-page__support-title {
+    font-size: var(--font-size-lg);
+    font-weight: var(--font-weight-semibold);
+    color: var(--text-secondary);
+    margin-bottom: var(--spacing-4);
+  }
+
+  .error-page__support p {
+    font-size: var(--font-size-base);
+    color: var(--text-secondary);
+    line-height: var(--line-height-relaxed);
+  }
+
+  .error-page__support-link {
+    color: var(--text-link);
+    font-weight: var(--font-weight-semibold);
+    text-decoration: underline;
+    transition: color var(--transition-fast) var(--easing-out);
+  }
+
+  .error-page__support-link:hover {
+    color: var(--text-link-hover);
+  }
+
+  .error-page__support-link:focus-visible {
+    outline: var(--focus-ring-width) solid var(--focus-ring);
+    outline-offset: var(--focus-ring-offset-width);
+    border-radius: var(--radius-sm);
+  }
+
+  /* Dark mode */
+  @media (prefers-color-scheme: dark) {
+    .error-page__code {
+      color: var(--error-700);
+    }
+  }
+</style>
